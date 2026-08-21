@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH09-T03
+**Added**
+- Servicio `FoodMatchingService` para vinculación determinista de alimentos reconocidos por IA con la base de datos canónica.
+- DTO `FoodMatchCandidate` con puntuación de confianza, tipo de coincidencia (exact, alias, token) y desglose de macronutrientes.
+- Algoritmo de normalización léxica (eliminación de acentos y caracteres especiales), compatibilidad con métodos de cocción (frito, asado, hervido) y boosting regional dominicano (`DO`).
+- Suite de pruebas en Pest (`FoodMatchingServiceTest.php`, 5 tests pasando).
+
 ### 2026-08-21 — PH09-T02
 **Added**
 - Interfaz `AiVisionProviderInterface` y DTOs estructurados `AiFoodAnalysisResult` y `AiRecognizedFoodItem`.

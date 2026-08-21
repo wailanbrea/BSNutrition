@@ -48,22 +48,23 @@ Crear foto IA segura, structured output, matching, correction y diary.
 - Tests en Pest (`AiVisionProviderTest.php`, 4 tests pasando)
 
 
-### [ ] PH09-T03 — Food matcher v1
+### [x] PH09-T03 — Food matcher v1
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Normalization
-- [ ] Aliases
-- [ ] Locale
-- [ ] Preparation
-- [ ] Scoring
-- [ ] Threshold
+- [x] Normalization (Limpieza de acentos, minúsculas y caracteres especiales en `FoodMatchingService::normalize`)
+- [x] Aliases (Búsqueda en tabla `food_aliases` para nombres populares dominicanos)
+- [x] Locale (Ponderación favorable `+0.05` para platos dominicanos `country_code = 'DO'`)
+- [x] Preparation (Alineación y coincidencia de métodos de cocción frito, guisado, asado, hervido)
+- [x] Scoring (Algoritmo de puntuación de similitud léxica y de tokens)
+- [x] Threshold (Umbral configurable `>=0.70` para match directo y sugerencia ordenada de candidatos alternativos)
 
 **Acceptance criteria:**
-- Canonical match or review candidates
+- Vinculación determinista a alimentos canónicos o provisión de candidatos ordenados por relevancia
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Pest (`FoodMatchingServiceTest.php`, 5 tests pasando)
+
 
 ### [ ] PH09-T04 — Analysis orchestration
 **Depends on:** None
