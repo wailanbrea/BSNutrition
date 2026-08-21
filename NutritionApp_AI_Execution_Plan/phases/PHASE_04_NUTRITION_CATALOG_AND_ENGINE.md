@@ -99,27 +99,28 @@ Crear esquema canónico, cálculo nutricional y adapters externos.
 **Tests / verification:**
 - Tests en Pest (`OpenFoodFactsServiceTest.php`) con 45 tests pasando al 100% (304 aserciones)
 
-### [ ] PH04-T06 — Dominican dataset foundation
+### [x] PH04-T06 — Dominican dataset foundation
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Country/locale
-- [ ] Aliases
-- [ ] Preparation variants
-- [ ] Verification
+- [x] Country/locale (`country_code = 'DO'`, `language = 'es'`)
+- [x] Aliases (Mangú, Los tres golpes, La bandera, Habichuelas guisadas, Sancocho, Tostones, Queso frito, Salami frito, Morir soñando, Mofongo, etc.)
+- [x] Preparation variants (Hervido, frito, guisado, asado)
+- [x] Verification (`verified = true`, `source = 'generic'`)
 
 **Acceptance criteria:**
-- Local foods represented/boostable
+- Catálogo maestro gastronómico dominicano cargado y verificable por búsquedas canónicas y coloquiales
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Pest (`DominicanFoodDatasetSeederTest.php`) con 46 tests pasando al 100% (320 aserciones)
 
 ## Phase exit criteria
-- [ ] Catalog and engine tested
-- [ ] Status -> Phase 05
+- [x] Catalog and engine tested
+- [x] Status -> Phase 05
 
 ## Mandatory closeout
-- [ ] Actualizar `PROJECT_STATUS.md`
-- [ ] Actualizar `CHANGELOG.md`
-- [ ] Actualizar `DECISIONS.md` si hubo decisión permanente
-- [ ] No dejar tareas `[-]` sin checkpoint
+- [x] Actualizar `PROJECT_STATUS.md`
+- [x] Actualizar `CHANGELOG.md`
+- [x] Actualizar `DECISIONS.md` si hubo decisión permanente
+- [x] No dejar tareas `[-]` sin checkpoint
+

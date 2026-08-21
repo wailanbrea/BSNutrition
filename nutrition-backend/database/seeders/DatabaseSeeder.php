@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             NutrientSeeder::class,
             FoodCategorySeeder::class,
             FoodSourceSeeder::class,
+            DominicanFoodDatasetSeeder::class,
         ]);
     }
 }

@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH04-T06 (Fase 04 Completada al 100%)
+**Added**
+- Seeder de base de datos `DominicanFoodDatasetSeeder.php` con 15 platos y alimentos canónicos dominicanos (Mangú, Los tres golpes, La bandera, Habichuelas guisadas, Pollo guisado, Moro de guandules, Sancocho, Tostones, Queso frito, Salami frito, Morir soñando, Mofongo, etc.).
+- Alias criollos, variantes de preparación y porciones cotidianas registradas con país `DO` e idioma `es`.
+- Conexión en `DatabaseSeeder.php` y suite de pruebas en `tests/Feature/DominicanFoodDatasetSeederTest.php` (46 tests pasando al 100%).
+
+**Changed**
+- **Fase 04 (Nutrition Catalog and Engine) completada al 100%**.
+- Inicio de la **Fase 05 (Food Search, Favorites and Recents)**.
+
 ### 2026-08-21 — PH04-T05
 **Added**
 - Adaptador y cliente `app/Services/OpenFoodFactsService.php` para búsqueda, escaneo y resolución de códigos de barras (EAN-13, UPC-A) en Open Food Facts World Database.

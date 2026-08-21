@@ -2,14 +2,14 @@
 
 ## Current state
 - Project status: IN PROGRESS
-- Current phase: Phase 04 — Nutrition Catalog and Engine
-- Current task: PH04-T06
+- Current phase: Phase 05 — Food Search, Favorites and Recents
+- Current task: PH05-T01
 - Current task status: `[ ]`
-- Last completed task: PH04-T05
+- Last completed task: PH04-T06
 - Last update: 2026-08-21
 
 ## Exact next action
-Abrir `phases/PHASE_04_NUTRITION_CATALOG_AND_ENGINE.md` y ejecutar `PH04-T06` (Dominican dataset foundation: Seeder canónico de alimentos y preparaciones tradicionales dominicanas con variantes, alias criollos, porciones y boosting por locale `es_DO`).
+Abrir `phases/PHASE_05_FOOD_SEARCH,_FAVORITES_AND_RECENTS.md` y ejecutar `PH05-T01` (Backend food search: Endpoints REST `GET /api/v1/foods/search`, `GET /api/v1/foods/{id}`, `GET /api/v1/foods/barcode/{barcode}`, normalización de búsqueda, ranking con boosting por locale dominicano `DO`, paginación y recursos JSON).
 
 ## Active blockers
 None.
@@ -23,6 +23,8 @@ None.
 - detalles finales de deployment.
 
 ## Recently completed
+- PH04-T06 — Dominican Dataset Foundation: Seeder de catálogo criollo `DominicanFoodDatasetSeeder` con 15 platos y alimentos canónicos dominicanos (Mangú, Los tres golpes, La bandera, Habichuelas guisadas, Pollo guisado, Moro de guandules, Sancocho, Tostones, Queso frito, Salami frito, Morir soñando, Mofongo, etc.) con sus porciones, nutrientes y alias con tests en `DominicanFoodDatasetSeederTest.php`.
+- **Fase 04 (Nutrition Catalog and Engine) completada al 100%**.
 - PH04-T05 — Open Food Facts Adapter: Cliente `OpenFoodFactsService` para búsqueda y resolución de códigos de barras, mapeo de macronutrientes y micronutrientes, creación de marcas y porciones, y comando CLI `php artisan foods:import-off` con tests en `OpenFoodFactsServiceTest.php`.
 - PH04-T04 — USDA Adapter: Cliente `UsdaFoodDataService` para búsqueda y detalle en FoodData Central, mapeo de más de 30 IDs de nutrientes a códigos canónicos, importación a base de datos con porciones y comando CLI `php artisan foods:import-usda` con tests en `UsdaFoodDataServiceTest.php`.
 - PH04-T03 — Nutrition Calculation Service: Servicio `NutritionCalculatorService` con normalización por base (100g/ml), escalado por porciones y gramos libres, agregación de comidas y días completos, distribución porcentual de macros e inmutabilidad de snapshots históricos con tests en `NutritionCalculatorServiceTest.php`.
