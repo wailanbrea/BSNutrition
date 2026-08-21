@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH07-T03
+**Added**
+- Worker de sincronización en segundo plano `DiarySyncWorker` (HiltWorker + CoroutineWorker) con restricciones de red activa `NetworkType.CONNECTED`.
+- Drenado automático de mutaciones pendientes de creación, edición y eliminación de comidas y agua desde `SyncQueueDao`.
+- Política de reintentos y retroceso exponencial `BackoffPolicy.EXPONENTIAL` ante fallos transitorios de red.
+- Manejo inteligente de errores permanentes (4xx) para prevenir atascos en la cola local.
+- Utilidad `SyncManager` para programar tareas periódicas cada 15 minutos o invocar sincronizaciones inmediatas bajo demanda.
+- Tests unitarios en `DiarySyncWorkerTest.kt`.
+
 ### 2026-08-21 — PH07-T02
 **Added**
 - Lecturas reactivas sin bloqueo de red en `DiaryRepositoryImpl` vía `observeDiaryDay`, `observeWaterLogs` y `observeTotalWater`.

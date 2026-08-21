@@ -49,22 +49,23 @@ Convertir diario/tracking a local-first con Room + WorkManager.
 - Tests en Kotlin (`DiaryRepositoryTest.kt` actualizado con Room DAOs y Flow)
 
 
-### [ ] PH07-T03 — Sync worker
+### [x] PH07-T03 — Sync worker
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Network constraint
-- [ ] Push
-- [ ] Pull cursor
-- [ ] Backoff
-- [ ] Permanent errors
-- [ ] Auth
+- [x] Network constraint (`Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED)`)
+- [x] Push (Drenado de cola `SyncQueueDao` procesando inserciones, actualizaciones y borrados hacia el backend)
+- [x] Pull cursor (Refresco y actualización del estado del diario al reconectar)
+- [x] Backoff (`BackoffPolicy.EXPONENTIAL` con reintento automático)
+- [x] Permanent errors (Manejo de errores HTTP 4xx definitivos descartando elementos no recuperables)
+- [x] Auth (Verificación del token de sesión antes de sincronizar)
 
 **Acceptance criteria:**
-- Reconnect sync succeeds
+- Sincronización automática garantizada en reconexión y en background mediante WorkManager
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Kotlin (`DiarySyncWorkerTest.kt`)
+
 
 ### [ ] PH07-T04 — Idempotency/conflicts
 **Depends on:** None
