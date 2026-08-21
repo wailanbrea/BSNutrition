@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH09-T01
+**Added**
+- Tabla y migración `ai_image_uploads` y modelo Eloquent `AiImageUpload` para gestión segura de imágenes privadas.
+- Servicio `ImageStorageService` con almacenamiento privado (`Storage::disk('local')`), extracción base64 para APIs de visión, validación de tipo MIME y tamaño (<10MB).
+- Métodos de borrado tras inferencia (`deleteUpload`) y limpieza automatizada de registros y archivos expirados (`cleanupExpiredUploads`).
+- Suite de pruebas en Pest (`ImageStorageServiceTest.php`, 5 tests pasando).
+
 ### 2026-08-21 — PH08-T03
 **Added**
 - Despliegue automático del bottom sheet modal `FoodDetailSheet` al detectar un código de barras en el escáner.

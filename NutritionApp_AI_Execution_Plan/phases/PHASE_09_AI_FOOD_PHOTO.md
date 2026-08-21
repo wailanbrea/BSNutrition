@@ -10,25 +10,26 @@ Crear foto IA segura, structured output, matching, correction y diary.
 - `05_API_CONTRACT.md`
 
 ## Entry criteria
-- [ ] Diary/catalog/barcode stable
-- [ ] AI/storage credentials available
+- [x] Diary/catalog/barcode stable (Fases 06, 07 y 08 completadas)
+- [x] AI/storage credentials available
 
 ## Tasks
 
-### [ ] PH09-T01 — Private image storage
+### [x] PH09-T01 — Private image storage
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Metadata
-- [ ] Signed/private upload
-- [ ] Validation
-- [ ] Delete
+- [x] Metadata (Tabla y modelo `AiImageUpload` con `mime_type`, `file_size_bytes`, `status`, `expires_at`)
+- [x] Signed/private upload (`ImageStorageService::storePrivateUpload` en disco privado con UUID)
+- [x] Validation (Whitelist de formatos JPEG/PNG/WEBP/HEIC y límite de 10 MB)
+- [x] Delete (`ImageStorageService::deleteUpload` y purga periódica con `cleanupExpiredUploads`)
 
 **Acceptance criteria:**
-- No public permanent image requirement
+- Las imágenes de comida se guardan exclusivamente en almacenamiento privado, sin URLs públicas y con ciclo de vida/retención configurable
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Pest (`ImageStorageServiceTest.php`, 5 tests pasando)
+
 
 ### [ ] PH09-T02 — AI provider abstraction
 **Depends on:** None
