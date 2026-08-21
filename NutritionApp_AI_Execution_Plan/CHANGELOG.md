@@ -2,6 +2,21 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH01-T03
+**Added**
+- `app/Http/Controllers/Api/V1/AuthController.php` para flujos de registro, login, logout, me y eliminación de cuenta.
+- `app/Http/Requests/Auth/RegisterRequest.php` y `LoginRequest.php` con validación y confirmación de contraseñas.
+- `app/Http/Resources/UserResource.php` para serialización de datos de usuario.
+- Rutas protegidas y públicas en `routes/api.php` bajo prefijo `/api/v1`.
+- Suite de pruebas de autenticación en `tests/Feature/AuthTest.php`.
+
+**Changed**
+- Configuración de tokens Sanctum por dispositivo y revocación en logout.
+
+**Tests**
+- `php ./vendor/bin/pest` (17 passed, 91 assertions).
+- `php ./vendor/bin/pint` (formato limpio verificado).
+
 ### 2026-08-21 — PH01-T02
 **Added**
 - `app/Http/Responses/ApiErrorResponse.php` para estandarización de payloads de error JSON `{ error: { code, message, fields } }`.

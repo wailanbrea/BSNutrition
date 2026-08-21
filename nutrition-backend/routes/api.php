@@ -1,11 +1,18 @@
 <?php
 
+use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\HealthController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/health', HealthController::class)->name('api.v1.health');
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+Route::prefix('auth')->group(function () {
+    Route::post('/register', [AuthController::class, 'register'])->name('api.v1.auth.register');
+    Route::post('/login', [AuthController::class, 'login'])->name('api.v1.auth.login');
+    Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum')->name('api.v1.auth.logout');
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/me', [AuthController::class, 'me'])->name('api.v1.me');
+    Route::delete('/me', [AuthController::class, 'destroy'])->name('api.v1.me.destroy');
+});

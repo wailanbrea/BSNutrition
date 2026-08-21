@@ -50,23 +50,23 @@ Crear Laravel API, MySQL, errores JSON, Sanctum y perfil.
 **Tests / verification:**
 - Feature tests (`tests/Feature/ApiErrorContractTest.php`)
 
-### [ ] PH01-T03 — Sanctum auth
+### [x] PH01-T03 — Sanctum auth
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Register
-- [ ] Login
-- [ ] Logout
-- [ ] Me
-- [ ] Rate limits
-- [ ] Per-device token
+- [x] Register (`POST /api/v1/auth/register`)
+- [x] Login (`POST /api/v1/auth/login`)
+- [x] Logout (`POST /api/v1/auth/logout`)
+- [x] Me (`GET /api/v1/me` y `DELETE /api/v1/me`)
+- [x] Rate limits
+- [x] Per-device token
 
 **Acceptance criteria:**
 - Bearer auth works
 - Logout revokes token
 
 **Tests / verification:**
-- Auth feature tests
+- Auth feature tests (`tests/Feature/AuthTest.php`)
 
 ### [ ] PH01-T04 — Profile API
 **Depends on:** None

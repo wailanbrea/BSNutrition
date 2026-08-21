@@ -19,7 +19,7 @@ beforeEach(function () {
 });
 
 test('it returns structured 401 UNAUTHENTICATED error on protected routes without token', function () {
-    $response = $this->getJson('/api/v1/user');
+    $response = $this->getJson('/api/v1/me');
 
     $response->assertStatus(401)
         ->assertJson([
