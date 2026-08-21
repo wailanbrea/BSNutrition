@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH02-T05
+**Added**
+- Shell de navegación con Jetpack Compose Navigation (`com.bsnutrition.app.navigation`):
+  - Rutas tipadas `Route.Login`, `Route.Register`, `Route.Main` y destinos `TopLevelRoute`.
+  - Enum `TopLevelDestination` con 5 pestañas canónicas: Hoy, Diario, Registrar, Progreso y Más.
+  - `MainTabScreen` con `Scaffold` y `NavigationBar` de Material 3.
+  - Vistas base de Compose para features: `HomeScreen`, `DiaryScreen`, `AddScreen`, `ProgressScreen` y `MoreScreen` (con resumen de cuenta y botón de Logout).
+  - `AppNavHost` con redirección reactiva basada en `isAuthenticated` y control de backstack.
+  - `MainActivity` conectada al `AppNavHost` y temas `BSNutritionTheme`.
+  - Pruebas unitarias en `NavigationTest.kt`.
+
+**Changed**
+- Cierre exitoso de la **Fase 02 (Android Foundation and Authentication)** al 100%.
+
 ### 2026-08-21 — PH02-T04
 **Added**
 - Capa de datos y repositorio de autenticación: `AuthRepository` y `AuthRepositoryImpl` con persistencia de token en DataStore y cache de usuario en Room (`UserDao`).

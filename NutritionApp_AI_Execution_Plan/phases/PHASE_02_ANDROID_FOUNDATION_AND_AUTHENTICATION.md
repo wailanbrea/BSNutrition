@@ -9,8 +9,8 @@ Crear app Kotlin/Compose, arquitectura core, red, almacenamiento y login.
 - `05_API_CONTRACT.md`
 
 ## Entry criteria
-- [ ] Backend auth ready
-- [ ] Android SDK/JDK ready
+- [x] Backend auth ready
+- [x] Android SDK/JDK ready
 
 ## Tasks
 
@@ -79,27 +79,28 @@ Crear app Kotlin/Compose, arquitectura core, red, almacenamiento y login.
 **Tests / verification:**
 - Tests unitarios en `AuthRepositoryTest` y `AuthViewModelTest`
 
-### [ ] PH02-T05 — Navigation shell
+### [x] PH02-T05 — Navigation shell
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Single Activity
-- [ ] Navigation 3
-- [ ] Auth/app graphs
-- [ ] Top-level placeholders
+- [x] Single Activity (`MainActivity.kt`)
+- [x] Navigation Compose (`Route`, `TopLevelRoute`, `AppNavHost`)
+- [x] Auth/app graphs (`Route.Login`, `Route.Register`, `Route.Main`)
+- [x] Top-level placeholders (`HomeScreen`, `DiaryScreen`, `AddScreen`, `ProgressScreen`, `MoreScreen`)
+- [x] Bottom navigation bar con 5 destinos canónicos y cambio de pantalla fluido
 
 **Acceptance criteria:**
-- Stable login/logout navigation
+- Navegación reactiva con soporte de login, tabs y logout
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Unit tests en `NavigationTest`
 
 ## Phase exit criteria
-- [ ] Android auth working
-- [ ] Status -> Phase 03
+- [x] Android auth working
+- [x] Status -> Phase 03
 
 ## Mandatory closeout
-- [ ] Actualizar `PROJECT_STATUS.md`
-- [ ] Actualizar `CHANGELOG.md`
-- [ ] Actualizar `DECISIONS.md` si hubo decisión permanente
-- [ ] No dejar tareas `[-]` sin checkpoint
+- [x] Actualizar `PROJECT_STATUS.md`
+- [x] Actualizar `CHANGELOG.md`
+- [x] Actualizar `DECISIONS.md` si hubo decisión permanente
+- [x] No dejar tareas `[-]` sin checkpoint

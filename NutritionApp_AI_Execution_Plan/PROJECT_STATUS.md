@@ -2,14 +2,14 @@
 
 ## Current state
 - Project status: IN PROGRESS
-- Current phase: Phase 02 — Android Foundation and Authentication
-- Current task: PH02-T05
+- Current phase: Phase 03 — Food Database and Search (Backend & Local Cache)
+- Current task: PH03-T01
 - Current task status: `[ ]`
-- Last completed task: PH02-T04
+- Last completed task: PH02-T05 (Phase 02 complete)
 - Last update: 2026-08-21
 
 ## Exact next action
-Abrir `phases/PHASE_02_ANDROID_FOUNDATION_AND_AUTHENTICATION.md` y ejecutar `PH02-T05` (Navigation shell: Single Activity, Jetpack Compose Navigation, Auth & App graph routing, bottom navigation bar con top-level placeholders para Hoy, Diario, Add, Progreso, Más).
+Abrir `phases/PHASE_03_FOOD_DATABASE_AND_SEARCH.md` y ejecutar `PH03-T01` (Food search backend & USDA baseline: migraciones de `foods`, `food_portions`, `food_nutrients`, comandos de importación USDA/OpenFoodFacts, endpoints `/api/v1/foods/search`, `/api/v1/foods/{id}` y tests en Pest).
 
 ## Active blockers
 None.
@@ -26,6 +26,8 @@ None.
 No todos estos puntos bloquean el bootstrap.
 
 ## Recently completed
+- PH02-T05 — Navigation shell en Android (`com.bsnutrition.app.navigation`): `Route`, `TopLevelDestination`, `MainTabScreen` con Bottom Navigation Bar (Hoy, Diario, Registrar, Progreso, Más), `AppNavHost` reactivo a autenticación, integración en `MainActivity` y tests unitarios en `NavigationTest`.
+- **Fase 02 (Android Foundation and Authentication) completada al 100%**.
 - PH02-T04 — Auth UI y Repositorio en Android (`com.bsnutrition.app.core.data` y `com.bsnutrition.app.feature.auth`): `AuthRepository`, `AuthRepositoryImpl`, `DataModule`, `AuthViewModel`, `LoginScreen`, `RegisterScreen`, persistencia en DataStore y tests unitarios en `AuthRepositoryTest` y `AuthViewModelTest`.
 - PH02-T03 — Network Layer en Android (`NutritionApp/app/src/main/java/com/bsnutrition/app/core/network/`): Interfaces Retrofit (`AuthApiService`, `ProfileApiService`, `HealthApiService`), DTOs de autenticación y perfil, helper `safeApiCall` con captura tipada de `ApiException` y tests unitarios en `SafeApiCallTest`.
 - PH02-T02 — Arquitectura Core en Android (`NutritionApp/app/src/main/java/com/bsnutrition/app/core/`): Módulos Hilt (`DispatchersModule`, `DataStoreModule`, `NetworkModule`, `DatabaseModule`), modelos (`User`, `UserProfile`, `AuthToken`, `ApiError`, `Result`), persistencia DataStore (`AuthTokenDataSourceImpl`), Room Database base (`NutritionDatabase`, `UserEntity`, `UserDao`) y Design System components (`BsnButton`, `BsnTextField`, `BsnCard`, `BsnLoadingIndicator`).
@@ -38,12 +40,11 @@ No todos estos puntos bloquean el bootstrap.
 - PH00 — Repositorios locales, gobernanza, convenciones de branching, CI skeleton y estrategias de entorno.
 
 ## Files/modules changed in last task
-- `NutritionApp/`: app/src/main/java/com/bsnutrition/app/core/data/repository/*, app/src/main/java/com/bsnutrition/app/core/data/di/*, app/src/main/java/com/bsnutrition/app/feature/auth/*, app/src/test/java/com/bsnutrition/app/core/data/AuthRepositoryTest.kt, app/src/test/java/com/bsnutrition/app/feature/auth/AuthViewModelTest.kt
+- `NutritionApp/`: app/src/main/java/com/bsnutrition/app/navigation/*, app/src/main/java/com/bsnutrition/app/feature/home/*, app/src/main/java/com/bsnutrition/app/feature/diary/*, app/src/main/java/com/bsnutrition/app/feature/add/*, app/src/main/java/com/bsnutrition/app/feature/progress/*, app/src/main/java/com/bsnutrition/app/feature/more/*, app/src/main/java/com/bsnutrition/app/MainActivity.kt, app/src/test/java/com/bsnutrition/app/navigation/NavigationTest.kt
 - `NutritionApp_AI_Execution_Plan/`: PROJECT_STATUS.md, CHANGELOG.md, phases/PHASE_02_ANDROID_FOUNDATION_AND_AUTHENTICATION.md
 
 ## Tests from last task
-- `AuthRepositoryTest` unit tests (login, logout, token persistence & Room insert)
-- `AuthViewModelTest` unit tests (field validation, mismatched passwords, state transitions)
+- `NavigationTest` unit tests (verificación de 5 tabs canónicos, títulos, descripciones e iconos)
 
 ## Known issues
 None.
