@@ -52,5 +52,17 @@ interface FoodApiService {
     suspend fun isFavoriteFood(
         @Path("id") id: Long
     ): com.bsnutrition.app.core.network.model.ToggleFavoriteResponseDto
+
+    @GET("foods/recents")
+    suspend fun getRecentFoods(
+        @Query("page") page: Int? = 1,
+        @Query("per_page") perPage: Int? = 50
+    ): FoodSearchResponseDto
+
+    @POST("foods/{id}/recent")
+    suspend fun recordRecentFood(
+        @Path("id") id: Long
+    ): com.bsnutrition.app.core.network.model.MessageResponseDto
 }
+
 

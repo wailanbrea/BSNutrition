@@ -68,4 +68,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Food::class, 'user_food_favorites')->withTimestamps();
     }
+
+    public function recentFoods(): BelongsToMany
+    {
+        return $this->belongsToMany(Food::class, 'user_food_recents')
+            ->withPivot(['use_count', 'last_used_at'])
+            ->withTimestamps();
+    }
 }

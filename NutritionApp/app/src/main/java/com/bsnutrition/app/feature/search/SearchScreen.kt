@@ -121,9 +121,18 @@ fun SearchScreen(
                     )
                 }
 
+                // Recents chip
+                item {
+                    FilterChip(
+                        selected = uiState.isRecentsTab,
+                        onClick = { viewModel.onRecentsTabToggled() },
+                        label = { Text("🕒 Recientes") }
+                    )
+                }
+
                 items(categories) { (id, name) ->
                     FilterChip(
-                        selected = !uiState.isFavoritesTab && uiState.selectedCategoryId == id,
+                        selected = !uiState.isFavoritesTab && !uiState.isRecentsTab && uiState.selectedCategoryId == id,
                         onClick = { viewModel.onCategorySelected(id) },
                         label = { Text(name) }
                     )
@@ -166,13 +175,19 @@ fun SearchScreen(
                             .weight(1f),
                         contentAlignment = Alignment.Center
                     ) {
+                        val emptyMsg = when {
+                            uiState.isFavoritesTab -> "No tienes alimentos favoritos guardados."
+                            uiState.isRecentsTab -> "Aún no tienes alimentos registrados recientemente."
+                            else -> "No se encontraron alimentos para '${uiState.query}'"
+                        }
                         Text(
-                            text = if (uiState.isFavoritesTab) "No tienes alimentos favoritos guardados." else "No se encontraron alimentos para '${uiState.query}'",
+                            text = emptyMsg,
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
                 }
+
                 else -> {
                     LazyColumn(
                         modifier = Modifier

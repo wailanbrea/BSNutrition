@@ -62,26 +62,29 @@ Crear búsqueda rápida y métodos de reuso.
 - Tests en Pest (`FoodFavoriteTest.php`) con 56 tests pasando al 100% (684 aserciones)
 - Tests unitarios en Android (`FoodRepositoryTest.kt`, `SearchViewModelTest.kt`)
 
-### [ ] PH05-T04 — Recents
+### [x] PH05-T04 — Recents
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] History query
-- [ ] Local section
-- [ ] Ranking
+- [x] History query (Migración `user_food_recents`, relación `recentFoods` en `User`, endpoints `GET /api/v1/foods/recents`, `POST /api/v1/foods/{id}/recent`)
+- [x] Local section (`RecentFoodEntity`, `RecentFoodDao`, `NutritionDatabase`, caché offline y sincronización)
+- [x] Ranking (Ordenamiento por fecha de último consumo `last_used_at` y frecuencia de uso `use_count`)
+- [x] Registro automático al seleccionar o agregar alimentos en Android y chip '🕒 Recientes' en `SearchScreen`
 
 **Acceptance criteria:**
-- Recent foods easy to add
+- Alimentos recientes accesibles al instante y fáciles de registrar con un toque
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Pest (`FoodRecentTest.php`) con 59 tests pasando al 100% (696 aserciones)
+- Tests unitarios en Android (`FoodRepositoryTest.kt`, `SearchViewModelTest.kt`)
 
 ## Phase exit criteria
-- [ ] Search usable
-- [ ] Status -> Phase 06
+- [x] Search usable (Búsqueda de alimentos por texto, alias dominicanos, marcas, favoritos y recientes operativa en backend y Android)
+- [x] Status -> Phase 06 (Listo para iniciar Fase 06: Diary and Daily Logging)
 
 ## Mandatory closeout
-- [ ] Actualizar `PROJECT_STATUS.md`
-- [ ] Actualizar `CHANGELOG.md`
-- [ ] Actualizar `DECISIONS.md` si hubo decisión permanente
-- [ ] No dejar tareas `[-]` sin checkpoint
+- [x] Actualizar `PROJECT_STATUS.md`
+- [x] Actualizar `CHANGELOG.md`
+- [x] Actualizar `DECISIONS.md` si hubo decisión permanente
+- [x] No dejar tareas `[-]` sin checkpoint
+

@@ -2,6 +2,21 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH05-T04 (Fase 05 Completada al 100%)
+**Added**
+- Migración de base de datos `2026_08_21_210000_create_user_food_recents_table.php` para almacenamiento del historial de consumo con contador `use_count` y marca temporal `last_used_at`.
+- Relación `recentFoods()` en modelo `User`.
+- Endpoints REST en `FoodController.php`:
+  - `GET /api/v1/foods/recents`: Listado ordenado por mayor frecuencia y último uso.
+  - `POST /api/v1/foods/{id}/recent`: Registro de consumo o selección.
+- Entidad Room `RecentFoodEntity`, DAO `RecentFoodDao`, e integración en `NutritionDatabase` y `DatabaseModule`.
+- Pestaña '🕒 Recientes' en `SearchScreen` y registro automático de alimentos en `SearchViewModel`.
+- Tests en Pest `tests/Feature/FoodRecentTest.php` (59 tests pasando al 100%) y tests unitarios en Android.
+
+**Changed**
+- **Fase 05 (Food Search, Favorites and Recents) completada al 100%**.
+- Inicio de la **Fase 06 (Diary and Dashboard)**.
+
 ### 2026-08-21 — PH05-T03
 **Added**
 - Migración de base de datos `2026_08_21_200000_create_user_food_favorites_table.php` para persistencia relacional con clave compuesta única e índices.

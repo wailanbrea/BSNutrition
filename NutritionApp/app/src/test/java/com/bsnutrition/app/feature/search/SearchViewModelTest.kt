@@ -154,6 +154,19 @@ class SearchViewModelTest {
     }
 
     @Test
+    fun `onRecentsTabToggled switches to recents results`() = runTest {
+        coEvery { foodRepository.getRecentFoods() } returns Result.Success(listOf(sampleFoodSummary))
+        viewModel = SearchViewModel(foodRepository)
+        advanceUntilIdle()
+
+        viewModel.onRecentsTabToggled()
+        advanceUntilIdle()
+
+        assertTrue(viewModel.uiState.value.isRecentsTab)
+        assertEquals(1, viewModel.uiState.value.searchResults.size)
+    }
+
+    @Test
     fun `dismissFoodDetail clears selected food and calculation`() = runTest {
         viewModel = SearchViewModel(foodRepository)
         advanceUntilIdle()
@@ -168,3 +181,4 @@ class SearchViewModelTest {
         assertNull(state.calculation)
     }
 }
+

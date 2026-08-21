@@ -37,5 +37,11 @@ object DatabaseModule {
     fun provideFavoriteFoodDao(database: NutritionDatabase): FavoriteFoodDao {
         return database.favoriteFoodDao()
     }
+
+    @Provides
+    fun provideRecentFoodDao(database: NutritionDatabase): RecentFoodDao {
+        return database.recentFoodDao()
+    }
 }
+
 

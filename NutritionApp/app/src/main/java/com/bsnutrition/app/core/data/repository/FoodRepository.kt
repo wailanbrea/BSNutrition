@@ -31,5 +31,10 @@ interface FoodRepository {
     suspend fun toggleFavorite(food: FoodSummary): Result<Boolean>
 
     suspend fun isFavorite(foodId: Long): Boolean
+
+    suspend fun getRecentFoods(): Result<List<FoodSummary>>
+
+    suspend fun recordRecentFood(food: FoodSummary): Result<Unit>
 }
+
 

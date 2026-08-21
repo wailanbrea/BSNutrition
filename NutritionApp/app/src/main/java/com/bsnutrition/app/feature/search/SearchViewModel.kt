@@ -7,6 +7,7 @@ import com.bsnutrition.app.core.data.repository.FoodRepository
 import com.bsnutrition.app.core.model.FoodDetail
 import com.bsnutrition.app.core.model.FoodPortion
 import com.bsnutrition.app.core.model.FoodSummary
+import com.bsnutrition.app.core.model.MacroBreakdown
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -35,12 +36,13 @@ class SearchViewModel @Inject constructor(
         // Initial search to display popular / verified Dominican foods
         searchFoods(query = "", categoryId = null)
         loadFavorites()
+        loadRecents()
 
         _queryFlow
             .debounce(300)
             .distinctUntilChanged()
             .onEach { query ->
-                if (!_uiState.value.isFavoritesTab) {
+                if (!_uiState.value.isFavoritesTab && !_uiState.value.isRecentsTab) {
                     searchFoods(query = query, categoryId = _uiState.value.selectedCategoryId)
                 }
             }
@@ -54,15 +56,25 @@ class SearchViewModel @Inject constructor(
 
     fun onCategorySelected(categoryId: Long?) {
         val nextCategoryId = if (_uiState.value.selectedCategoryId == categoryId) null else categoryId
-        _uiState.update { it.copy(selectedCategoryId = nextCategoryId, isFavoritesTab = false) }
+        _uiState.update { it.copy(selectedCategoryId = nextCategoryId, isFavoritesTab = false, isRecentsTab = false) }
         searchFoods(query = _uiState.value.query, categoryId = nextCategoryId)
     }
 
     fun onFavoritesTabToggled() {
         val nextState = !_uiState.value.isFavoritesTab
-        _uiState.update { it.copy(isFavoritesTab = nextState, selectedCategoryId = null) }
+        _uiState.update { it.copy(isFavoritesTab = nextState, isRecentsTab = false, selectedCategoryId = null) }
         if (nextState) {
             loadFavorites(displayAsResults = true)
+        } else {
+            searchFoods(query = _uiState.value.query, categoryId = null)
+        }
+    }
+
+    fun onRecentsTabToggled() {
+        val nextState = !_uiState.value.isRecentsTab
+        _uiState.update { it.copy(isRecentsTab = nextState, isFavoritesTab = false, selectedCategoryId = null) }
+        if (nextState) {
+            loadRecents(displayAsResults = true)
         } else {
             searchFoods(query = _uiState.value.query, categoryId = null)
         }
@@ -92,6 +104,38 @@ class SearchViewModel @Inject constructor(
                             it.copy(
                                 isLoading = false,
                                 error = result.message ?: "Error al cargar favoritos"
+                            )
+                        }
+                    }
+                }
+                is Result.Loading -> Unit
+            }
+        }
+    }
+
+    fun loadRecents(displayAsResults: Boolean = false) {
+        viewModelScope.launch {
+            if (displayAsResults) {
+                _uiState.update { it.copy(isLoading = true, error = null) }
+            }
+            when (val result = foodRepository.getRecentFoods()) {
+                is Result.Success -> {
+                    val recents = result.data
+                    _uiState.update {
+                        it.copy(
+                            recentFoods = recents,
+                            searchResults = if (displayAsResults) recents else it.searchResults,
+                            isLoading = if (displayAsResults) false else it.isLoading,
+                            error = null
+                        )
+                    }
+                }
+                is Result.Error -> {
+                    if (displayAsResults) {
+                        _uiState.update {
+                            it.copy(
+                                isLoading = false,
+                                error = result.message ?: "Error al cargar alimentos recientes"
                             )
                         }
                     }
@@ -168,6 +212,23 @@ class SearchViewModel @Inject constructor(
                     val foodDetail = result.data
                     val defaultPortion = foodDetail.portions.firstOrNull { it.isDefault }
                         ?: foodDetail.portions.firstOrNull()
+
+                    // Record as recent food
+                    val summary = FoodSummary(
+                        id = foodDetail.id,
+                        canonicalName = foodDetail.canonicalName,
+                        brand = foodDetail.brand,
+                        category = foodDetail.category,
+                        countryCode = foodDetail.countryCode,
+                        verified = foodDetail.verified,
+                        macrosPer100g = MacroBreakdown(
+                            calories = 0,
+                            proteinG = 0.0,
+                            carbsG = 0.0,
+                            fatG = 0.0
+                        )
+                    )
+                    foodRepository.recordRecentFood(summary)
 
                     _uiState.update {
                         it.copy(

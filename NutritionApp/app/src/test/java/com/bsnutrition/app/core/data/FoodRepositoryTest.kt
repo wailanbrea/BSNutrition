@@ -154,4 +154,21 @@ class FoodRepositoryTest {
         assertEquals(true, (result as Result.Success).data)
         coVerify { favoriteFoodDao.insertFavorite(any()) }
     }
+
+    @Test
+    fun `recordRecentFood inserts into Room and calls backend API`() = runTest(testDispatcher) {
+        val food = FoodSummary(
+            id = 1L,
+            canonicalName = "Mangú",
+            macrosPer100g = MacroBreakdown(155, 1.5, 31.0, 3.2)
+        )
+
+        coEvery { foodApiService.recordRecentFood(1L) } returns com.bsnutrition.app.core.network.model.MessageResponseDto("OK")
+
+        val result = repository.recordRecentFood(food)
+
+        assertTrue(result is Result.Success)
+        coVerify { recentFoodDao.insertRecent(any()) }
+    }
 }
+

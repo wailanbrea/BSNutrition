@@ -2,14 +2,14 @@
 
 ## Current state
 - Project status: IN PROGRESS
-- Current phase: Phase 05 — Food Search, Favorites and Recents
-- Current task: PH05-T04
+- Current phase: Phase 06 — Diary and Dashboard
+- Current task: PH06-T01
 - Current task status: `[ ]`
-- Last completed task: PH05-T03
+- Last completed task: PH05-T04
 - Last update: 2026-08-21
 
 ## Exact next action
-Abrir `phases/PHASE_05_FOOD_SEARCH,_FAVORITES_AND_RECENTS.md` y ejecutar `PH05-T04` (Recents: Historial de alimentos consumidos, ordenamiento por frecuencia y uso reciente en backend/Android, sección 'Recientes' en la UI de búsqueda y Room cache).
+Abrir `phases/PHASE_06_DIARY_AND_DASHBOARD.md` y ejecutar `PH06-T01` (Diary backend model/services: migraciones de `daily_diaries`, `meal_logs`, `food_log_entries`, `water_logs`, modelos Eloquent con relaciones de propiedad de usuario, integridad histórica e inmutabilidad de snapshots nutricionales).
 
 ## Active blockers
 None.
@@ -23,6 +23,8 @@ None.
 - detalles finales de deployment.
 
 ## Recently completed
+- PH05-T04 — Recents: Migración `user_food_recents`, relación `recentFoods` en `User`, endpoints `GET /api/v1/foods/recents`, `POST /api/v1/foods/{id}/recent`, entidad Room `RecentFoodEntity`, `RecentFoodDao`, soporte en `FoodRepositoryImpl`, registro automático de alimentos al seleccionar/guardar, pestaña '🕒 Recientes' en `SearchScreen` con tests en `FoodRecentTest.php` (59 tests pasando al 100%).
+- **Fase 05 (Food Search, Favorites and Recents) completada al 100%**.
 - PH05-T03 — Favorites: Migración `user_food_favorites`, relación `favoriteFoods` en `User` y `Food`, endpoints `GET /api/v1/foods/favorites`, `POST /api/v1/foods/{id}/favorite` y `GET /api/v1/foods/{id}/favorite`, entidad Room `FavoriteFoodEntity`, `FavoriteFoodDao`, soporte en `FoodRepositoryImpl`, pestaña de favoritos y botones interactivos en `SearchScreen` y `FoodDetailSheet` con tests en `FoodFavoriteTest.php` (56 tests pasando al 100%).
 - PH05-T02 — Android Search: Modelos de dominio (`FoodSummary`, `FoodDetail`, `FoodPortion`, `FoodNutrient`, `NutritionCalculation`), `FoodApiService`, `FoodRepository` / `FoodRepositoryImpl`, `SearchViewModel` con debouncing de 300ms, pantalla `SearchScreen` en Compose con badges de cocina dominicana `🇩🇴 RD`, `FoodDetailSheet` modal con selector interactivo de porciones y recálculo en tiempo real, e integración en `AddScreen` con tests en `FoodRepositoryTest.kt` y `SearchViewModelTest.kt`.
 - PH05-T01 — Backend Food Search: Endpoints REST `GET /api/v1/foods/search`, `GET /api/v1/foods/{id}`, `GET /api/v1/foods/barcode/{barcode}`, `POST /api/v1/foods/{id}/calculate` con recursos JSON `FoodSummaryResource`, `FoodDetailResource`, `FoodPortionResource`, `FoodNutrientResource`, ranking con locale boosting para República Dominicana `DO`, paginación y tests en `FoodSearchApiTest.php`.

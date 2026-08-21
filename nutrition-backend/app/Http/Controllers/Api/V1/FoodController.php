@@ -12,6 +12,7 @@ use App\Services\OpenFoodFactsService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\DB;
 
 class FoodController extends Controller
 {
@@ -180,6 +181,59 @@ class FoodController extends Controller
         return response()->json([
             'is_favorite' => $isFavorite,
             'food_id' => $id,
+        ]);
+    }
+
+    /**
+     * List authenticated user's recently logged or viewed foods.
+     */
+    public function recents(Request $request): AnonymousResourceCollection
+    {
+        $user = $request->user();
+
+        $recents = $user->recentFoods()
+            ->with(['brand', 'category', 'foodNutrients.nutrient', 'portions'])
+            ->orderByDesc('user_food_recents.last_used_at')
+            ->paginate((int) $request->input('per_page', 20));
+
+        return FoodSummaryResource::collection($recents);
+    }
+
+    /**
+     * Record a food consumption or view into recents history.
+     */
+    public function recordRecent(Request $request, int $id): JsonResponse
+    {
+        $user = $request->user();
+        $food = Food::findOrFail($id);
+
+        $existing = DB::table('user_food_recents')
+            ->where('user_id', $user->id)
+            ->where('food_id', $food->id)
+            ->first();
+
+        if ($existing) {
+            DB::table('user_food_recents')
+                ->where('id', $existing->id)
+                ->update([
+                    'use_count' => $existing->use_count + 1,
+                    'last_used_at' => now(),
+                    'updated_at' => now(),
+                ]);
+        } else {
+            DB::table('user_food_recents')->insert([
+                'user_id' => $user->id,
+                'food_id' => $food->id,
+                'use_count' => 1,
+                'last_used_at' => now(),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'Alimento registrado en recientes.',
+            'food_id' => $food->id,
         ]);
     }
 }

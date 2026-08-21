@@ -18,6 +18,9 @@ data class SearchUiState(
     val calculation: NutritionCalculation? = null,
     val isCalculating: Boolean = false,
     val isFavoritesTab: Boolean = false,
-    val favoriteFoodIds: Set<Long> = emptySet()
+    val isRecentsTab: Boolean = false,
+    val favoriteFoodIds: Set<Long> = emptySet(),
+    val recentFoods: List<FoodSummary> = emptyList()
 )
+
 

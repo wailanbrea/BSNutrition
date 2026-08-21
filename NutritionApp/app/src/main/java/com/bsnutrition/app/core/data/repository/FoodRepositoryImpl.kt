@@ -5,6 +5,8 @@ import com.bsnutrition.app.core.common.Dispatcher
 import com.bsnutrition.app.core.common.Result
 import com.bsnutrition.app.core.database.FavoriteFoodDao
 import com.bsnutrition.app.core.database.FavoriteFoodEntity
+import com.bsnutrition.app.core.database.RecentFoodDao
+import com.bsnutrition.app.core.database.RecentFoodEntity
 import com.bsnutrition.app.core.model.FoodDetail
 import com.bsnutrition.app.core.model.FoodSummary
 import com.bsnutrition.app.core.model.NutritionCalculation
@@ -21,6 +23,7 @@ import javax.inject.Singleton
 class FoodRepositoryImpl @Inject constructor(
     private val foodApiService: FoodApiService,
     private val favoriteFoodDao: FavoriteFoodDao,
+    private val recentFoodDao: RecentFoodDao,
     @Dispatcher(BsnDispatchers.IO) private val ioDispatcher: CoroutineDispatcher,
     private val json: Json
 ) : FoodRepository {
@@ -150,6 +153,51 @@ class FoodRepositoryImpl @Inject constructor(
     override suspend fun isFavorite(foodId: Long): Boolean {
         return withContext(ioDispatcher) {
             favoriteFoodDao.isFavorite(foodId)
+        }
+    }
+
+    override suspend fun getRecentFoods(): Result<List<FoodSummary>> {
+        val apiResult = safeApiCall(ioDispatcher, json) {
+            foodApiService.getRecentFoods()
+        }
+
+        return when (apiResult) {
+            is Result.Success -> {
+                val foods = apiResult.data.data.map { it.toDomain() }
+                withContext(ioDispatcher) {
+                    recentFoodDao.clearRecents()
+                    recentFoodDao.insertAll(foods.map { RecentFoodEntity.fromDomain(it) })
+                }
+                Result.Success(foods)
+            }
+            is Result.Error -> {
+                val cached = withContext(ioDispatcher) {
+                    recentFoodDao.getRecentFoods().map { it.toDomain() }
+                }
+                if (cached.isNotEmpty()) {
+                    Result.Success(cached)
+                } else {
+                    Result.Error(apiResult.exception, apiResult.message, apiResult.code)
+                }
+            }
+            is Result.Loading -> Result.Loading
+        }
+    }
+
+    override suspend fun recordRecentFood(food: FoodSummary): Result<Unit> {
+        // Optimistically update local Room cache
+        withContext(ioDispatcher) {
+            recentFoodDao.insertRecent(RecentFoodEntity.fromDomain(food))
+        }
+
+        val apiResult = safeApiCall(ioDispatcher, json) {
+            foodApiService.recordRecentFood(food.id)
+        }
+
+        return when (apiResult) {
+            is Result.Success -> Result.Success(Unit)
+            is Result.Error -> Result.Success(Unit) // Local record succeeded
+            is Result.Loading -> Result.Loading
         }
     }
 }
