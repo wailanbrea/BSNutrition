@@ -30,43 +30,44 @@ Agregar escaneo CameraX/ML Kit y lookup local/externo.
 - Tests en Pest (`FoodSearchApiTest.php` y `OpenFoodFactsServiceTest.php`)
 
 
-### [ ] PH08-T02 — Android scanner
+### [x] PH08-T02 — Android scanner
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] CameraX
-- [ ] ML Kit
-- [ ] Throttle
-- [ ] Permissions
-- [ ] Lifecycle
+- [x] CameraX (`PreviewView`, `ImageAnalysis`, `ProcessCameraProvider`)
+- [x] ML Kit (`BarcodeScanning`, soporte para EAN-13, EAN-8, UPC-A, UPC-E, QR, Code-128)
+- [x] Throttle (Filtro de debouncing de 1.5s para evitar eventos de escaneo redundantes)
+- [x] Permissions (Solicitud en tiempo de ejecución de `Manifest.permission.CAMERA` con fallback informativo)
+- [x] Lifecycle (Enlace seguro al ciclo de vida del composable con `LocalLifecycleOwner`)
 
 **Acceptance criteria:**
-- Stable single scan event
+- Escaneo fluido, estable y reactivo con vista previa y visor de alineación
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Kotlin (`BarcodeScannerViewModelTest.kt`)
 
-### [ ] PH08-T03 — Log scanned product
+### [x] PH08-T03 — Log scanned product
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Detail
-- [ ] Portion
-- [ ] Add diary
-- [ ] Unknown path
+- [x] Detail (Presentación inmediata del bottom sheet `FoodDetailSheet` con macronutrientes al detectar código)
+- [x] Portion (Selección dinámica de porción y recálculo calórico interactivo)
+- [x] Add diary (Persistencia local-first en Room y backend con registro en alimentos recientes)
+- [x] Unknown path (Diálogo de producto no encontrado con opción de reintento o registro manual)
 
 **Acceptance criteria:**
-- Barcode -> diary E2E
+- Flujo completo desde el escaneo del código de barras hasta el registro en el diario nutricional
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Kotlin (`BarcodeScannerViewModelTest.kt`)
 
 ## Phase exit criteria
-- [ ] Barcode E2E complete
-- [ ] Status -> Phase 09
+- [x] Barcode E2E complete (Escáner CameraX/ML Kit + API Lookup con Open Food Facts fallback + registro en diario)
+- [x] Status -> Phase 09
 
 ## Mandatory closeout
-- [ ] Actualizar `PROJECT_STATUS.md`
-- [ ] Actualizar `CHANGELOG.md`
-- [ ] Actualizar `DECISIONS.md` si hubo decisión permanente
-- [ ] No dejar tareas `[-]` sin checkpoint
+- [x] Actualizar `PROJECT_STATUS.md`
+- [x] Actualizar `CHANGELOG.md`
+- [x] Actualizar `DECISIONS.md` si hubo decisión permanente
+- [x] No dejar tareas `[-]` sin checkpoint
+

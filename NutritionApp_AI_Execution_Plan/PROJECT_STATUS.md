@@ -2,14 +2,14 @@
 
 ## Current state
 - Project status: IN PROGRESS
-- Current phase: Phase 08 — Barcode
-- Current task: PH08-T02
+- Current phase: Phase 09 — AI Food Photo
+- Current task: PH09-T01
 - Current task status: `[ ]`
-- Last completed task: PH08-T01
+- Last completed task: PH08-T03
 - Last update: 2026-08-21
 
 ## Exact next action
-Abrir `phases/PHASE_08_BARCODE.md` y ejecutar `PH08-T02` (Android scanner: Implementación del escáner en Android usando CameraX y Google ML Kit Barcode Scanning con `BarcodeScanning`, `ImageAnalysis`, `PreviewView`, control de permisos en tiempo de ejecución, ciclo de vida Compose y debouncing de lectura).
+Abrir `phases/PHASE_09_AI_FOOD_PHOTO.md` y ejecutar `PH09-T01` (Private image storage: Servicio de almacenamiento de imágenes privadas en Laravel `app/Services/ImageStorageService.php`, subidas firmadas/privadas, validación de tipo MIME/dimensiones/peso, eliminación tras inferencia o retención temporal configurable).
 
 ## Active blockers
 None.
@@ -23,6 +23,9 @@ None.
 - detalles finales de deployment.
 
 ## Recently completed
+- PH08-T03 — Log scanned product: Bottom sheet `FoodDetailSheet` al detectar código de barras, selector de porciones dinámico con recálculo en tiempo real, registro en diario y en historial reciente con tests en `BarcodeScannerViewModelTest.kt`.
+- PH08-T02 — Android scanner: Integración completa de CameraX y Google ML Kit (`BarcodeScanning`) en `BarcodeScannerScreen` y `BarcodeAnalyzer`, control de permisos en tiempo de ejecución, retícula de visor con animación y debouncing de lectura de 1.5s.
+- **Fase 08 (Barcode) completada al 100%**.
 - PH08-T01 — Barcode lookup API: Endpoint `GET /api/v1/foods/barcode/{barcode}` con búsqueda local directa en base de datos canónica, fallback transparente a Open Food Facts (`OpenFoodFactsService`), importación y caching automático con marcas, porciones y nutrientes, respuesta 404 estructurada si no existe y tests en `FoodSearchApiTest.php` y `OpenFoodFactsServiceTest.php` (75 tests pasando al 100%).
 - PH07-T05 — Offline E2E: Suite integral de pruebas end-to-end (`OfflineSyncE2ETest.kt`) validando creación, edición, eliminación de comidas y agua sin conexión, retención en Room y en `SyncQueueDao`, drenado y reconciliación garantizada al reconectar y manejo tolerante a fallos de servidor.
 - **Fase 07 (Offline-First and Sync) completada al 100%**.
@@ -40,11 +43,13 @@ None.
 - **Fase 05 (Food Search, Favorites and Recents) completada al 100%**.
 
 ## Files/modules changed in last task
-- `nutrition-backend/`: app/Http/Controllers/Api/V1/FoodController.php, tests/Feature/FoodSearchApiTest.php, tests/Feature/OpenFoodFactsServiceTest.php
+- `NutritionApp/`: feature/scanner/BarcodeAnalyzer.kt, feature/scanner/BarcodeScannerViewModel.kt, feature/scanner/BarcodeScannerScreen.kt, feature/add/AddScreen.kt, test/java/com/bsnutrition/app/feature/scanner/BarcodeScannerViewModelTest.kt, app/build.gradle.kts, gradle/libs.versions.toml, AndroidManifest.xml
 - `NutritionApp_AI_Execution_Plan/`: PROJECT_STATUS.md, CHANGELOG.md, phases/PHASE_08_BARCODE.md
 
 ## Tests from last task
 - `php ./vendor/bin/pest` -> 75 passed (802 assertions)
+- `BarcodeScannerViewModelTest` -> Camera scan event handling, 404 fallback, and meal logging verified
+
 
 
 

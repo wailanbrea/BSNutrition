@@ -2,6 +2,23 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH08-T03
+**Added**
+- Despliegue automático del bottom sheet modal `FoodDetailSheet` al detectar un código de barras en el escáner.
+- Selección interactiva de porción y cálculo dinámico de macronutrientes en tiempo real.
+- Registro directo en el diario nutricional con persistencia local-first y adición automática a alimentos recientes.
+- Diálogo de producto no encontrado con opción para reintentar escaneo o regresar a búsqueda.
+- Tests unitarios en `BarcodeScannerViewModelTest.kt`.
+- **Fase 08 (Barcode) completada al 100%**.
+
+### 2026-08-21 — PH08-T02
+**Added**
+- Pantalla `BarcodeScannerScreen` con vista previa de cámara en tiempo real mediante CameraX y análisis con Google ML Kit.
+- Analizador `BarcodeAnalyzer` con soporte para formatos EAN-13, EAN-8, UPC-A, UPC-E, QR y Code-128.
+- Control de throttling de 1.5s y manejo de permisos `Manifest.permission.CAMERA` en tiempo de ejecución.
+- Superposición de visor con retícula cuadrada y botón para alternar linterna/flash.
+- Integración en `AddScreen` y `SearchScreen`.
+
 ### 2026-08-21 — PH08-T01
 **Added**
 - Endpoint `GET /api/v1/foods/barcode/{barcode}` con lookup local en base de datos de alimentos.

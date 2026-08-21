@@ -33,6 +33,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.foundation.clickable
+import com.bsnutrition.app.feature.scanner.BarcodeScannerScreen
 import com.bsnutrition.app.feature.search.SearchScreen
 
 @Composable
@@ -41,11 +42,20 @@ fun AddScreen(
     onNavigateToSearch: (() -> Unit)? = null
 ) {
     var isSearching by rememberSaveable { mutableStateOf(false) }
+    var isScanning by rememberSaveable { mutableStateOf(false) }
+
+    if (isScanning) {
+        BarcodeScannerScreen(
+            onNavigateBack = { isScanning = false },
+            onFoodLogged = { isScanning = false }
+        )
+        return
+    }
 
     if (isSearching) {
         SearchScreen(
             modifier = modifier,
-            onScanBarcodeClick = { /* Barcode scan */ }
+            onScanBarcodeClick = { isScanning = true }
         )
         return
     }
@@ -83,11 +93,16 @@ fun AddScreen(
                 subtitle = subtitle,
                 icon = icon,
                 onClick = {
-                    if (title == "Búsqueda en catálogo") {
-                        if (onNavigateToSearch != null) {
-                            onNavigateToSearch()
-                        } else {
-                            isSearching = true
+                    when (title) {
+                        "Búsqueda en catálogo" -> {
+                            if (onNavigateToSearch != null) {
+                                onNavigateToSearch()
+                            } else {
+                                isSearching = true
+                            }
+                        }
+                        "Escáner de código de barras" -> {
+                            isScanning = true
                         }
                     }
                 }
@@ -95,6 +110,7 @@ fun AddScreen(
         }
     }
 }
+
 
 @Composable
 private fun AddMethodCard(
