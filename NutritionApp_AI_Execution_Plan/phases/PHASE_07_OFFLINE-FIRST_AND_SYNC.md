@@ -84,27 +84,28 @@ Convertir diario/tracking a local-first con Room + WorkManager.
 - Tests en Pest (`DiaryServiceTest.php` e idempotencia de `client_id`) y tests en Android
 
 
-### [ ] PH07-T05 — Offline E2E
+### [x] PH07-T05 — Offline E2E
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Create/edit/delete offline
-- [ ] Kill/restart
-- [ ] Reconnect
-- [ ] Server errors
+- [x] Create/edit/delete offline (Flujo completo de mutaciones persistidas en local sin conexión)
+- [x] Kill/restart (Persistencia garantizada de transacciones y de la cola `SyncQueueDao` entre sesiones)
+- [x] Reconnect (Drenado automático y sincronización al restaurar la conectividad a internet)
+- [x] Server errors (Descarte de errores cliente 4xx definitivos y reintentos con backoff para 5xx)
 
 **Acceptance criteria:**
-- Critical cases pass
+- Casos críticos de uso offline-first pasan satisfactoriamente
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Kotlin (`OfflineSyncE2ETest.kt`)
 
 ## Phase exit criteria
-- [ ] Offline diary reliable
-- [ ] Status -> Phase 08
+- [x] Offline diary reliable (Persistencia en Room con Flow reactivo, WorkManager y reconciliación garantizada)
+- [x] Status -> Phase 08
 
 ## Mandatory closeout
-- [ ] Actualizar `PROJECT_STATUS.md`
-- [ ] Actualizar `CHANGELOG.md`
-- [ ] Actualizar `DECISIONS.md` si hubo decisión permanente
-- [ ] No dejar tareas `[-]` sin checkpoint
+- [x] Actualizar `PROJECT_STATUS.md`
+- [x] Actualizar `CHANGELOG.md`
+- [x] Actualizar `DECISIONS.md` si hubo decisión permanente (ADR-010 añadido)
+- [x] No dejar tareas `[-]` sin checkpoint
+

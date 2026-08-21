@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH07-T05
+**Added**
+- Suite integral de pruebas E2E `OfflineSyncE2ETest.kt` cubriendo ciclo completo offline (creación, edición, eliminación de comidas y agua sin red).
+- Validación de persistencia de transacciones y de la cola `SyncQueueDao` simulando caída o reinicio del proceso de la aplicación.
+- Drenado automático y reconciliación consistente de mutaciones al restaurar la conectividad a internet.
+- Tolerancia a fallos de backend y descarte de respuestas cliente (4xx) para evitar bucles venenosos en la cola.
+- **Fase 07 (Offline-First and Sync) completada al 100%**.
+
 ### 2026-08-21 — PH07-T04
 **Added**
 - Formalización de **ADR-010 — Offline-First Synchronization & Conflict Resolution Strategy** en `DECISIONS.md`.

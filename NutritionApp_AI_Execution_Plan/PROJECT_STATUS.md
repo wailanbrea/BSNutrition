@@ -2,14 +2,14 @@
 
 ## Current state
 - Project status: IN PROGRESS
-- Current phase: Phase 07 — Offline-first and Sync
-- Current task: PH07-T05
+- Current phase: Phase 08 — Barcode
+- Current task: PH08-T01
 - Current task status: `[ ]`
-- Last completed task: PH07-T04
+- Last completed task: PH07-T05
 - Last update: 2026-08-21
 
 ## Exact next action
-Abrir `phases/PHASE_07_OFFLINE-FIRST_AND_SYNC.md` y ejecutar `PH07-T05` (Offline E2E: Verificación y suite de pruebas integral del flujo offline [creación, edición, eliminación de comidas y agua sin conexión, persistencia tras reinicio de la app, reconciliación automática al reconectar y tolerancia a fallos de red] y cierre de Fase 07).
+Abrir `phases/PHASE_08_BARCODE.md` y ejecutar `PH08-T01` (Barcode lookup API: Búsqueda local por código de barras `GET /api/v1/foods/barcode/{barcode}`, fallback a Open Food Facts con importación automática y caching en base de datos canónica, respuesta 404 estructurada si no existe y rate limiting).
 
 ## Active blockers
 None.
@@ -23,6 +23,8 @@ None.
 - detalles finales de deployment.
 
 ## Recently completed
+- PH07-T05 — Offline E2E: Suite integral de pruebas end-to-end (`OfflineSyncE2ETest.kt`) validando creación, edición, eliminación de comidas y agua sin conexión, retención en Room y en `SyncQueueDao`, drenado y reconciliación garantizada al reconectar y manejo tolerante a fallos de servidor.
+- **Fase 07 (Offline-First and Sync) completada al 100%**.
 - PH07-T04 — Idempotency/conflicts: Validación de idempotencia con `client_id` (UUID), versionado optimista, tombstones mediante soft deletes en Room y Eloquent, deduplicación de reintentos en `SyncQueueDao` y formalización de ADR-010 en `DECISIONS.md`.
 - PH07-T03 — Sync worker: `DiarySyncWorker` con HiltWorker, drenado de cola de mutaciones `SyncQueueDao`, restricciones de red `NetworkType.CONNECTED`, política de backoff exponencial, descarte seguro de errores cliente permanentes y `SyncManager` para sincronización periódica y bajo demanda con tests en `DiarySyncWorkerTest.kt`.
 - PH07-T02 — Local-first repositories: Adaptación de `DiaryRepositoryImpl` para persistencia offline-first con Room, lectura reactiva mediante `Flow` (`observeDiaryDay`, `observeWaterLogs`, `observeTotalWater`), encolado y procesamiento de mutaciones (`SyncQueueEntity`) y reconciliación transparente en segundo plano con tests en `DiaryRepositoryTest.kt`.
@@ -37,11 +39,13 @@ None.
 - **Fase 05 (Food Search, Favorites and Recents) completada al 100%**.
 
 ## Files/modules changed in last task
-- `NutritionApp_AI_Execution_Plan/`: DECISIONS.md (ADR-010), PROJECT_STATUS.md, CHANGELOG.md, phases/PHASE_07_OFFLINE-FIRST_AND_SYNC.md
+- `NutritionApp/`: test/java/com/bsnutrition/app/core/sync/OfflineSyncE2ETest.kt
+- `NutritionApp_AI_Execution_Plan/`: PROJECT_STATUS.md, CHANGELOG.md, phases/PHASE_07_OFFLINE-FIRST_AND_SYNC.md
 
 ## Tests from last task
 - `php ./vendor/bin/pest` -> 75 passed (802 assertions)
-- `Idempotency and versioning tests` -> Verified across service and sync layers
+- `OfflineSyncE2ETest` -> Full offline CRUD, simulated process restart, and online reconciliation passing
+
 
 ## Known issues
 None.
