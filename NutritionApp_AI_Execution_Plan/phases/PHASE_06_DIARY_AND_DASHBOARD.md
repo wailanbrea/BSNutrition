@@ -36,20 +36,21 @@ Implementar núcleo diario con snapshots históricos y dashboard Today.
 - Tests en Pest (`DiaryServiceTest.php`) con 67 tests pasando al 100% (722 aserciones)
 
 
-### [ ] PH06-T02 — Diary API
+### [x] PH06-T02 — Diary API
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Daily read
-- [ ] Add/edit/delete
-- [ ] Copy meal/day
-- [ ] Totals
+- [x] Daily read (`GET /api/v1/diary/{date}` con `DiaryDayResource`, `MealResource` y totales agregados)
+- [x] Add/edit/delete (`POST /api/v1/diary/{date}/entries`, `PUT /api/v1/diary/entries/{id}`, `DELETE /api/v1/diary/entries/{id}`)
+- [x] Copy meal/day (`POST /api/v1/diary/copy-meal`, `POST /api/v1/diary/copy-day`)
+- [x] Totals (`GET /api/v1/diary/{date}/summary`, registro y consulta de agua `GET/POST /api/v1/diary/{date}/water`, `DELETE /api/v1/diary/water/{id}`)
 
 **Acceptance criteria:**
-- Consistent daily payload
+- Cargas y respuestas JSON normalizadas, estructuradas y consistentes para consumo directo por la app Android
 
 **Tests / verification:**
-- Feature tests
+- Tests en Pest (`DiaryApiTest.php`) con 75 tests pasando al 100% (802 aserciones)
+
 
 ### [ ] PH06-T03 — Android diary UI
 **Depends on:** None

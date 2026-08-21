@@ -2,6 +2,23 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH06-T02
+**Added**
+- Controlador REST `app/Http/Controllers/Api/V1/DiaryController.php` con endpoints:
+  - `GET /api/v1/diary/{date}`: Obtener o inicializar el diario diario con sus 4 comidas y resumen.
+  - `POST /api/v1/diary/{date}/entries`: Registrar alimento en una comida con cálculo dinámico de snapshots nutricionales.
+  - `PUT /api/v1/diary/entries/{id}`: Actualizar cantidad, porción o alimento con recálculo e incremento de versión.
+  - `DELETE /api/v1/diary/entries/{id}`: Eliminación lógica de entrada de comida.
+  - `POST /api/v1/diary/copy-meal`: Copiar comida completa a otra fecha o sección.
+  - `POST /api/v1/diary/copy-day`: Duplicar el diario completo a otra fecha.
+  - `GET /api/v1/diary/{date}/water`: Listado de registros de agua del día.
+  - `POST /api/v1/diary/{date}/water`: Registro de consumo de agua en mililitros.
+  - `DELETE /api/v1/diary/water/{id}`: Eliminar registro de agua.
+  - `GET /api/v1/diary/{date}/summary`: Totales calóricos, macronutrientes, fibra y agua.
+- FormRequests con validación exhaustiva: `AddMealEntryRequest`, `UpdateMealEntryRequest`, `CopyMealRequest`, `CopyDayRequest`, `LogWaterRequest`.
+- JSON Resources estructurados: `DiaryDayResource`, `MealResource`, `MealEntryResource`, `WaterLogResource`, `DailySummaryResource`.
+- Suite de pruebas de integración en Pest `tests/Feature/DiaryApiTest.php` (75 tests pasando al 100%, 802 aserciones).
+
 ### 2026-08-21 — PH06-T01
 **Added**
 - Migración `2026_08_21_220000_create_diary_tables.php` con tablas `diaries`, `meals`, `meal_entries` y `water_logs`.

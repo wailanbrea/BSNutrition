@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\DiaryController;
 use App\Http\Controllers\Api\V1\FoodController;
 use App\Http\Controllers\Api\V1\GoalController;
 use App\Http\Controllers\Api\V1\HealthController;
@@ -36,4 +37,16 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/foods/{id}', [FoodController::class, 'show'])->whereNumber('id')->name('api.v1.foods.show');
     Route::get('/foods/barcode/{barcode}', [FoodController::class, 'byBarcode'])->name('api.v1.foods.barcode');
     Route::post('/foods/{id}/calculate', [FoodController::class, 'calculate'])->whereNumber('id')->name('api.v1.foods.calculate');
+
+    // Daily Diary & Meals Logging
+    Route::get('/diary/{date}', [DiaryController::class, 'show'])->where('date', '\d{4}-\d{2}-\d{2}')->name('api.v1.diary.show');
+    Route::post('/diary/{date}/entries', [DiaryController::class, 'addEntry'])->where('date', '\d{4}-\d{2}-\d{2}')->name('api.v1.diary.entries.add');
+    Route::put('/diary/entries/{id}', [DiaryController::class, 'updateEntry'])->whereNumber('id')->name('api.v1.diary.entries.update');
+    Route::delete('/diary/entries/{id}', [DiaryController::class, 'deleteEntry'])->whereNumber('id')->name('api.v1.diary.entries.delete');
+    Route::post('/diary/copy-meal', [DiaryController::class, 'copyMeal'])->name('api.v1.diary.copy_meal');
+    Route::post('/diary/copy-day', [DiaryController::class, 'copyDay'])->name('api.v1.diary.copy_day');
+    Route::get('/diary/{date}/water', [DiaryController::class, 'water'])->where('date', '\d{4}-\d{2}-\d{2}')->name('api.v1.diary.water');
+    Route::post('/diary/{date}/water', [DiaryController::class, 'logWater'])->where('date', '\d{4}-\d{2}-\d{2}')->name('api.v1.diary.water.log');
+    Route::delete('/diary/water/{id}', [DiaryController::class, 'deleteWater'])->whereNumber('id')->name('api.v1.diary.water.delete');
+    Route::get('/diary/{date}/summary', [DiaryController::class, 'summary'])->where('date', '\d{4}-\d{2}-\d{2}')->name('api.v1.diary.summary');
 });
