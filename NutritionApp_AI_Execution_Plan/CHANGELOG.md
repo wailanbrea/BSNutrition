@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH02-T02
+**Added**
+- Arquitectura `core` en Android:
+  - `core.common`: Cualificadores `@Dispatcher`, enum `BsnDispatchers`, `DispatchersModule` y wrapper `Result<T>`.
+  - `core.model`: Modelos de dominio `User`, `UserProfile`, `AuthToken`, `AuthResponse`, `ApiErrorResponse`, `ApiErrorDetail` y `ApiException`.
+  - `core.datastore`: Interfaz `AuthTokenDataSource`, implementación `AuthTokenDataSourceImpl` con Jetpack Preferences DataStore y `DataStoreModule`.
+  - `core.network`: `AuthInterceptor` para inyección de token Bearer en peticiones HTTP y `NetworkModule` con configuración de `Json`, `OkHttpClient` y `Retrofit`.
+  - `core.database`: `NutritionDatabase` con Room, `UserEntity`, `UserDao` y `DatabaseModule`.
+  - `core.designsystem`: Componentes reutilizables `BsnPrimaryButton`, `BsnSecondaryButton`, `BsnTextField`, `BsnCard` y `BsnLoadingIndicator`.
+  - Pruebas unitarias en `ResultTest.kt`.
+
+**Changed**
+- Arquitectura desacoplada y modular lista para las capas de red y autenticación.
+
 ### 2026-08-21 — PH02-T01
 **Added**
 - Proyecto base de Android en `NutritionApp/` con Jetpack Compose y Material 3.

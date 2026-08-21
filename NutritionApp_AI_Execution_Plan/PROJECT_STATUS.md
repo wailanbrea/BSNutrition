@@ -3,13 +3,13 @@
 ## Current state
 - Project status: IN PROGRESS
 - Current phase: Phase 02 — Android Foundation and Authentication
-- Current task: PH02-T02
+- Current task: PH02-T03
 - Current task status: `[ ]`
-- Last completed task: PH02-T01
+- Last completed task: PH02-T02
 - Last update: 2026-08-21
 
 ## Exact next action
-Abrir `phases/PHASE_02_ANDROID_FOUNDATION_AND_AUTHENTICATION.md` y ejecutar `PH02-T02` (Core architecture: módulos/paquetes core para Hilt, designsystem, model, network, database, datastore y testing).
+Abrir `phases/PHASE_02_ANDROID_FOUNDATION_AND_AUTHENTICATION.md` y ejecutar `PH02-T03` (Network layer: Retrofit API interfaces, DTOs, AuthInterceptor, parseo tipado de errores ApiErrorDetail y tests con MockWebServer).
 
 ## Active blockers
 None.
@@ -26,6 +26,7 @@ None.
 No todos estos puntos bloquean el bootstrap.
 
 ## Recently completed
+- PH02-T02 — Arquitectura Core en Android (`NutritionApp/app/src/main/java/com/bsnutrition/app/core/`): Módulos Hilt (`DispatchersModule`, `DataStoreModule`, `NetworkModule`, `DatabaseModule`), modelos (`User`, `UserProfile`, `AuthToken`, `ApiError`, `Result`), persistencia DataStore (`AuthTokenDataSourceImpl`), Room Database base (`NutritionDatabase`, `UserEntity`, `UserDao`) y Design System components (`BsnButton`, `BsnTextField`, `BsnCard`, `BsnLoadingIndicator`).
 - PH02-T01 — Proyecto Android base en `NutritionApp/`: Gradle Version Catalog (`libs.versions.toml`), Jetpack Compose, Material 3, tema `BSNutritionTheme`, `MainActivity`, `NutritionApplication` con Hilt y build types debug/release.
 - **Fase 01 (Backend Foundation and Authentication) completada al 100%**.
 - PH01-T04 — Profile API: Migración `user_profiles`, modelo `UserProfile`, relación en `User`, FormRequest `UpdateProfileRequest`, serializador `UserProfileResource`, endpoints `GET/PUT /api/v1/profile` y tests de aislamiento de propiedad.
@@ -35,12 +36,12 @@ No todos estos puntos bloquean el bootstrap.
 - PH00 — Repositorios locales, gobernanza, convenciones de branching, CI skeleton y estrategias de entorno.
 
 ## Files/modules changed in last task
-- `NutritionApp/`: gradle/libs.versions.toml, settings.gradle.kts, build.gradle.kts, gradle.properties, app/build.gradle.kts, app/proguard-rules.pro, app/src/main/AndroidManifest.xml, app/src/main/res/values/strings.xml, app/src/main/res/values/themes.xml, app/src/main/java/com/bsnutrition/app/NutritionApplication.kt, app/src/main/java/com/bsnutrition/app/MainActivity.kt, app/src/main/java/com/bsnutrition/app/ui/theme/*
+- `NutritionApp/`: app/src/main/java/com/bsnutrition/app/core/common/*, app/src/main/java/com/bsnutrition/app/core/model/*, app/src/main/java/com/bsnutrition/app/core/datastore/*, app/src/main/java/com/bsnutrition/app/core/network/*, app/src/main/java/com/bsnutrition/app/core/database/*, app/src/main/java/com/bsnutrition/app/core/designsystem/component/*, app/src/test/java/com/bsnutrition/app/core/ResultTest.kt
 - `NutritionApp_AI_Execution_Plan/`: PROJECT_STATUS.md, CHANGELOG.md, phases/PHASE_02_ANDROID_FOUNDATION_AND_AUTHENTICATION.md
 
 ## Tests from last task
-- Validación de archivos de configuración Gradle y estructura de proyecto Android
-- `ExampleUnitTest` agregado
+- `ResultTest` unit tests (verificación de manejo de estados Success/Error)
+- Verificación de tipos y anotaciones de inyección Hilt y serialización
 
 ## Known issues
 None.

@@ -29,23 +29,23 @@ Crear app Kotlin/Compose, arquitectura core, red, almacenamiento y login.
 **Tests / verification:**
 - Estructura y catálogo de versiones verificados, Unit test base (`ExampleUnitTest`)
 
-### [ ] PH02-T02 — Core architecture
+### [x] PH02-T02 — Core architecture
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Hilt
-- [ ] designsystem
-- [ ] model
-- [ ] network
-- [ ] database
-- [ ] datastore
-- [ ] testing
+- [x] Hilt (`DispatchersModule`, `DataStoreModule`, `NetworkModule`, `DatabaseModule`)
+- [x] designsystem (`BsnButton`, `BsnTextField`, `BsnCard`, `BsnLoadingIndicator`)
+- [x] model (`User`, `UserProfile`, `AuthToken`, `AuthResponse`, `ApiError`, `ApiException`, `Result<T>`)
+- [x] network (Base OkHttp Client, AuthInterceptor, Retrofit, Serialization)
+- [x] database (Room `NutritionDatabase`, `UserEntity`, `UserDao`)
+- [x] datastore (`AuthTokenDataSource`, `AuthTokenDataSourceImpl`)
+- [x] testing (`ResultTest`, `ExampleUnitTest`)
 
 **Acceptance criteria:**
-- Modules/dependencies compile
+- Modules/dependencies compile y arquitectura core desacoplada
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Unit tests de Result y arquitectura core (`ResultTest`)
 
 ### [ ] PH02-T03 — Network layer
 **Depends on:** None
