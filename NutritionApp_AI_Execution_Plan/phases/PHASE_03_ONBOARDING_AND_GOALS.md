@@ -13,21 +13,21 @@ Implementar perfil inicial, cálculo versionado de objetivos y flujo Android.
 
 ## Tasks
 
-### [ ] PH03-T01 — Goal formula ADR
+### [x] PH03-T01 — Goal formula ADR
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Select BMR formula
-- [ ] Activity multipliers
-- [ ] Goal constraints
-- [ ] Macro defaults
-- [ ] Algorithm version
+- [x] Select BMR formula (Mifflin-St Jeor en `DECISIONS.md`)
+- [x] Activity multipliers (Sedentary 1.2, Light 1.375, Moderate 1.55, Active 1.725, Very Active 1.9)
+- [x] Goal constraints (Déficit/superávit por kg/sem, límites mínimos seguros de 1200 kcal mujeres / 1500 kcal hombres)
+- [x] Macro defaults (Distribución 30/40/30 en pérdida, 25/45/30 en mantenimiento, 30/45/25 en ganancia, agua 35ml/kg)
+- [x] Algorithm version (ADR-009 versionado como `mifflin_v1.0`)
 
 **Acceptance criteria:**
-- Formula documented/versioned
+- Fórmula documentada, versionada y aprobada en ADR-009
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Especificación formal y matemática en `DECISIONS.md` y `08_NUTRITION_ENGINE.md`
 
 ### [ ] PH03-T02 — Backend goal calculator
 **Depends on:** None

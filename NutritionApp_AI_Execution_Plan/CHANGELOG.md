@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH03-T01
+**Added**
+- Formalización de **ADR-009** (Nutrition Goals & Energy Expenditure Calculation Algorithm) en `DECISIONS.md`.
+- Definición canónica de BMR con ecuación de Mifflin-St Jeor, factores de actividad TDEE (1.20 a 1.90), ajustes calóricos por objetivo con déficit/superávit calibrado, umbrales de seguridad fisiológica (1200 kcal mujeres / 1500 kcal hombres), distribución porcentual de macronutrientes y versión de algoritmo `mifflin_v1.0`.
+
+**Changed**
+- Inicio de la **Fase 03 (Onboarding and Goals)**.
+
 ### 2026-08-21 — PH02-T05
 **Added**
 - Shell de navegación con Jetpack Compose Navigation (`com.bsnutrition.app.navigation`):
