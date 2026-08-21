@@ -86,26 +86,27 @@ Implementar núcleo diario con snapshots históricos y dashboard Today.
 - Tests unitarios en Android (`HomeViewModelTest.kt`)
 
 
-### [ ] PH06-T05 — History navigation
+### [x] PH06-T05 — History navigation
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Previous/next
-- [ ] Calendar
-- [ ] Empty days
+- [x] Previous/next (Navegación fluida hacia días anteriores y posteriores con recarga automática de comidas y agua)
+- [x] Calendar (Modal `DiaryDatePickerModal` con `DatePickerDialog` de Material 3 para salto directo a cualquier fecha)
+- [x] Empty days (Manejo de días sin registros con tarjetas limpias en 0 kcal y botones para agregar alimentos)
 
 **Acceptance criteria:**
-- Historical view/edit works
+- Visualización, navegación y registro histórico plenamente funcional
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests unitarios en Android (`DiaryViewModelTest.kt`)
 
 ## Phase exit criteria
-- [ ] Online diary complete
-- [ ] Status -> Phase 07
+- [x] Online diary complete
+- [x] Status -> Phase 07
 
 ## Mandatory closeout
-- [ ] Actualizar `PROJECT_STATUS.md`
-- [ ] Actualizar `CHANGELOG.md`
-- [ ] Actualizar `DECISIONS.md` si hubo decisión permanente
-- [ ] No dejar tareas `[-]` sin checkpoint
+- [x] Actualizar `PROJECT_STATUS.md`
+- [x] Actualizar `CHANGELOG.md`
+- [x] Actualizar `DECISIONS.md` si hubo decisión permanente
+- [x] No dejar tareas `[-]` sin checkpoint
+

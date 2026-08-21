@@ -126,7 +126,8 @@ fun DiaryScreen(
                 selectedDate = uiState.selectedDate,
                 onPreviousDay = { viewModel.onPreviousDay() },
                 onNextDay = { viewModel.onNextDay() },
-                onToday = { viewModel.onToday() }
+                onToday = { viewModel.onToday() },
+                onOpenDatePicker = { viewModel.openDatePickerDialog() }
             )
 
             if (uiState.isLoading && uiState.diary == null) {
@@ -184,6 +185,15 @@ fun DiaryScreen(
         }
     }
 
+    // Dialog: Date Picker Modal
+    if (uiState.showDatePickerDialog) {
+        DiaryDatePickerModal(
+            initialDate = uiState.selectedDate,
+            onDateSelected = { pickedDate -> viewModel.onDateSelected(pickedDate) },
+            onDismiss = { viewModel.dismissDatePickerDialog() }
+        )
+    }
+
     // Dialog: Copy Day
     if (uiState.showCopyDayDialog) {
         CopyDayDialog(
@@ -213,6 +223,7 @@ fun DateNavigationHeader(
     onPreviousDay: () -> Unit,
     onNextDay: () -> Unit,
     onToday: () -> Unit,
+    onOpenDatePicker: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Surface(
@@ -235,13 +246,23 @@ fun DateNavigationHeader(
 
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(4.dp)
             ) {
-                Text(
-                    text = displayDate,
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold
-                )
+                TextButton(onClick = onOpenDatePicker) {
+                    Icon(
+                        imageVector = Icons.Default.Today,
+                        contentDescription = "Seleccionar fecha",
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(18.dp)
+                    )
+                    Spacer(modifier = Modifier.width(6.dp))
+                    Text(
+                        text = displayDate,
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                }
 
                 if (selectedDate != LocalDate.now()) {
                     IconButton(
@@ -267,6 +288,42 @@ fun DateNavigationHeader(
         }
     }
 }
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun DiaryDatePickerModal(
+    initialDate: LocalDate,
+    onDateSelected: (LocalDate) -> Unit,
+    onDismiss: () -> Unit
+) {
+    val initialMillis = initialDate.atStartOfDay(java.time.ZoneId.of("UTC")).toInstant().toEpochMilli()
+    val datePickerState = androidx.compose.material3.rememberDatePickerState(initialSelectedDateMillis = initialMillis)
+
+    androidx.compose.material3.DatePickerDialog(
+        onDismissRequest = onDismiss,
+        confirmButton = {
+            TextButton(onClick = {
+                datePickerState.selectedDateMillis?.let { millis ->
+                    val selectedLocalDate = java.time.Instant.ofEpochMilli(millis)
+                        .atZone(java.time.ZoneId.of("UTC"))
+                        .toLocalDate()
+                    onDateSelected(selectedLocalDate)
+                }
+                onDismiss()
+            }) {
+                Text("Aceptar")
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) {
+                Text("Cancelar")
+            }
+        }
+    ) {
+        androidx.compose.material3.DatePicker(state = datePickerState)
+    }
+}
+
 
 @Composable
 fun DailyProgressCard(

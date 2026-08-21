@@ -17,6 +17,7 @@ data class DiaryUiState(
     val isLoggingWater: Boolean = false,
     val error: String? = null,
     val userMessage: String? = null,
+    val showDatePickerDialog: Boolean = false,
     val showCopyDayDialog: Boolean = false,
     val showCopyMealDialog: Boolean = false,
     val mealToCopy: MealLog? = null,

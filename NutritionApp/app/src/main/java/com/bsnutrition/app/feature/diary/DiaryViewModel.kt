@@ -237,6 +237,14 @@ class DiaryViewModel @Inject constructor(
         }
     }
 
+    fun openDatePickerDialog() {
+        _uiState.update { it.copy(showDatePickerDialog = true) }
+    }
+
+    fun dismissDatePickerDialog() {
+        _uiState.update { it.copy(showDatePickerDialog = false) }
+    }
+
     fun openCopyMealDialog(meal: MealLog) {
         _uiState.update { it.copy(showCopyMealDialog = true, mealToCopy = meal) }
     }
@@ -252,6 +260,7 @@ class DiaryViewModel @Inject constructor(
     fun dismissCopyDayDialog() {
         _uiState.update { it.copy(showCopyDayDialog = false) }
     }
+
 
     fun clearUserMessage() {
         _uiState.update { it.copy(userMessage = null) }

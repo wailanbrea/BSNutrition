@@ -147,4 +147,33 @@ class DiaryViewModelTest {
         assertEquals("Alimento eliminado de la comida", viewModel.uiState.value.userMessage)
         coVerify { diaryRepository.deleteMealEntry(501L) }
     }
+
+    @Test
+    fun `openDatePickerDialog and dismissDatePickerDialog toggle state correctly`() = runTest {
+        viewModel = DiaryViewModel(diaryRepository, goalRepository)
+        advanceUntilIdle()
+
+        assertEquals(false, viewModel.uiState.value.showDatePickerDialog)
+
+        viewModel.openDatePickerDialog()
+        assertEquals(true, viewModel.uiState.value.showDatePickerDialog)
+
+        viewModel.dismissDatePickerDialog()
+        assertEquals(false, viewModel.uiState.value.showDatePickerDialog)
+    }
+
+    @Test
+    fun `onDateSelected updates selected date and fetches historical diary`() = runTest {
+        val targetHistoricalDate = LocalDate.of(2026, 8, 15)
+        viewModel = DiaryViewModel(diaryRepository, goalRepository)
+        advanceUntilIdle()
+
+        viewModel.onDateSelected(targetHistoricalDate)
+        advanceUntilIdle()
+
+        assertEquals(targetHistoricalDate, viewModel.uiState.value.selectedDate)
+        coVerify { diaryRepository.getDiaryDay("2026-08-15") }
+        coVerify { diaryRepository.getWaterLogs("2026-08-15") }
+    }
 }
+

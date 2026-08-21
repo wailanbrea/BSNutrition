@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH06-T05
+**Added**
+- Navegación temporal e histórica en `DiaryViewModel` con selección de fechas arbitrarias y recarga dinámica de registros.
+- Componente `DiaryDatePickerModal` con `DatePickerDialog` de Material 3 para salto rápido a cualquier fecha histórica o futura.
+- Soporte y renderizado de días vacíos con estado limpio y botones directos para agregar comidas.
+- Tests unitarios en `DiaryViewModelTest.kt` cubriendo apertura/cierre de modal de fecha y carga de días históricos.
+- **Fase 06 (Diary and Dashboard) completada al 100%**.
+
 ### 2026-08-21 — PH06-T04
 **Added**
 - Integración de `DiaryRepository` en `HomeViewModel` para cargar reactivamente el diario y consumo del día actual.

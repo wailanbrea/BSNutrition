@@ -2,14 +2,14 @@
 
 ## Current state
 - Project status: IN PROGRESS
-- Current phase: Phase 06 — Diary and Dashboard
-- Current task: PH06-T05
+- Current phase: Phase 07 — Offline-first and Sync
+- Current task: PH07-T01
 - Current task status: `[ ]`
-- Last completed task: PH06-T04
+- Last completed task: PH06-T05
 - Last update: 2026-08-21
 
 ## Exact next action
-Abrir `phases/PHASE_06_DIARY_AND_DASHBOARD.md` y ejecutar `PH06-T05` (History navigation: Selector de calendario / fecha, navegación entre días históricos y futuros, visualización y soporte de días vacíos, verificación de edición/eliminación histórica y cierre de Fase 06).
+Abrir `phases/PHASE_07_OFFLINE-FIRST_AND_SYNC.md` y ejecutar `PH07-T01` (Room core schema: Entidades completas de Room para `DiaryEntity`, `MealEntity`, `MealEntryEntity`, `WaterLogEntity`, `SyncQueueEntity`, DAOs correspondientes, índices compuestos, TypeConverters e incremento de versión de `AppDatabase`).
 
 ## Active blockers
 None.
@@ -23,12 +23,33 @@ None.
 - detalles finales de deployment.
 
 ## Recently completed
+- PH06-T05 — History navigation: Navegación de historial con fechas relativas (Hoy, Ayer, Mañana) y fechas arbitrarias, modal `DiaryDatePickerModal` con `DatePickerDialog` de Material 3, soporte y renderizado limpio de días vacíos y tests en `DiaryViewModelTest.kt`.
+- **Fase 06 (Diary and Dashboard) completada al 100%**.
 - PH06-T04 — Today dashboard: `HomeViewModel` y `HomeScreen` actualizados con tarjeta Hero de calorías y anillo circular de progreso, barras lineales reactivas de macronutrientes (`MacroProtein`, `MacroCarbs`, `MacroFat`), widget de hidratación con registros rápidos de agua +250ml / +500ml y accesos directos a comidas con tests en `HomeViewModelTest.kt`.
 - PH06-T03 — Android diary UI: Modelos de dominio (`DailyDiary`, `MealLog`, `FoodLogEntry`, `WaterLog`, `DailySummary`), DTOs `DiaryDtos.kt`, cliente Retrofit `DiaryApiService`, repositorio `DiaryRepositoryImpl`, `DiaryViewModel`, pantalla Compose `DiaryScreen` con navegación temporal completa, widget de progreso calórico y de macronutrientes, contador y registro de agua, secciones para Desayuno/Almuerzo/Cena/Meriendas con eliminación y duplicación de comidas/días, con tests en `DiaryRepositoryTest.kt` y `DiaryViewModelTest.kt`.
 - PH06-T02 — Diary API: Controladores REST `DiaryController.php`, FormRequests con validación estricta (`AddMealEntryRequest`, `UpdateMealEntryRequest`, `CopyMealRequest`, `CopyDayRequest`, `LogWaterRequest`), Resources JSON estructurados (`DiaryDayResource`, `MealResource`, `MealEntryResource`, `WaterLogResource`, `DailySummaryResource`), endpoints REST para gestión diaria de comidas, agua y duplicación con tests en `DiaryApiTest.php` (75 tests pasando al 100%, 802 aserciones).
 - PH06-T01 — Diary backend model/services: Migraciones de base de datos `2026_08_21_220000_create_diary_tables.php` (`diaries`, `meals`, `meal_entries`, `water_logs`), modelos Eloquent (`Diary`, `Meal`, `MealEntry`, `WaterLog`), servicio de dominio `DiaryService` con cálculo inmutable de snapshots nutricionales vía `NutritionCalculatorService`, soporte de idempotencia por `client_id`, operaciones CRUD, clonación de comidas/días completos, control estricto de propiedad por usuario y suite de tests en Pest (`DiaryServiceTest.php`) con 67 tests pasando al 100% (722 aserciones).
 - PH05-T04 — Recents: Migración `user_food_recents`, relación `recentFoods` en `User`, endpoints `GET /api/v1/foods/recents`, `POST /api/v1/foods/{id}/recent`, entidad Room `RecentFoodEntity`, `RecentFoodDao`, soporte en `FoodRepositoryImpl`, registro automático de alimentos al seleccionar/guardar, pestaña '🕒 Recientes' en `SearchScreen` con tests en `FoodRecentTest.php` (59 tests pasando al 100%).
 - **Fase 05 (Food Search, Favorites and Recents) completada al 100%**.
+- PH05-T03 — Favorites: Migración `user_food_favorites`, relación `favoriteFoods` en `User` y `Food`, endpoints `GET /api/v1/foods/favorites`, `POST /api/v1/foods/{id}/favorite` y `GET /api/v1/foods/{id}/favorite`, entidad Room `FavoriteFoodEntity`, `FavoriteFoodDao`, soporte en `FoodRepositoryImpl`, pestaña de favoritos y botones interactivos en `SearchScreen` y `FoodDetailSheet` con tests en `FoodFavoriteTest.php`.
+- PH05-T02 — Android Search: Modelos de dominio (`FoodSummary`, `FoodDetail`, `FoodPortion`, `FoodNutrient`, `NutritionCalculation`), `FoodApiService`, `FoodRepository` / `FoodRepositoryImpl`, `SearchViewModel` con debouncing de 300ms, pantalla `SearchScreen` en Compose con badges de cocina dominicana `🇩🇴 RD`, `FoodDetailSheet` modal con selector interactivo de porciones y recálculo en tiempo real, e integración en `AddScreen` con tests en `FoodRepositoryTest.kt` y `SearchViewModelTest.kt`.
+- PH05-T01 — Backend Food Search: Endpoints REST `GET /api/v1/foods/search`, `GET /api/v1/foods/{id}`, `GET /api/v1/foods/barcode/{barcode}`, `POST /api/v1/foods/{id}/calculate` con recursos JSON `FoodSummaryResource`, `FoodDetailResource`, `FoodPortionResource`, `FoodNutrientResource`, ranking con locale boosting para República Dominicana `DO`, paginación y tests en `FoodSearchApiTest.php`.
+- PH04-T06 — Dominican Dataset Foundation: Seeder de catálogo criollo `DominicanFoodDatasetSeeder` con 15 platos y alimentos canónicos dominicanos (Mangú, Los tres golpes, La bandera, Habichuelas guisadas, Pollo guisado, Moro de guandules, Sancocho, Tostones, Queso frito, Salami frito, Morir soñando, Mofongo, etc.) con sus porciones, nutrientes y alias con tests en `DominicanFoodDatasetSeederTest.php`.
+- **Fase 04 (Nutrition Catalog and Engine) completada al 100%**.
+
+## Files/modules changed in last task
+- `NutritionApp/`: feature/diary/DiaryUiState.kt, feature/diary/DiaryViewModel.kt, feature/diary/DiaryScreen.kt, test/java/com/bsnutrition/app/feature/diary/DiaryViewModelTest.kt
+- `NutritionApp_AI_Execution_Plan/`: PROJECT_STATUS.md, CHANGELOG.md, phases/PHASE_06_DIARY_AND_DASHBOARD.md
+
+## Tests from last task
+- `php ./vendor/bin/pest` -> 75 passed (802 assertions)
+- `DiaryViewModelTest` -> Added history navigation and date picker tests
+
+## Known issues
+None.
+
+## Manual owner actions required
+None.
 - PH05-T03 — Favorites: Migración `user_food_favorites`, relación `favoriteFoods` en `User` y `Food`, endpoints `GET /api/v1/foods/favorites`, `POST /api/v1/foods/{id}/favorite` y `GET /api/v1/foods/{id}/favorite`, entidad Room `FavoriteFoodEntity`, `FavoriteFoodDao`, soporte en `FoodRepositoryImpl`, pestaña de favoritos y botones interactivos en `SearchScreen` y `FoodDetailSheet` con tests en `FoodFavoriteTest.php`.
 - PH05-T02 — Android Search: Modelos de dominio (`FoodSummary`, `FoodDetail`, `FoodPortion`, `FoodNutrient`, `NutritionCalculation`), `FoodApiService`, `FoodRepository` / `FoodRepositoryImpl`, `SearchViewModel` con debouncing de 300ms, pantalla `SearchScreen` en Compose con badges de cocina dominicana `🇩🇴 RD`, `FoodDetailSheet` modal con selector interactivo de porciones y recálculo en tiempo real, e integración en `AddScreen` con tests en `FoodRepositoryTest.kt` y `SearchViewModelTest.kt`.
 - PH05-T01 — Backend Food Search: Endpoints REST `GET /api/v1/foods/search`, `GET /api/v1/foods/{id}`, `GET /api/v1/foods/barcode/{barcode}`, `POST /api/v1/foods/{id}/calculate` con recursos JSON `FoodSummaryResource`, `FoodDetailResource`, `FoodPortionResource`, `FoodNutrientResource`, ranking con locale boosting para República Dominicana `DO`, paginación y tests en `FoodSearchApiTest.php`.
