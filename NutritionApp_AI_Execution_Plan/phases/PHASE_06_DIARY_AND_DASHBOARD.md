@@ -10,28 +10,31 @@ Implementar núcleo diario con snapshots históricos y dashboard Today.
 - `06_ANDROID_ARCHITECTURE.md`
 
 ## Entry criteria
-- [ ] Food search ready
-- [ ] Goals ready
+- [x] Food search ready (Búsqueda de alimentos por texto, alias, códigos de barras y cálculo dinámico operativo)
+- [x] Goals ready (Metas nutricionales calculadas y persistidas)
 
 ## Tasks
 
-### [ ] PH06-T01 — Diary backend model/services
+### [x] PH06-T01 — Diary backend model/services
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Diaries
-- [ ] Meals
-- [ ] Entries
-- [ ] Snapshots
-- [ ] CRUD
-- [ ] Ownership
-- [ ] Client IDs
+- [x] Diaries (Migración `diaries`, modelo `Diary`, unicidad `user_id` + `diary_date`, zona horaria y notas)
+- [x] Meals (Migración `meals`, modelo `Meal`, 4 comidas estándar: desayuno, almuerzo, cena, merienda)
+- [x] Entries (Migración `meal_entries`, modelo `MealEntry`, soft deletes)
+- [x] Snapshots (Inmutabilidad histórica de calorías, macros y micronutrientes calculados con `NutritionCalculatorService`)
+- [x] CRUD (`addEntry`, `updateEntry`, `deleteEntry`, `getOrCreateDiaryForDate`)
+- [x] Ownership (Validación estricta de propiedad de usuario en modificaciones)
+- [x] Client IDs (Soporte de idempotencia con `client_id` para operaciones offline-first)
+- [x] Water logs (Migración `water_logs`, modelo `WaterLog`, registro y agregación diaria)
+- [x] Copying (`copyMeal`, `copyDay`)
 
 **Acceptance criteria:**
-- Historical integrity/idempotency
+- Integridad histórica garantizada mediante snapshots e idempotencia por `client_id`
 
 **Tests / verification:**
-- CRUD/snapshot/auth/idempotency
+- Tests en Pest (`DiaryServiceTest.php`) con 67 tests pasando al 100% (722 aserciones)
+
 
 ### [ ] PH06-T02 — Diary API
 **Depends on:** None

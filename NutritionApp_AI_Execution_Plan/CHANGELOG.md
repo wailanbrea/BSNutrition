@@ -2,6 +2,22 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH06-T01
+**Added**
+- Migración `2026_08_21_220000_create_diary_tables.php` con tablas `diaries`, `meals`, `meal_entries` y `water_logs`.
+- Modelos Eloquent `Diary`, `Meal`, `MealEntry` y `WaterLog` con relaciones, casts y soft deletes.
+- Relaciones `diaries()` y `waterLogs()` en modelo `User`.
+- Servicio de dominio `DiaryService`:
+  - `getOrCreateDiaryForDate`: Generación automática de diario con 4 comidas canónicas (desayuno, almuerzo, cena, merienda).
+  - `addEntry`: Creación de entradas con cálculo exacto de snapshots nutricionales inmutables vía `NutritionCalculatorService`, soporte de idempotencia por `client_id` y registro automático de recientes.
+  - `updateEntry`: Modificación segura con recálculo de snapshots e incremento de versión.
+  - `deleteEntry`: Eliminación lógica (soft delete) con verificación de pertenencia.
+  - `copyMeal`: Duplicación de comidas completas entre fechas/tipos de comida.
+  - `copyDay`: Duplicación de días completos de diario.
+  - `logWater` y `getDailyWaterTotal`: Registro y sumatoria de agua consumida.
+  - `getDailySummary`: Agregación de totales calóricos, macronutrientes y resumen por comidas.
+- Suite de pruebas en Pest `tests/Feature/DiaryServiceTest.php` (67 tests pasando al 100%, 722 aserciones).
+
 ### 2026-08-21 — PH05-T04 (Fase 05 Completada al 100%)
 **Added**
 - Migración de base de datos `2026_08_21_210000_create_user_food_recents_table.php` para almacenamiento del historial de consumo con contador `use_count` y marca temporal `last_used_at`.

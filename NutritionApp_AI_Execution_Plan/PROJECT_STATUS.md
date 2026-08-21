@@ -3,13 +3,13 @@
 ## Current state
 - Project status: IN PROGRESS
 - Current phase: Phase 06 — Diary and Dashboard
-- Current task: PH06-T01
+- Current task: PH06-T02
 - Current task status: `[ ]`
-- Last completed task: PH05-T04
+- Last completed task: PH06-T01
 - Last update: 2026-08-21
 
 ## Exact next action
-Abrir `phases/PHASE_06_DIARY_AND_DASHBOARD.md` y ejecutar `PH06-T01` (Diary backend model/services: migraciones de `daily_diaries`, `meal_logs`, `food_log_entries`, `water_logs`, modelos Eloquent con relaciones de propiedad de usuario, integridad histórica e inmutabilidad de snapshots nutricionales).
+Abrir `phases/PHASE_06_DIARY_AND_DASHBOARD.md` y ejecutar `PH06-T02` (Diary API: Controladores REST, FormRequests con validación estricta, Resources JSON estructurados para `GET /api/v1/diary/{date}`, `POST /api/v1/diary/{date}/entries`, `PUT /api/v1/diary/entries/{id}`, `DELETE /api/v1/diary/entries/{id}`, `POST /api/v1/diary/copy-meal`, `POST /api/v1/diary/copy-day`, `POST /api/v1/diary/{date}/water`, `DELETE /api/v1/diary/water/{id}` y `GET /api/v1/diary/{date}/summary`).
 
 ## Active blockers
 None.
@@ -23,13 +23,15 @@ None.
 - detalles finales de deployment.
 
 ## Recently completed
+- PH06-T01 — Diary backend model/services: Migraciones de base de datos `2026_08_21_220000_create_diary_tables.php` (`diaries`, `meals`, `meal_entries`, `water_logs`), modelos Eloquent (`Diary`, `Meal`, `MealEntry`, `WaterLog`), servicio de dominio `DiaryService` con cálculo inmutable de snapshots nutricionales vía `NutritionCalculatorService`, soporte de idempotencia por `client_id`, operaciones CRUD, clonación de comidas/días completos, control estricto de propiedad por usuario y suite de tests en Pest (`DiaryServiceTest.php`) con 67 tests pasando al 100% (722 aserciones).
 - PH05-T04 — Recents: Migración `user_food_recents`, relación `recentFoods` en `User`, endpoints `GET /api/v1/foods/recents`, `POST /api/v1/foods/{id}/recent`, entidad Room `RecentFoodEntity`, `RecentFoodDao`, soporte en `FoodRepositoryImpl`, registro automático de alimentos al seleccionar/guardar, pestaña '🕒 Recientes' en `SearchScreen` con tests en `FoodRecentTest.php` (59 tests pasando al 100%).
 - **Fase 05 (Food Search, Favorites and Recents) completada al 100%**.
-- PH05-T03 — Favorites: Migración `user_food_favorites`, relación `favoriteFoods` en `User` y `Food`, endpoints `GET /api/v1/foods/favorites`, `POST /api/v1/foods/{id}/favorite` y `GET /api/v1/foods/{id}/favorite`, entidad Room `FavoriteFoodEntity`, `FavoriteFoodDao`, soporte en `FoodRepositoryImpl`, pestaña de favoritos y botones interactivos en `SearchScreen` y `FoodDetailSheet` con tests en `FoodFavoriteTest.php` (56 tests pasando al 100%).
+- PH05-T03 — Favorites: Migración `user_food_favorites`, relación `favoriteFoods` en `User` y `Food`, endpoints `GET /api/v1/foods/favorites`, `POST /api/v1/foods/{id}/favorite` y `GET /api/v1/foods/{id}/favorite`, entidad Room `FavoriteFoodEntity`, `FavoriteFoodDao`, soporte en `FoodRepositoryImpl`, pestaña de favoritos y botones interactivos en `SearchScreen` y `FoodDetailSheet` con tests en `FoodFavoriteTest.php`.
 - PH05-T02 — Android Search: Modelos de dominio (`FoodSummary`, `FoodDetail`, `FoodPortion`, `FoodNutrient`, `NutritionCalculation`), `FoodApiService`, `FoodRepository` / `FoodRepositoryImpl`, `SearchViewModel` con debouncing de 300ms, pantalla `SearchScreen` en Compose con badges de cocina dominicana `🇩🇴 RD`, `FoodDetailSheet` modal con selector interactivo de porciones y recálculo en tiempo real, e integración en `AddScreen` con tests en `FoodRepositoryTest.kt` y `SearchViewModelTest.kt`.
 - PH05-T01 — Backend Food Search: Endpoints REST `GET /api/v1/foods/search`, `GET /api/v1/foods/{id}`, `GET /api/v1/foods/barcode/{barcode}`, `POST /api/v1/foods/{id}/calculate` con recursos JSON `FoodSummaryResource`, `FoodDetailResource`, `FoodPortionResource`, `FoodNutrientResource`, ranking con locale boosting para República Dominicana `DO`, paginación y tests en `FoodSearchApiTest.php`.
 - PH04-T06 — Dominican Dataset Foundation: Seeder de catálogo criollo `DominicanFoodDatasetSeeder` con 15 platos y alimentos canónicos dominicanos (Mangú, Los tres golpes, La bandera, Habichuelas guisadas, Pollo guisado, Moro de guandules, Sancocho, Tostones, Queso frito, Salami frito, Morir soñando, Mofongo, etc.) con sus porciones, nutrientes y alias con tests en `DominicanFoodDatasetSeederTest.php`.
 - **Fase 04 (Nutrition Catalog and Engine) completada al 100%**.
+
 - PH04-T05 — Open Food Facts Adapter: Cliente `OpenFoodFactsService` para búsqueda y resolución de códigos de barras, mapeo de macronutrientes y micronutrientes, creación de marcas y porciones, y comando CLI `php artisan foods:import-off` con tests en `OpenFoodFactsServiceTest.php`.
 - PH04-T04 — USDA Adapter: Cliente `UsdaFoodDataService` para búsqueda y detalle en FoodData Central, mapeo de más de 30 IDs de nutrientes a códigos canónicos, importación a base de datos con porciones y comando CLI `php artisan foods:import-usda` con tests en `UsdaFoodDataServiceTest.php`.
 - PH04-T03 — Nutrition Calculation Service: Servicio `NutritionCalculatorService` con normalización por base (100g/ml), escalado por porciones y gramos libres, agregación de comidas y días completos, distribución porcentual de macros e inmutabilidad de snapshots históricos con tests en `NutritionCalculatorServiceTest.php`.

@@ -75,4 +75,14 @@ class User extends Authenticatable
             ->withPivot(['use_count', 'last_used_at'])
             ->withTimestamps();
     }
+
+    public function diaries(): HasMany
+    {
+        return $this->hasMany(Diary::class);
+    }
+
+    public function waterLogs(): HasMany
+    {
+        return $this->hasMany(WaterLog::class);
+    }
 }
