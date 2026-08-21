@@ -69,9 +69,29 @@ Factores calóricos: Proteína = 4 kcal/g, Carbohidratos = 4 kcal/g, Grasas = 9 
 ### 5. Versionado y Snapshots
 Todo cálculo persistido en `nutrition_goals` debe almacenar `calculation_version = "mifflin_v1.0"`.
 
+## ADR-010 — Offline-First Synchronization & Conflict Resolution Strategy
+**Status:** Accepted (Phase 07)
+
+### 1. Identificadores Únicos Generados en el Cliente (`client_id`)
+- Toda mutación iniciada en la aplicación móvil (creación de entradas de diario, registros de agua, registros de peso) genera un `client_id` único (UUIDv4) antes de persistir en Room.
+- El backend almacena e indexa `client_id` con restricción de unicidad por usuario.
+- En caso de reintentos de red o reenvíos de la cola de sincronización, la API responde de forma **idempotente** devolviendo el registro existente sin duplicar entradas ni calorias.
+
+### 2. Versionado Optimista
+- Cada entidad mutable almacena un entero `version` inicializado en 1.
+- Toda actualización incrementa el contador de versión (`version = version + 1`) y actualiza el timestamp `updated_at`.
+- En caso de modificaciones concurrentes, prevalece la versión con mayor número secuencial o timestamp más reciente (Last-Write-Wins convergente).
+
+### 3. Tombstones (Eliminación Lógica)
+- Las operaciones de eliminación aplican un borrado lógico (`is_deleted = true` en local, `deleted_at` vía SoftDeletes en backend).
+- El estado "tombstone" asegura que una entidad eliminada localmente no sea reinsertada accidentalmente durante la reconciliación con el servidor.
+
+### 4. Inmutabilidad de Snapshots Nutricionales
+- Los macronutrientes y micronutrientes calculados al registrar un alimento en el diario se congelan en snapshots inmutables (`calories_snapshot`, `protein_snapshot`, etc.).
+- Las ediciones posteriores del catálogo canónico de alimentos no modifican el historial registrado en días pasados del usuario.
+
 ## Pending ADR
-- ULID vs UUID
-- conflict rules
 - image retention
 - subscription tiers/pricing
+
 

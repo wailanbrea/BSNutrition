@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH07-T04
+**Added**
+- Formalización de **ADR-010 — Offline-First Synchronization & Conflict Resolution Strategy** en `DECISIONS.md`.
+- Garantía de idempotencia en peticiones de diario y agua mediante `client_id` (UUIDv4) con verificación en `DiaryService.php`.
+- Control de versiones optimista y políticas de Last-Write-Wins (LWW) en sincronización distribuida.
+- Estrategia de eliminación basada en lápidas (tombstones) mediante soft deletes locales (`is_deleted`) y en servidor (`deleted_at`).
+
 ### 2026-08-21 — PH07-T03
 **Added**
 - Worker de sincronización en segundo plano `DiarySyncWorker` (HiltWorker + CoroutineWorker) con restricciones de red activa `NetworkType.CONNECTED`.

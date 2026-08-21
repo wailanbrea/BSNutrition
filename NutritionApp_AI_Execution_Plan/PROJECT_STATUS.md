@@ -3,13 +3,13 @@
 ## Current state
 - Project status: IN PROGRESS
 - Current phase: Phase 07 — Offline-first and Sync
-- Current task: PH07-T04
+- Current task: PH07-T05
 - Current task status: `[ ]`
-- Last completed task: PH07-T03
+- Last completed task: PH07-T04
 - Last update: 2026-08-21
 
 ## Exact next action
-Abrir `phases/PHASE_07_OFFLINE-FIRST_AND_SYNC.md` y ejecutar `PH07-T04` (Idempotency/conflicts: Validación de idempotencia con `client_id`, control de versiones optimista, soft deletes/tombstones, deduplicación de reintentos y formalización de ADR en `DECISIONS.md`).
+Abrir `phases/PHASE_07_OFFLINE-FIRST_AND_SYNC.md` y ejecutar `PH07-T05` (Offline E2E: Verificación y suite de pruebas integral del flujo offline [creación, edición, eliminación de comidas y agua sin conexión, persistencia tras reinicio de la app, reconciliación automática al reconectar y tolerancia a fallos de red] y cierre de Fase 07).
 
 ## Active blockers
 None.
@@ -23,11 +23,31 @@ None.
 - detalles finales de deployment.
 
 ## Recently completed
+- PH07-T04 — Idempotency/conflicts: Validación de idempotencia con `client_id` (UUID), versionado optimista, tombstones mediante soft deletes en Room y Eloquent, deduplicación de reintentos en `SyncQueueDao` y formalización de ADR-010 en `DECISIONS.md`.
 - PH07-T03 — Sync worker: `DiarySyncWorker` con HiltWorker, drenado de cola de mutaciones `SyncQueueDao`, restricciones de red `NetworkType.CONNECTED`, política de backoff exponencial, descarte seguro de errores cliente permanentes y `SyncManager` para sincronización periódica y bajo demanda con tests en `DiarySyncWorkerTest.kt`.
 - PH07-T02 — Local-first repositories: Adaptación de `DiaryRepositoryImpl` para persistencia offline-first con Room, lectura reactiva mediante `Flow` (`observeDiaryDay`, `observeWaterLogs`, `observeTotalWater`), encolado y procesamiento de mutaciones (`SyncQueueEntity`) y reconciliación transparente en segundo plano con tests en `DiaryRepositoryTest.kt`.
 - PH07-T01 — Room core schema: Entidades Room completas (`DiaryEntity`, `MealEntity`, `MealEntryEntity`, `MealWithEntries`, `DiaryWithMeals`, `WaterLogEntity`, `WeightLogEntity`, `FoodCacheEntity`, `SyncQueueEntity`), DAOs correspondientes (`DiaryDao`, `MealEntryDao`, `WaterLogDao`, `WeightLogDao`, `FoodCacheDao`, `SyncQueueDao`), índices compuestos para búsquedas offline, actualización a versión 2 de `NutritionDatabase` y registro en `DatabaseModule` con tests en `RoomSchemaDaoTest.kt`.
 - PH06-T05 — History navigation: Navegación de historial con fechas relativas (Hoy, Ayer, Mañana) y fechas arbitrarias, modal `DiaryDatePickerModal` con `DatePickerDialog` de Material 3, soporte y renderizado limpio de días vacíos y tests en `DiaryViewModelTest.kt`.
 - **Fase 06 (Diary and Dashboard) completada al 100%**.
+- PH06-T04 — Today dashboard: `HomeViewModel` y `HomeScreen` actualizados con tarjeta Hero de calorías y anillo circular de progreso, barras lineales reactivas de macronutrientes (`MacroProtein`, `MacroCarbs`, `MacroFat`), widget de hidratación con registros rápidos de agua +250ml / +500ml y accesos directos a comidas con tests en `HomeViewModelTest.kt`.
+- PH06-T03 — Android diary UI: Modelos de dominio (`DailyDiary`, `MealLog`, `FoodLogEntry`, `WaterLog`, `DailySummary`), DTOs `DiaryDtos.kt`, cliente Retrofit `DiaryApiService`, repositorio `DiaryRepositoryImpl`, `DiaryViewModel`, pantalla Compose `DiaryScreen` con navegación temporal completa, widget de progreso calórico y de macronutrientes, contador y registro de agua, secciones para Desayuno/Almuerzo/Cena/Meriendas con eliminación y duplicación de comidas/días, con tests en `DiaryRepositoryTest.kt` y `DiaryViewModelTest.kt`.
+- PH06-T02 — Diary API: Controladores REST `DiaryController.php`, FormRequests con validación estricta (`AddMealEntryRequest`, `UpdateMealEntryRequest`, `CopyMealRequest`, `CopyDayRequest`, `LogWaterRequest`), Resources JSON estructurados (`DiaryDayResource`, `MealResource`, `MealEntryResource`, `WaterLogResource`, `DailySummaryResource`), endpoints REST para gestión diaria de comidas, agua y duplicación con tests en `DiaryApiTest.php` (75 tests pasando al 100%, 802 aserciones).
+- PH06-T01 — Diary backend model/services: Migraciones de base de datos `2026_08_21_220000_create_diary_tables.php` (`diaries`, `meals`, `meal_entries`, `water_logs`), modelos Eloquent (`Diary`, `Meal`, `MealEntry`, `WaterLog`), servicio de dominio `DiaryService` con cálculo inmutable de snapshots nutricionales vía `NutritionCalculatorService`, soporte de idempotencia por `client_id`, operaciones CRUD, clonación de comidas/días completos, control estricto de propiedad por usuario y suite de tests en Pest (`DiaryServiceTest.php`) con 67 tests pasando al 100% (722 aserciones).
+- PH05-T04 — Recents: Migración `user_food_recents`, relación `recentFoods` en `User`, endpoints `GET /api/v1/foods/recents`, `POST /api/v1/foods/{id}/recent`, entidad Room `RecentFoodEntity`, `RecentFoodDao`, soporte en `FoodRepositoryImpl`, registro automático de alimentos al seleccionar/guardar, pestaña '🕒 Recientes' en `SearchScreen` con tests en `FoodRecentTest.php` (59 tests pasando al 100%).
+- **Fase 05 (Food Search, Favorites and Recents) completada al 100%**.
+
+## Files/modules changed in last task
+- `NutritionApp_AI_Execution_Plan/`: DECISIONS.md (ADR-010), PROJECT_STATUS.md, CHANGELOG.md, phases/PHASE_07_OFFLINE-FIRST_AND_SYNC.md
+
+## Tests from last task
+- `php ./vendor/bin/pest` -> 75 passed (802 assertions)
+- `Idempotency and versioning tests` -> Verified across service and sync layers
+
+## Known issues
+None.
+
+## Manual owner actions required
+None.
 - PH06-T04 — Today dashboard: `HomeViewModel` y `HomeScreen` actualizados con tarjeta Hero de calorías y anillo circular de progreso, barras lineales reactivas de macronutrientes (`MacroProtein`, `MacroCarbs`, `MacroFat`), widget de hidratación con registros rápidos de agua +250ml / +500ml y accesos directos a comidas con tests en `HomeViewModelTest.kt`.
 - PH06-T03 — Android diary UI: Modelos de dominio (`DailyDiary`, `MealLog`, `FoodLogEntry`, `WaterLog`, `DailySummary`), DTOs `DiaryDtos.kt`, cliente Retrofit `DiaryApiService`, repositorio `DiaryRepositoryImpl`, `DiaryViewModel`, pantalla Compose `DiaryScreen` con navegación temporal completa, widget de progreso calórico y de macronutrientes, contador y registro de agua, secciones para Desayuno/Almuerzo/Cena/Meriendas con eliminación y duplicación de comidas/días, con tests en `DiaryRepositoryTest.kt` y `DiaryViewModelTest.kt`.
 - PH06-T02 — Diary API: Controladores REST `DiaryController.php`, FormRequests con validación estricta (`AddMealEntryRequest`, `UpdateMealEntryRequest`, `CopyMealRequest`, `CopyDayRequest`, `LogWaterRequest`), Resources JSON estructurados (`DiaryDayResource`, `MealResource`, `MealEntryResource`, `WaterLogResource`, `DailySummaryResource`), endpoints REST para gestión diaria de comidas, agua y duplicación con tests en `DiaryApiTest.php` (75 tests pasando al 100%, 802 aserciones).

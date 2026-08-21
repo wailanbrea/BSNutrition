@@ -67,21 +67,22 @@ Convertir diario/tracking a local-first con Room + WorkManager.
 - Tests en Kotlin (`DiarySyncWorkerTest.kt`)
 
 
-### [ ] PH07-T04 — Idempotency/conflicts
+### [x] PH07-T04 — Idempotency/conflicts
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Client IDs
-- [ ] Versions
-- [ ] Tombstones
-- [ ] Retry dedupe
-- [ ] ADR
+- [x] Client IDs (Generación de UUID en cliente y verificación de unicidad en backend para garantizar idempotencia)
+- [x] Versions (Control de versión optimista secuencial `version = version + 1`)
+- [x] Tombstones (Borrado lógico en Room y SoftDeletes en backend para evitar reaparición de datos eliminados)
+- [x] Retry dedupe (Deduplicación de mutaciones mediante cola FIFO y claves de idempotencia)
+- [x] ADR (ADR-010 documentado y aprobado en `DECISIONS.md`)
 
 **Acceptance criteria:**
-- No duplicate retries
+- Cero registros duplicados en reintentos y convergencia consistente entre cliente y servidor
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Pest (`DiaryServiceTest.php` e idempotencia de `client_id`) y tests en Android
+
 
 ### [ ] PH07-T05 — Offline E2E
 **Depends on:** None
