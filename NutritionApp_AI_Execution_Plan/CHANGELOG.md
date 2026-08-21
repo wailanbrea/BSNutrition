@@ -2,6 +2,22 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH01-T04
+**Added**
+- Migración `2026_08_21_143204_create_user_profiles_table.php` con campos de datos biométricos, objetivos y preferencias regionales.
+- Modelo `app/Models/UserProfile.php` y relación `profile()` en `User`.
+- `app/Http/Requests/Profile/UpdateProfileRequest.php` para validación estricta de perfiles.
+- `app/Http/Resources/UserProfileResource.php` para serialización de perfiles.
+- `app/Http/Controllers/Api/V1/ProfileController.php` con soporte para `GET /api/v1/profile` y `PUT /api/v1/profile`.
+- Suite de pruebas de perfil y aislamiento de propiedad en `tests/Feature/ProfileTest.php`.
+
+**Changed**
+- Cierre exitoso de la **Fase 01 (Backend Foundation and Authentication)**.
+
+**Tests**
+- `php ./vendor/bin/pest` (23 passed, 134 assertions).
+- `php ./vendor/bin/pint` (formato limpio verificado).
+
 ### 2026-08-21 — PH01-T03
 **Added**
 - `app/Http/Controllers/Api/V1/AuthController.php` para flujos de registro, login, logout, me y eliminación de cuenta.

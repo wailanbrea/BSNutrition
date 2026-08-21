@@ -68,27 +68,28 @@ Crear Laravel API, MySQL, errores JSON, Sanctum y perfil.
 **Tests / verification:**
 - Auth feature tests (`tests/Feature/AuthTest.php`)
 
-### [ ] PH01-T04 — Profile API
+### [x] PH01-T04 — Profile API
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Migration/model
-- [ ] GET/PUT
-- [ ] Validation
-- [ ] Ownership
+- [x] Migration/model (`user_profiles`, `UserProfile`)
+- [x] GET/PUT (`/api/v1/profile`)
+- [x] Validation (`UpdateProfileRequest`)
+- [x] Ownership (estricto aislamiento derivado del token de usuario)
 
 **Acceptance criteria:**
 - User can only access own profile
 
 **Tests / verification:**
-- Profile/authorization tests
+- Profile/authorization tests (`tests/Feature/ProfileTest.php`)
 
 ## Phase exit criteria
-- [ ] Backend auth/profile green
-- [ ] Status -> Phase 02
+- [x] Backend auth/profile green
+- [x] Status -> Phase 02
 
 ## Mandatory closeout
-- [ ] Actualizar `PROJECT_STATUS.md`
-- [ ] Actualizar `CHANGELOG.md`
-- [ ] Actualizar `DECISIONS.md` si hubo decisión permanente
-- [ ] No dejar tareas `[-]` sin checkpoint
+- [x] Actualizar `PROJECT_STATUS.md`
+- [x] Actualizar `CHANGELOG.md`
+- [x] Actualizar `DECISIONS.md` si hubo decisión permanente
+- [x] No dejar tareas `[-]` sin checkpoint
+
