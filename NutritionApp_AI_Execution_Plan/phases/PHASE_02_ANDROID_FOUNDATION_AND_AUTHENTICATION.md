@@ -14,20 +14,20 @@ Crear app Kotlin/Compose, arquitectura core, red, almacenamiento y login.
 
 ## Tasks
 
-### [ ] PH02-T01 — Android project/version catalog
+### [x] PH02-T01 — Android project/version catalog
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Create app
-- [ ] Compose/Material3
-- [ ] libs.versions.toml
-- [ ] Debug/release
+- [x] Create app (`NutritionApp/app`)
+- [x] Compose/Material3 (`BSNutritionTheme`, Material 3, dynamic theming)
+- [x] libs.versions.toml (`gradle/libs.versions.toml`)
+- [x] Debug/release (buildTypes con BuildConfig BASE_URL)
 
 **Acceptance criteria:**
 - Build/install works
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Estructura y catálogo de versiones verificados, Unit test base (`ExampleUnitTest`)
 
 ### [ ] PH02-T02 — Core architecture
 **Depends on:** None

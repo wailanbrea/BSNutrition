@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH02-T01
+**Added**
+- Proyecto base de Android en `NutritionApp/` con Jetpack Compose y Material 3.
+- Gradle Version Catalog en `NutritionApp/gradle/libs.versions.toml` con versiones canónicas de Compose, Hilt, Room, Retrofit, OkHttp, Serialization, DataStore y Testing.
+- `settings.gradle.kts`, `build.gradle.kts` raíz y `app/build.gradle.kts` con build types (`debug` con Base URL local `http://10.0.2.2:8000/api/v1/` y `release`).
+- `NutritionApplication.kt` con `@HiltAndroidApp` y `MainActivity.kt` con `@AndroidEntryPoint`.
+- Sistema de temas `BSNutritionTheme` con paleta de colores de nutrición y tipografía Material 3.
+- `ExampleUnitTest.kt` para verificación de test runner.
+
+**Changed**
+- Inicio de la **Fase 02 (Android Foundation and Authentication)**.
+
 ### 2026-08-21 — PH01-T04
 **Added**
 - Migración `2026_08_21_143204_create_user_profiles_table.php` con campos de datos biométricos, objetivos y preferencias regionales.
