@@ -13,25 +13,25 @@ Crear esquema canónico, cálculo nutricional y adapters externos.
 
 ## Tasks
 
-### [ ] PH04-T01 — Food/nutrient schema
+### [x] PH04-T01 — Food/nutrient schema
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Categories
-- [ ] Brands
-- [ ] Foods
-- [ ] Aliases
-- [ ] Barcodes
-- [ ] Portions
-- [ ] Nutrients
-- [ ] Sources
-- [ ] Indexes
+- [x] Categories (`food_categories`, `FoodCategory`)
+- [x] Brands (`food_brands`, `FoodBrand`)
+- [x] Foods (`foods`, `Food`)
+- [x] Aliases (`food_aliases`, `FoodAlias`)
+- [x] Barcodes (`food_barcodes`, `FoodBarcode`)
+- [x] Portions (`food_portions`, `FoodPortion`)
+- [x] Nutrients (`nutrients`, `Nutrient`)
+- [x] Sources (`food_sources`, `FoodSource`)
+- [x] Indexes (Índices normalizados, compuestos, únicos y de búsqueda)
 
 **Acceptance criteria:**
-- Supports generic/branded/portions/micronutrients
+- Esquema de base de datos canónico y modelos Eloquent con soporte completo para alimentos genéricos, de marca, porciones, códigos de barras y micronutrientes
 
 **Tests / verification:**
-- Migration/model tests
+- Tests en Pest (`FoodCatalogSchemaTest.php`) con 32 tests pasando al 100% (191 aserciones)
 
 ### [ ] PH04-T02 — Nutrient seed
 **Depends on:** None

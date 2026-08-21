@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH04-T01
+**Added**
+- Migración de catálogo canónico `2026_08_21_190000_create_food_catalog_tables.php` estructurando: `food_categories`, `food_brands`, `food_sources`, `nutrients`, `foods`, `food_aliases`, `food_barcodes`, `food_portions`, `food_nutrients`.
+- Modelos Eloquent completos (`FoodCategory`, `FoodBrand`, `FoodSource`, `Nutrient`, `Food`, `FoodAlias`, `FoodBarcode`, `FoodPortion`, `FoodNutrient`) con relaciones íntegras, eliminación en cascada y soft deletes.
+- Scopes de consulta optimizados en `Food`: `search(term)` (búsqueda normalizada por nombre, alias y marca), `byBarcode(barcode)` y `verified()`.
+- Suite de pruebas exhaustiva en `tests/Feature/FoodCatalogSchemaTest.php` (32 tests pasando al 100%).
+
+**Changed**
+- Inicio de la **Fase 04 (Nutrition Catalog and Engine)**.
+
 ### 2026-08-21 — PH03-T04
 **Added**
 - Interfaz `ProfileRepository` e implementación `ProfileRepositoryImpl` con mapeo de red y enlace Hilt en `DataModule`.
