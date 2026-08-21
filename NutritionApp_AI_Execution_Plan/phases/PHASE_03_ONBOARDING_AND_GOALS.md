@@ -44,22 +44,22 @@ Implementar perfil inicial, cálculo versionado de objetivos y flujo Android.
 **Tests / verification:**
 - Tests en Pest (`NutritionGoalTest.php`) con 100% de aserciones pasando (28 tests totales)
 
-### [ ] PH03-T03 — Android onboarding
+### [x] PH03-T03 — Android onboarding
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Birth/sex
-- [ ] Height/weight
-- [ ] Activity
-- [ ] Goal/rate
-- [ ] Units
-- [ ] Review
+- [x] Birth/sex (`BirthSexStepView`, `updateBirthAndSex`)
+- [x] Height/weight (`HeightWeightStepView`, `updateHeightAndWeight`)
+- [x] Activity (`ActivityStepView`, `updateActivityLevel`)
+- [x] Goal/rate (`GoalRateStepView`, `updateGoalAndRate`)
+- [x] Units (`UnitsStepView`, `updateUnitSystem`)
+- [x] Review (`ReviewStepView`, cálculo y previsualización de metas)
 
 **Acceptance criteria:**
-- Validated complete flow
+- Flujo interactivo completo de onboarding en Compose con indicador de progreso y validación paso a paso
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests unitarios en `OnboardingViewModelTest` validando transiciones de estado, cálculo de metas y límites
 
 ### [ ] PH03-T04 — Connect/save goals
 **Depends on:** None

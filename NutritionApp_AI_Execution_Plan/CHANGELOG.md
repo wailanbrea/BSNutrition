@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH03-T03
+**Added**
+- Modelo de dominio `NutritionGoal.kt` y DTOs de cálculo y metas `GoalDtos.kt`.
+- Interfaz Retrofit `GoalApiService` y repositorio `GoalRepository` / `GoalRepositoryImpl` con inyección Hilt.
+- Feature de Onboarding (`com.bsnutrition.app.feature.onboarding`):
+  - `OnboardingStep` (6 pasos) y `OnboardingUiState`.
+  - `OnboardingViewModel` para control de pasos, cálculo dinámico de metas y envío al repositorio.
+  - `OnboardingScreen` con Compose y Material 3 (selector de sexo/fecha, altura/peso, nivel de actividad, objetivo nutricional, unidades y resumen de metas).
+- Pruebas unitarias en `OnboardingViewModelTest.kt`.
+
 ### 2026-08-21 — PH03-T02
 **Added**
 - Migración `2026_08_21_180000_create_nutrition_goals_table.php` para almacenar objetivos calóricos, macronutrientes, agua, fibra y versión de cálculo.

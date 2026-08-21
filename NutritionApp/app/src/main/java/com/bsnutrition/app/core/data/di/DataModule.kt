@@ -17,4 +17,11 @@ abstract class DataModule {
     abstract fun bindAuthRepository(
         impl: AuthRepositoryImpl
     ): AuthRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindGoalRepository(
+        impl: com.bsnutrition.app.core.data.repository.GoalRepositoryImpl
+    ): com.bsnutrition.app.core.data.repository.GoalRepository
 }
+
