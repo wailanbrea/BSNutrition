@@ -67,4 +67,23 @@ object NetworkModule {
             .addConverterFactory(json.asConverterFactory(contentType))
             .build()
     }
+
+    @Provides
+    @Singleton
+    fun provideAuthApiService(retrofit: Retrofit): com.bsnutrition.app.core.network.api.AuthApiService {
+        return retrofit.create(com.bsnutrition.app.core.network.api.AuthApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideProfileApiService(retrofit: Retrofit): com.bsnutrition.app.core.network.api.ProfileApiService {
+        return retrofit.create(com.bsnutrition.app.core.network.api.ProfileApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideHealthApiService(retrofit: Retrofit): com.bsnutrition.app.core.network.api.HealthApiService {
+        return retrofit.create(com.bsnutrition.app.core.network.api.HealthApiService::class.java)
+    }
 }
+

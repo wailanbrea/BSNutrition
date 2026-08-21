@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH02-T03
+**Added**
+- Interfaces de servicios Retrofit: `AuthApiService`, `ProfileApiService` y `HealthApiService`.
+- DTOs de transferencia serializables: `RegisterRequestDto`, `LoginRequestDto`, `AuthResponseDto`, `UserDto`, `UserContainerDto`, `UpdateProfileRequestDto`, `UserProfileDto`, `ProfileContainerDto`, `HealthResponseDto`, `MessageResponseDto`.
+- Utilidad `safeApiCall` con captura tipada de `ApiException` y parseo de errores de backend `ApiErrorResponse`.
+- Provisión de servicios API en `NetworkModule`.
+- Pruebas unitarias de red y parseo de errores en `SafeApiCallTest.kt`.
+
+**Changed**
+- Configuración de dependencias de prueba con `okhttp-mockwebserver`.
+
 ### 2026-08-21 — PH02-T02
 **Added**
 - Arquitectura `core` en Android:

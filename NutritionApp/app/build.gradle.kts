@@ -109,6 +109,7 @@ dependencies {
     testImplementation(libs.mockk)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.turbine)
+    testImplementation(libs.okhttp.mockwebserver)
 
     // Instrumented Testing
     androidTestImplementation(libs.androidx.junit)

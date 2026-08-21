@@ -47,21 +47,21 @@ Crear app Kotlin/Compose, arquitectura core, red, almacenamiento y login.
 **Tests / verification:**
 - Unit tests de Result y arquitectura core (`ResultTest`)
 
-### [ ] PH02-T03 — Network layer
+### [x] PH02-T03 — Network layer
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Retrofit/OkHttp
-- [ ] Serialization
-- [ ] Auth interceptor
-- [ ] Typed errors
-- [ ] Safe logging
+- [x] Retrofit/OkHttp (`AuthApiService`, `ProfileApiService`, `HealthApiService`)
+- [x] Serialization (`AuthDtos`, `ProfileDtos`, `HealthDtos`)
+- [x] Auth interceptor (`AuthInterceptor` con inyección automática de token Bearer)
+- [x] Typed errors (`safeApiCall`, `parseApiError`, `ApiException` con deserialización de `ApiErrorResponse`)
+- [x] Safe logging (`HttpLoggingInterceptor` condicional por `BuildConfig.DEBUG`)
 
 **Acceptance criteria:**
-- Health endpoint works
+- Conexión e interfaces Retrofit/OkHttp tipadas con manejo de errores
 
 **Tests / verification:**
-- MockWebServer
+- Unit tests de `SafeApiCallTest` y parseo de errores tipados
 
 ### [ ] PH02-T04 — Auth UI/repository
 **Depends on:** None

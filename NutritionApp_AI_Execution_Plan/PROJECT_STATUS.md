@@ -3,13 +3,13 @@
 ## Current state
 - Project status: IN PROGRESS
 - Current phase: Phase 02 — Android Foundation and Authentication
-- Current task: PH02-T03
+- Current task: PH02-T04
 - Current task status: `[ ]`
-- Last completed task: PH02-T02
+- Last completed task: PH02-T03
 - Last update: 2026-08-21
 
 ## Exact next action
-Abrir `phases/PHASE_02_ANDROID_FOUNDATION_AND_AUTHENTICATION.md` y ejecutar `PH02-T03` (Network layer: Retrofit API interfaces, DTOs, AuthInterceptor, parseo tipado de errores ApiErrorDetail y tests con MockWebServer).
+Abrir `phases/PHASE_02_ANDROID_FOUNDATION_AND_AUTHENTICATION.md` y ejecutar `PH02-T04` (Auth UI/repository: AuthRepository, AuthViewModel, LoginScreen, RegisterScreen con Compose, gestión de estado y persistencia de sesión).
 
 ## Active blockers
 None.
@@ -26,6 +26,7 @@ None.
 No todos estos puntos bloquean el bootstrap.
 
 ## Recently completed
+- PH02-T03 — Network Layer en Android (`NutritionApp/app/src/main/java/com/bsnutrition/app/core/network/`): Interfaces Retrofit (`AuthApiService`, `ProfileApiService`, `HealthApiService`), DTOs de autenticación y perfil, helper `safeApiCall` con captura tipada de `ApiException` y tests unitarios en `SafeApiCallTest`.
 - PH02-T02 — Arquitectura Core en Android (`NutritionApp/app/src/main/java/com/bsnutrition/app/core/`): Módulos Hilt (`DispatchersModule`, `DataStoreModule`, `NetworkModule`, `DatabaseModule`), modelos (`User`, `UserProfile`, `AuthToken`, `ApiError`, `Result`), persistencia DataStore (`AuthTokenDataSourceImpl`), Room Database base (`NutritionDatabase`, `UserEntity`, `UserDao`) y Design System components (`BsnButton`, `BsnTextField`, `BsnCard`, `BsnLoadingIndicator`).
 - PH02-T01 — Proyecto Android base en `NutritionApp/`: Gradle Version Catalog (`libs.versions.toml`), Jetpack Compose, Material 3, tema `BSNutritionTheme`, `MainActivity`, `NutritionApplication` con Hilt y build types debug/release.
 - **Fase 01 (Backend Foundation and Authentication) completada al 100%**.
@@ -36,12 +37,11 @@ No todos estos puntos bloquean el bootstrap.
 - PH00 — Repositorios locales, gobernanza, convenciones de branching, CI skeleton y estrategias de entorno.
 
 ## Files/modules changed in last task
-- `NutritionApp/`: app/src/main/java/com/bsnutrition/app/core/common/*, app/src/main/java/com/bsnutrition/app/core/model/*, app/src/main/java/com/bsnutrition/app/core/datastore/*, app/src/main/java/com/bsnutrition/app/core/network/*, app/src/main/java/com/bsnutrition/app/core/database/*, app/src/main/java/com/bsnutrition/app/core/designsystem/component/*, app/src/test/java/com/bsnutrition/app/core/ResultTest.kt
+- `NutritionApp/`: gradle/libs.versions.toml, app/build.gradle.kts, app/src/main/java/com/bsnutrition/app/core/network/model/*, app/src/main/java/com/bsnutrition/app/core/network/api/*, app/src/main/java/com/bsnutrition/app/core/network/util/SafeApiCall.kt, app/src/main/java/com/bsnutrition/app/core/network/NetworkModule.kt, app/src/test/java/com/bsnutrition/app/core/network/SafeApiCallTest.kt
 - `NutritionApp_AI_Execution_Plan/`: PROJECT_STATUS.md, CHANGELOG.md, phases/PHASE_02_ANDROID_FOUNDATION_AND_AUTHENTICATION.md
 
 ## Tests from last task
-- `ResultTest` unit tests (verificación de manejo de estados Success/Error)
-- Verificación de tipos y anotaciones de inyección Hilt y serialización
+- `SafeApiCallTest` unit tests (422 validation parsing, 401 unauthenticated, 200 success, 404 error)
 
 ## Known issues
 None.
