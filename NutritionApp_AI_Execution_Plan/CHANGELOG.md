@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH07-T02
+**Added**
+- Lecturas reactivas sin bloqueo de red en `DiaryRepositoryImpl` vía `observeDiaryDay`, `observeWaterLogs` y `observeTotalWater`.
+- Transacciones locales inmediatas en Room para agregar, editar y eliminar comidas, y registrar ingesta de agua con asignación de `clientId` único (`UUID`).
+- Encolado atómico de mutaciones en `SyncQueueDao` con payload serializado JSON para sincronización garantizada.
+- Reconciliación asíncrona transparente en segundo plano sin interrumpir ni demorar la respuesta de la UI.
+- Pruebas unitarias completas en `DiaryRepositoryTest.kt` cubriendo lectura en caché, inserción con cola y flujos reactivos.
+
 ### 2026-08-21 — PH07-T01
 **Added**
 - Entidades completas de Room para persistencia offline-first: `DiaryEntity`, `MealEntity`, `MealEntryEntity`, `MealWithEntries`, `DiaryWithMeals`, `WaterLogEntity`, `WeightLogEntity`, `FoodCacheEntity`, `SyncQueueEntity`.

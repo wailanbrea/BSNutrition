@@ -6,8 +6,11 @@ import com.bsnutrition.app.core.model.DailySummary
 import com.bsnutrition.app.core.model.FoodLogEntry
 import com.bsnutrition.app.core.model.MealLog
 import com.bsnutrition.app.core.model.WaterLog
+import kotlinx.coroutines.flow.Flow
 
 interface DiaryRepository {
+
+    fun observeDiaryDay(date: String): Flow<DailyDiary?>
 
     suspend fun getDiaryDay(date: String): Result<DailyDiary>
 
@@ -52,6 +55,10 @@ interface DiaryRepository {
         targetDate: String
     ): Result<DailyDiary>
 
+    fun observeWaterLogs(date: String): Flow<List<WaterLog>>
+
+    fun observeTotalWater(date: String): Flow<Int>
+
     suspend fun getWaterLogs(date: String): Result<List<WaterLog>>
 
     suspend fun logWater(
@@ -64,4 +71,6 @@ interface DiaryRepository {
     suspend fun deleteWaterLog(id: Long): Result<Unit>
 
     suspend fun getDailySummary(date: String): Result<DailySummary>
+
+    suspend fun syncPendingMutations(): Result<Int>
 }

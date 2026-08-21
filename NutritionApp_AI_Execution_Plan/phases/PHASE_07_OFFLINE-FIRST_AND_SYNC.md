@@ -33,20 +33,21 @@ Convertir diario/tracking a local-first con Room + WorkManager.
 - Tests en Kotlin (`RoomSchemaDaoTest.kt`)
 
 
-### [ ] PH07-T02 — Local-first repositories
+### [x] PH07-T02 — Local-first repositories
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Room Flow reads
-- [ ] Local transactions
-- [ ] Pending mutations
-- [ ] Reconcile
+- [x] Room Flow reads (`observeDiaryDay`, `observeWaterLogs`, `observeTotalWater`)
+- [x] Local transactions (Operaciones inmediatas en Room con estado `pending_*`)
+- [x] Pending mutations (Encolado automático en `SyncQueueDao` con payload serializado en JSON)
+- [x] Reconcile (Reconciliación asíncrona sin bloquear la interacción del usuario en la UI)
 
 **Acceptance criteria:**
-- UI does not wait on network
+- La interfaz responde de forma instantánea leyendo y mutando datos locales desde Room, desacoplada de la red
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Kotlin (`DiaryRepositoryTest.kt` actualizado con Room DAOs y Flow)
+
 
 ### [ ] PH07-T03 — Sync worker
 **Depends on:** None

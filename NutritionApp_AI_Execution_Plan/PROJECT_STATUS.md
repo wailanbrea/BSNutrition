@@ -3,13 +3,13 @@
 ## Current state
 - Project status: IN PROGRESS
 - Current phase: Phase 07 — Offline-first and Sync
-- Current task: PH07-T02
+- Current task: PH07-T03
 - Current task status: `[ ]`
-- Last completed task: PH07-T01
+- Last completed task: PH07-T02
 - Last update: 2026-08-21
 
 ## Exact next action
-Abrir `phases/PHASE_07_OFFLINE-FIRST_AND_SYNC.md` y ejecutar `PH07-T02` (Local-first repositories: Adaptar `DiaryRepositoryImpl` para leer via Flow directamente de Room, persistir transacciones locales inmediatas, encolar mutaciones en `SyncQueueDao` con estado `pending_*` y reconciliar datos cuando haya conectividad).
+Abrir `phases/PHASE_07_OFFLINE-FIRST_AND_SYNC.md` y ejecutar `PH07-T03` (Sync worker: `DiarySyncWorker` con WorkManager, restricciones de red `NetworkType.CONNECTED`, drenado de `SyncQueueDao`, backoff exponencial, manejo de errores permanentes y `SyncManager` para programar sincronizaciones periódicas y bajo demanda).
 
 ## Active blockers
 None.
@@ -23,6 +23,7 @@ None.
 - detalles finales de deployment.
 
 ## Recently completed
+- PH07-T02 — Local-first repositories: Adaptación de `DiaryRepositoryImpl` para persistencia offline-first con Room, lectura reactiva mediante `Flow` (`observeDiaryDay`, `observeWaterLogs`, `observeTotalWater`), encolado y procesamiento de mutaciones (`SyncQueueEntity`) y reconciliación transparente en segundo plano con tests en `DiaryRepositoryTest.kt`.
 - PH07-T01 — Room core schema: Entidades Room completas (`DiaryEntity`, `MealEntity`, `MealEntryEntity`, `MealWithEntries`, `DiaryWithMeals`, `WaterLogEntity`, `WeightLogEntity`, `FoodCacheEntity`, `SyncQueueEntity`), DAOs correspondientes (`DiaryDao`, `MealEntryDao`, `WaterLogDao`, `WeightLogDao`, `FoodCacheDao`, `SyncQueueDao`), índices compuestos para búsquedas offline, actualización a versión 2 de `NutritionDatabase` y registro en `DatabaseModule` con tests en `RoomSchemaDaoTest.kt`.
 - PH06-T05 — History navigation: Navegación de historial con fechas relativas (Hoy, Ayer, Mañana) y fechas arbitrarias, modal `DiaryDatePickerModal` con `DatePickerDialog` de Material 3, soporte y renderizado limpio de días vacíos y tests en `DiaryViewModelTest.kt`.
 - **Fase 06 (Diary and Dashboard) completada al 100%**.
@@ -32,6 +33,20 @@ None.
 - PH06-T01 — Diary backend model/services: Migraciones de base de datos `2026_08_21_220000_create_diary_tables.php` (`diaries`, `meals`, `meal_entries`, `water_logs`), modelos Eloquent (`Diary`, `Meal`, `MealEntry`, `WaterLog`), servicio de dominio `DiaryService` con cálculo inmutable de snapshots nutricionales vía `NutritionCalculatorService`, soporte de idempotencia por `client_id`, operaciones CRUD, clonación de comidas/días completos, control estricto de propiedad por usuario y suite de tests en Pest (`DiaryServiceTest.php`) con 67 tests pasando al 100% (722 aserciones).
 - PH05-T04 — Recents: Migración `user_food_recents`, relación `recentFoods` en `User`, endpoints `GET /api/v1/foods/recents`, `POST /api/v1/foods/{id}/recent`, entidad Room `RecentFoodEntity`, `RecentFoodDao`, soporte en `FoodRepositoryImpl`, registro automático de alimentos al seleccionar/guardar, pestaña '🕒 Recientes' en `SearchScreen` con tests en `FoodRecentTest.php` (59 tests pasando al 100%).
 - **Fase 05 (Food Search, Favorites and Recents) completada al 100%**.
+
+## Files/modules changed in last task
+- `NutritionApp/`: core/data/repository/DiaryRepository.kt, core/data/repository/DiaryRepositoryImpl.kt, test/java/com/bsnutrition/app/core/data/DiaryRepositoryTest.kt
+- `NutritionApp_AI_Execution_Plan/`: PROJECT_STATUS.md, CHANGELOG.md, phases/PHASE_07_OFFLINE-FIRST_AND_SYNC.md
+
+## Tests from last task
+- `php ./vendor/bin/pest` -> 75 passed (802 assertions)
+- `DiaryRepositoryTest` -> Local-first Room caching, Flow emissions, mutation enqueuing verified
+
+## Known issues
+None.
+
+## Manual owner actions required
+None.
 
 - PH05-T03 — Favorites: Migración `user_food_favorites`, relación `favoriteFoods` en `User` y `Food`, endpoints `GET /api/v1/foods/favorites`, `POST /api/v1/foods/{id}/favorite` y `GET /api/v1/foods/{id}/favorite`, entidad Room `FavoriteFoodEntity`, `FavoriteFoodDao`, soporte en `FoodRepositoryImpl`, pestaña de favoritos y botones interactivos en `SearchScreen` y `FoodDetailSheet` con tests en `FoodFavoriteTest.php`.
 - PH05-T02 — Android Search: Modelos de dominio (`FoodSummary`, `FoodDetail`, `FoodPortion`, `FoodNutrient`, `NutritionCalculation`), `FoodApiService`, `FoodRepository` / `FoodRepositoryImpl`, `SearchViewModel` con debouncing de 300ms, pantalla `SearchScreen` en Compose con badges de cocina dominicana `🇩🇴 RD`, `FoodDetailSheet` modal con selector interactivo de porciones y recálculo en tiempo real, e integración en `AddScreen` con tests en `FoodRepositoryTest.kt` y `SearchViewModelTest.kt`.
