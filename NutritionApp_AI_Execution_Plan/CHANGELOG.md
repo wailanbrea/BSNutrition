@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH03-T04
+**Added**
+- Interfaz `ProfileRepository` e implementación `ProfileRepositoryImpl` con mapeo de red y enlace Hilt en `DataModule`.
+- Persistencia unificada de perfil y metas en `OnboardingViewModel.completeOnboarding()`.
+- Integración de `Route.Onboarding` en `AppNavHost` para dirigir a usuarios nuevos tras el registro.
+- `HomeViewModel` y `HomeScreen` dinámico con consumo reactivo de metas nutricionales calculadas (calorías restantes y desglose de macronutrientes).
+- Pruebas unitarias en `HomeViewModelTest.kt` y ampliación de `OnboardingViewModelTest.kt`.
+
+**Changed**
+- Cierre exitoso de la **Fase 03 (Onboarding and Goals)** al 100%.
+
 ### 2026-08-21 — PH03-T03
 **Added**
 - Modelo de dominio `NutritionGoal.kt` y DTOs de cálculo y metas `GoalDtos.kt`.

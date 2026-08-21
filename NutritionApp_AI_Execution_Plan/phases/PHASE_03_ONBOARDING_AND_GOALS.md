@@ -61,28 +61,29 @@ Implementar perfil inicial, cálculo versionado de objetivos y flujo Android.
 **Tests / verification:**
 - Tests unitarios en `OnboardingViewModelTest` validando transiciones de estado, cálculo de metas y límites
 
-### [ ] PH03-T04 — Connect/save goals
+### [x] PH03-T04 — Connect/save goals
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Submit profile
-- [ ] Calculate
-- [ ] Review
-- [ ] Confirm
-- [ ] Mark onboarding complete
+- [x] Submit profile (`ProfileRepository.updateProfile` con datos de onboarding)
+- [x] Calculate (`GoalRepository.calculateGoal` con algoritmo Mifflin-St Jeor)
+- [x] Review (`ReviewStepView` mostrando desglose de calorías, macronutrientes y agua)
+- [x] Confirm (`completeOnboarding()` sincronizando con backend)
+- [x] Mark onboarding complete (`isOnboardingComplete` y redirección a `Route.Main` con metas dinámicas en `HomeScreen`)
 
 **Acceptance criteria:**
-- Fresh user reaches Today with targets
+- Usuario recién registrado completa onboarding y accede a la pantalla Hoy (`HomeScreen`) con sus metas calculadas y activas
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests unitarios en `HomeViewModelTest.kt` y `OnboardingViewModelTest.kt`
 
 ## Phase exit criteria
-- [ ] Onboarding E2E complete
-- [ ] Status -> Phase 04
+- [x] Onboarding E2E complete (flujo completo desde registro, onboarding 6 pasos, cálculo Mifflin-St Jeor, guardado y visualización en Home)
+- [x] Status -> Phase 04
 
 ## Mandatory closeout
-- [ ] Actualizar `PROJECT_STATUS.md`
-- [ ] Actualizar `CHANGELOG.md`
-- [ ] Actualizar `DECISIONS.md` si hubo decisión permanente
-- [ ] No dejar tareas `[-]` sin checkpoint
+- [x] Actualizar `PROJECT_STATUS.md`
+- [x] Actualizar `CHANGELOG.md`
+- [x] Actualizar `DECISIONS.md` si hubo decisión permanente (ADR-009)
+- [x] No dejar tareas `[-]` sin checkpoint
+

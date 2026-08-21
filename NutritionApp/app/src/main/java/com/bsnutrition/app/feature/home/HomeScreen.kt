@@ -13,10 +13,14 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.bsnutrition.app.core.designsystem.component.BsnCard
+import com.bsnutrition.app.core.model.NutritionGoal
 import com.bsnutrition.app.core.model.User
 import com.bsnutrition.app.ui.theme.MacroCarbs
 import com.bsnutrition.app.ui.theme.MacroFat
@@ -26,8 +30,18 @@ import com.bsnutrition.app.ui.theme.MacroWater
 @Composable
 fun HomeScreen(
     user: User?,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    viewModel: HomeViewModel = hiltViewModel()
 ) {
+    val uiState by viewModel.uiState.collectAsState()
+    val goal: NutritionGoal? = uiState.goal
+
+    val calorieTarget = goal?.calorieTarget ?: 2000
+    val proteinTarget = goal?.proteinTargetG ?: 150f
+    val carbsTarget = goal?.carbohydrateTargetG ?: 220f
+    val fatTarget = goal?.fatTargetG ?: 65f
+    val waterTarget = goal?.waterTargetMl ?: 2500
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -67,7 +81,7 @@ fun HomeScreen(
                 ) {
                     Column {
                         Text(text = "Meta", style = MaterialTheme.typography.bodyMedium)
-                        Text(text = "2,000 kcal", fontWeight = FontWeight.Bold)
+                        Text(text = "$calorieTarget kcal", fontWeight = FontWeight.Bold)
                     }
                     Column {
                         Text(text = "Alimentos", style = MaterialTheme.typography.bodyMedium)
@@ -76,7 +90,7 @@ fun HomeScreen(
                     Column {
                         Text(text = "Restante", style = MaterialTheme.typography.bodyMedium)
                         Text(
-                            text = "2,000 kcal",
+                            text = "$calorieTarget kcal",
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.primary
                         )
@@ -103,30 +117,31 @@ fun HomeScreen(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(text = "Proteínas", color = MacroProtein, fontWeight = FontWeight.Medium)
-                    Text(text = "0 / 150 g", fontWeight = FontWeight.Bold)
+                    Text(text = "0 / $proteinTarget g", fontWeight = FontWeight.Bold)
                 }
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(text = "Carbohidratos", color = MacroCarbs, fontWeight = FontWeight.Medium)
-                    Text(text = "0 / 220 g", fontWeight = FontWeight.Bold)
+                    Text(text = "0 / $carbsTarget g", fontWeight = FontWeight.Bold)
                 }
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(text = "Grasas", color = MacroFat, fontWeight = FontWeight.Medium)
-                    Text(text = "0 / 65 g", fontWeight = FontWeight.Bold)
+                    Text(text = "0 / $fatTarget g", fontWeight = FontWeight.Bold)
                 }
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(text = "Agua", color = MacroWater, fontWeight = FontWeight.Medium)
-                    Text(text = "0 / 2,500 ml", fontWeight = FontWeight.Bold)
+                    Text(text = "0 / $waterTarget ml", fontWeight = FontWeight.Bold)
                 }
             }
         }
     }
 }
+

@@ -2,6 +2,7 @@ package com.bsnutrition.app.feature.onboarding
 
 import com.bsnutrition.app.core.common.Result
 import com.bsnutrition.app.core.data.repository.GoalRepository
+import com.bsnutrition.app.core.data.repository.ProfileRepository
 import com.bsnutrition.app.core.model.NutritionGoal
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -23,13 +24,14 @@ import org.junit.Test
 class OnboardingViewModelTest {
 
     private val goalRepository: GoalRepository = mockk(relaxed = true)
+    private val profileRepository: ProfileRepository = mockk(relaxed = true)
     private val testDispatcher = StandardTestDispatcher()
     private lateinit var viewModel: OnboardingViewModel
 
     @Before
     fun setup() {
         Dispatchers.setMain(testDispatcher)
-        viewModel = OnboardingViewModel(goalRepository)
+        viewModel = OnboardingViewModel(goalRepository, profileRepository)
     }
 
     @After

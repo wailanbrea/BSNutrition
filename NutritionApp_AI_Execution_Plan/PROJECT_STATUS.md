@@ -2,14 +2,14 @@
 
 ## Current state
 - Project status: IN PROGRESS
-- Current phase: Phase 03 — Onboarding and Goals
-- Current task: PH03-T04
+- Current phase: Phase 04 — Nutrition Catalog and Engine
+- Current task: PH04-T01
 - Current task status: `[ ]`
-- Last completed task: PH03-T03
+- Last completed task: PH03-T04 (Phase 03 complete)
 - Last update: 2026-08-21
 
 ## Exact next action
-Abrir `phases/PHASE_03_ONBOARDING_AND_GOALS.md` y ejecutar `PH03-T04` (Connect/save goals: persistencia final de perfil y metas en backend, sincronización con estado local, transición fluida a Home Dashboard con objetivos activos).
+Abrir `phases/PHASE_04_NUTRITION_CATALOG_AND_ENGINE.md` y ejecutar `PH04-T01` (Food/nutrient schema: migraciones y modelos Eloquent para categorías, marcas, alimentos genéricos/comerciales, alias de búsqueda, códigos de barras, porciones, nutrientes canónicos y fuentes con índices optimizados).
 
 ## Active blockers
 None.
@@ -23,6 +23,8 @@ None.
 - detalles finales de deployment.
 
 ## Recently completed
+- PH03-T04 — Connect/save Goals & Dashboard Integration: `ProfileRepository` e implementación en `ProfileRepositoryImpl`, inyección en `OnboardingViewModel` para persistencia simultánea de perfil biométrico y metas calculadas, `HomeViewModel` y `HomeScreen` con tarjetas reactivas de calorías y macronutrientes reales, y conexión en `AppNavHost` con tests en `HomeViewModelTest` y `OnboardingViewModelTest`.
+- **Fase 03 (Onboarding and Goals) completada al 100%**.
 - PH03-T03 — Android Onboarding Flow (`com.bsnutrition.app.feature.onboarding`): `OnboardingStep` (6 pasos), `OnboardingUiState`, `OnboardingViewModel`, `OnboardingScreen` con Compose y Material 3, selector de sexo/fecha, medidas de altura/peso, nivel de actividad con multiplicadores TDEE, objetivo calórico/ritmo, sistema de unidades y previsualización de metas con tests unitarios en `OnboardingViewModelTest`.
 - PH03-T02 — Backend Goal Calculator: Migración `nutrition_goals`, modelo `NutritionGoal`, servicio de dominio `NutritionGoalCalculatorService` (Mifflin-St Jeor `mifflin_v1.0`), endpoints `POST /api/v1/goals/calculate`, `GET /api/v1/goals/current`, `PUT /api/v1/goals` y suite de tests en Pest (`NutritionGoalTest.php`).
 - PH03-T01 — Goal formula ADR: ADR-009 formalizado en `DECISIONS.md` con la ecuación Mifflin-St Jeor, multiplicadores TDEE, ajustes por objetivo con déficit/superávit calibrado, límites de seguridad (1200/1500 kcal), distribución de macronutrientes y versión de algoritmo `mifflin_v1.0`.
@@ -40,11 +42,12 @@ None.
 - PH00 — Repositorios locales, gobernanza, convenciones de branching, CI skeleton y estrategias de entorno.
 
 ## Files/modules changed in last task
-- `NutritionApp/`: app/src/main/java/com/bsnutrition/app/core/model/NutritionGoal.kt, app/src/main/java/com/bsnutrition/app/core/network/model/GoalDtos.kt, app/src/main/java/com/bsnutrition/app/core/network/api/GoalApiService.kt, app/src/main/java/com/bsnutrition/app/core/network/NetworkModule.kt, app/src/main/java/com/bsnutrition/app/core/data/repository/GoalRepository*, app/src/main/java/com/bsnutrition/app/core/data/di/DataModule.kt, app/src/main/java/com/bsnutrition/app/feature/onboarding/*, app/src/test/java/com/bsnutrition/app/feature/onboarding/OnboardingViewModelTest.kt
+- `NutritionApp/`: app/src/main/java/com/bsnutrition/app/core/data/repository/ProfileRepository*, app/src/main/java/com/bsnutrition/app/core/data/di/DataModule.kt, app/src/main/java/com/bsnutrition/app/feature/onboarding/OnboardingViewModel.kt, app/src/main/java/com/bsnutrition/app/navigation/Route.kt, app/src/main/java/com/bsnutrition/app/navigation/AppNavHost.kt, app/src/main/java/com/bsnutrition/app/feature/home/HomeViewModel.kt, app/src/main/java/com/bsnutrition/app/feature/home/HomeScreen.kt, app/src/test/java/com/bsnutrition/app/feature/home/HomeViewModelTest.kt, app/src/test/java/com/bsnutrition/app/feature/onboarding/OnboardingViewModelTest.kt
 - `NutritionApp_AI_Execution_Plan/`: PROJECT_STATUS.md, CHANGELOG.md, phases/PHASE_03_ONBOARDING_AND_GOALS.md
 
 ## Tests from last task
-- `OnboardingViewModelTest` unit tests (inicialización, progresión de pasos, cálculo de metas, finalización)
+- `HomeViewModelTest` unit tests (carga de metas actuales y gestión de errores)
+- `OnboardingViewModelTest` unit tests (persistencia de perfil biométrico y metas nutricionales)
 
 ## Known issues
 None.

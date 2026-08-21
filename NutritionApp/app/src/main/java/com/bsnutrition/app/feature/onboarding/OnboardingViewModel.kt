@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bsnutrition.app.core.common.Result
 import com.bsnutrition.app.core.data.repository.GoalRepository
+import com.bsnutrition.app.core.data.repository.ProfileRepository
+import com.bsnutrition.app.core.model.UserProfile
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OnboardingViewModel @Inject constructor(
-    private val goalRepository: GoalRepository
+    private val goalRepository: GoalRepository,
+    private val profileRepository: ProfileRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(OnboardingUiState())
@@ -108,7 +111,8 @@ class OnboardingViewModel @Inject constructor(
     }
 
     fun completeOnboarding() {
-        val goal = _uiState.value.calculatedGoal
+        val state = _uiState.value
+        val goal = state.calculatedGoal
         if (goal == null) {
             calculateGoals()
             return
@@ -116,6 +120,21 @@ class OnboardingViewModel @Inject constructor(
 
         _uiState.update { it.copy(isLoading = true) }
         viewModelScope.launch {
+            val userProfile = UserProfile(
+                birthDate = state.birthDate,
+                sex = state.sex,
+                height = state.heightCm,
+                currentWeight = state.weightKg,
+                activityLevel = state.activityLevel,
+                goalType = state.goalType,
+                weeklyGoalRate = state.weeklyGoalRate,
+                unitSystem = state.unitSystem
+            )
+
+            // 1. Save Profile
+            profileRepository.updateProfile(userProfile)
+
+            // 2. Save Goal
             when (val result = goalRepository.saveGoal(goal)) {
                 is Result.Success -> {
                     _uiState.update {

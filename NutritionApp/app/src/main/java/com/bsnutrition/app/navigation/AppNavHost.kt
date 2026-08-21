@@ -5,6 +5,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -12,6 +13,8 @@ import androidx.navigation.compose.rememberNavController
 import com.bsnutrition.app.feature.auth.AuthViewModel
 import com.bsnutrition.app.feature.auth.LoginScreen
 import com.bsnutrition.app.feature.auth.RegisterScreen
+import com.bsnutrition.app.feature.onboarding.OnboardingScreen
+import com.bsnutrition.app.feature.onboarding.OnboardingViewModel
 
 @Composable
 fun AppNavHost(
@@ -61,6 +64,18 @@ fun AppNavHost(
                     navController.popBackStack()
                 },
                 onRegisterSuccess = {
+                    navController.navigate(Route.Onboarding) {
+                        popUpTo(Route.Login) { inclusive = true }
+                    }
+                }
+            )
+        }
+
+        composable<Route.Onboarding> {
+            val onboardingViewModel: OnboardingViewModel = hiltViewModel()
+            OnboardingScreen(
+                viewModel = onboardingViewModel,
+                onOnboardingFinished = {
                     navController.navigate(Route.Main) {
                         popUpTo(Route.Login) { inclusive = true }
                     }
@@ -78,3 +93,4 @@ fun AppNavHost(
         }
     }
 }
+
