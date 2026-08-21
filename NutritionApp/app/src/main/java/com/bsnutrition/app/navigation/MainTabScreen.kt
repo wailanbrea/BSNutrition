@@ -56,7 +56,10 @@ fun MainTabScreen(
                 .padding(innerPadding)
         ) {
             when (selectedDestination) {
-                TopLevelDestination.HOME -> HomeScreen(user = user)
+                TopLevelDestination.HOME -> HomeScreen(
+                    user = user,
+                    onNavigateToAddFood = { _ -> selectedDestination = TopLevelDestination.ADD }
+                )
                 TopLevelDestination.DIARY -> DiaryScreen(
                     onNavigateToAddFood = { _, _ -> selectedDestination = TopLevelDestination.ADD }
                 )
@@ -64,6 +67,7 @@ fun MainTabScreen(
                 TopLevelDestination.PROGRESS -> ProgressScreen()
                 TopLevelDestination.MORE -> MoreScreen(user = user, onLogout = onLogout)
             }
+
 
         }
     }

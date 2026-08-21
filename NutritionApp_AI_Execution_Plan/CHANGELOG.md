@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH06-T04
+**Added**
+- Integración de `DiaryRepository` en `HomeViewModel` para cargar reactivamente el diario y consumo del día actual.
+- Tarjeta Hero en `HomeScreen` con anillo circular de progreso calórico (`CalorieHeroCard`), calorías consumidas, meta y balance restante.
+- Desglose interactivo de macronutrientes (`MacroBreakdownCard`) con barras de progreso para Proteínas, Carbohidratos y Grasas.
+- Widget de hidratación (`HomeWaterTrackerCard`) con botones de acceso rápido `+250ml` y `+500ml` con recálculo en tiempo real.
+- Listado de comidas del día (`HomeMealCard`) con conteo de alimentos, calorías registradas y botón de agregar alimento con cambio fluido a la pestaña de búsqueda.
+- Pruebas unitarias actualizadas en `HomeViewModelTest.kt`.
+
 ### 2026-08-21 — PH06-T03
 **Added**
 - Modelos de dominio del diario en Android (`DailyDiary`, `MealLog`, `FoodLogEntry`, `WaterLog`, `DailySummary`).

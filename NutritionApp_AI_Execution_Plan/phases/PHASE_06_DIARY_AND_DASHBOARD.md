@@ -69,21 +69,22 @@ Implementar núcleo diario con snapshots históricos y dashboard Today.
 - Tests unitarios en Android (`DiaryRepositoryTest.kt`, `DiaryViewModelTest.kt`)
 
 
-### [ ] PH06-T04 — Today dashboard
+### [x] PH06-T04 — Today dashboard
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Calories
-- [ ] Macros
-- [ ] Meals
-- [ ] Quick add
-- [ ] Water/weight hooks
+- [x] Calories (Hero Card con anillo circular de progreso, calorías consumidas vs meta diaria y restantes)
+- [x] Macros (Desglose reactivo de Proteínas, Carbohidratos y Grasas con barras lineales coloreadas)
+- [x] Meals (Tarjetas rápidas de las 4 comidas con conteo de alimentos, calorías y acceso directo)
+- [x] Quick add (Navegación directa con un clic para registrar alimentos en cualquier comida)
+- [x] Water/weight hooks (Widget de hidratación con registros rápidos de +250ml / +500ml)
 
 **Acceptance criteria:**
-- Updates immediately
+- Actualización inmediata y reactiva de los totales consumidos y metas del usuario
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests unitarios en Android (`HomeViewModelTest.kt`)
+
 
 ### [ ] PH06-T05 — History navigation
 **Depends on:** None
