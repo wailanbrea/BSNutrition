@@ -3,13 +3,13 @@
 ## Current state
 - Project status: IN PROGRESS
 - Current phase: Phase 06 — Diary and Dashboard
-- Current task: PH06-T03
+- Current task: PH06-T04
 - Current task status: `[ ]`
-- Last completed task: PH06-T02
+- Last completed task: PH06-T03
 - Last update: 2026-08-21
 
 ## Exact next action
-Abrir `phases/PHASE_06_DIARY_AND_DASHBOARD.md` y ejecutar `PH06-T03` (Android diary UI: Modelos de dominio `DailyDiary`, `Meal`, `MealEntry`, `WaterLog`, Retrofit `DiaryApiService`, `DiaryRepository`, `DiaryViewModel`, pantalla Compose `DiaryScreen` con selector de fechas, desglose por comidas [Desayuno, Almuerzo, Cena, Meriendas], contador de agua, acciones de agregar/editar/eliminar/copiar y sincronización).
+Abrir `phases/PHASE_06_DIARY_AND_DASHBOARD.md` y ejecutar `PH06-T04` (Today dashboard: `HomeScreen` con anillo calórico dinámico [consumidas vs meta], desglose de macronutrientes, accesos directos a comidas, registro rápido de agua y peso, y widget resumen).
 
 ## Active blockers
 None.
@@ -23,6 +23,7 @@ None.
 - detalles finales de deployment.
 
 ## Recently completed
+- PH06-T03 — Android diary UI: Modelos de dominio (`DailyDiary`, `MealLog`, `FoodLogEntry`, `WaterLog`, `DailySummary`), DTOs `DiaryDtos.kt`, cliente Retrofit `DiaryApiService`, repositorio `DiaryRepositoryImpl`, `DiaryViewModel`, pantalla Compose `DiaryScreen` con navegación temporal completa, widget de progreso calórico y de macronutrientes, contador y registro de agua, secciones para Desayuno/Almuerzo/Cena/Meriendas con eliminación y duplicación de comidas/días, con tests en `DiaryRepositoryTest.kt` y `DiaryViewModelTest.kt`.
 - PH06-T02 — Diary API: Controladores REST `DiaryController.php`, FormRequests con validación estricta (`AddMealEntryRequest`, `UpdateMealEntryRequest`, `CopyMealRequest`, `CopyDayRequest`, `LogWaterRequest`), Resources JSON estructurados (`DiaryDayResource`, `MealResource`, `MealEntryResource`, `WaterLogResource`, `DailySummaryResource`), endpoints REST para gestión diaria de comidas, agua y duplicación con tests en `DiaryApiTest.php` (75 tests pasando al 100%, 802 aserciones).
 - PH06-T01 — Diary backend model/services: Migraciones de base de datos `2026_08_21_220000_create_diary_tables.php` (`diaries`, `meals`, `meal_entries`, `water_logs`), modelos Eloquent (`Diary`, `Meal`, `MealEntry`, `WaterLog`), servicio de dominio `DiaryService` con cálculo inmutable de snapshots nutricionales vía `NutritionCalculatorService`, soporte de idempotencia por `client_id`, operaciones CRUD, clonación de comidas/días completos, control estricto de propiedad por usuario y suite de tests en Pest (`DiaryServiceTest.php`) con 67 tests pasando al 100% (722 aserciones).
 - PH05-T04 — Recents: Migración `user_food_recents`, relación `recentFoods` en `User`, endpoints `GET /api/v1/foods/recents`, `POST /api/v1/foods/{id}/recent`, entidad Room `RecentFoodEntity`, `RecentFoodDao`, soporte en `FoodRepositoryImpl`, registro automático de alimentos al seleccionar/guardar, pestaña '🕒 Recientes' en `SearchScreen` con tests en `FoodRecentTest.php` (59 tests pasando al 100%).
@@ -32,6 +33,20 @@ None.
 - PH05-T01 — Backend Food Search: Endpoints REST `GET /api/v1/foods/search`, `GET /api/v1/foods/{id}`, `GET /api/v1/foods/barcode/{barcode}`, `POST /api/v1/foods/{id}/calculate` con recursos JSON `FoodSummaryResource`, `FoodDetailResource`, `FoodPortionResource`, `FoodNutrientResource`, ranking con locale boosting para República Dominicana `DO`, paginación y tests en `FoodSearchApiTest.php`.
 - PH04-T06 — Dominican Dataset Foundation: Seeder de catálogo criollo `DominicanFoodDatasetSeeder` con 15 platos y alimentos canónicos dominicanos (Mangú, Los tres golpes, La bandera, Habichuelas guisadas, Pollo guisado, Moro de guandules, Sancocho, Tostones, Queso frito, Salami frito, Morir soñando, Mofongo, etc.) con sus porciones, nutrientes y alias con tests en `DominicanFoodDatasetSeederTest.php`.
 - **Fase 04 (Nutrition Catalog and Engine) completada al 100%**.
+
+## Files/modules changed in last task
+- `NutritionApp/`: core/model/DiaryModels.kt, core/network/model/DiaryDtos.kt, core/network/api/DiaryApiService.kt, core/network/NetworkModule.kt, core/data/repository/DiaryRepository.kt, core/data/repository/DiaryRepositoryImpl.kt, core/data/di/DataModule.kt, feature/diary/DiaryUiState.kt, feature/diary/DiaryViewModel.kt, feature/diary/DiaryScreen.kt, navigation/MainTabScreen.kt, tests
+- `NutritionApp_AI_Execution_Plan/`: PROJECT_STATUS.md, CHANGELOG.md, phases/PHASE_06_DIARY_AND_DASHBOARD.md
+
+## Tests from last task
+- `php ./vendor/bin/pest` -> 75 passed (802 assertions)
+- `NutritionApp tests` -> DiaryRepositoryTest, DiaryViewModelTest created and verified
+
+## Known issues
+None.
+
+## Manual owner actions required
+None.
 - PH04-T05 — Open Food Facts Adapter: Cliente `OpenFoodFactsService` para búsqueda y resolución de códigos de barras, mapeo de macronutrientes y micronutrientes, creación de marcas y porciones, y comando CLI `php artisan foods:import-off` con tests en `OpenFoodFactsServiceTest.php`.
 - PH04-T04 — USDA Adapter: Cliente `UsdaFoodDataService` para búsqueda y detalle en FoodData Central, mapeo de más de 30 IDs de nutrientes a códigos canónicos, importación a base de datos con porciones y comando CLI `php artisan foods:import-usda` con tests en `UsdaFoodDataServiceTest.php`.
 - PH04-T03 — Nutrition Calculation Service: Servicio `NutritionCalculatorService` con normalización por base (100g/ml), escalado por porciones y gramos libres, agregación de comidas y días completos, distribución porcentual de macros e inmutabilidad de snapshots históricos con tests en `NutritionCalculatorServiceTest.php`.

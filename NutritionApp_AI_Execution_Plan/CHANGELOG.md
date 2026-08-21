@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH06-T03
+**Added**
+- Modelos de dominio del diario en Android (`DailyDiary`, `MealLog`, `FoodLogEntry`, `WaterLog`, `DailySummary`).
+- DTOs y serialización `DiaryDtos.kt` para respuestas y solicitudes del diario.
+- Cliente Retrofit `DiaryApiService` e inyección en `NetworkModule`.
+- Repositorio `DiaryRepository` e implementación `DiaryRepositoryImpl` con mapeo y manejo de errores.
+- `DiaryViewModel` con estado reactivo, navegación de fechas, eliminación de entradas, modales de duplicación y registro de agua.
+- Pantalla en Jetpack Compose `DiaryScreen` con cabecera de fechas (Hoy, Ayer, Mañana), tarjeta de calorías restantes vs metas, barras de macronutrientes, widget de hidratación y 4 secciones de comidas estructuradas.
+- Conexión de navegación en `MainTabScreen`.
+- Suite de pruebas unitarias en `DiaryRepositoryTest.kt` y `DiaryViewModelTest.kt`.
+
 ### 2026-08-21 — PH06-T02
 **Added**
 - Controlador REST `app/Http/Controllers/Api/V1/DiaryController.php` con endpoints:

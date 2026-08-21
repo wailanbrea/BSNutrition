@@ -57,11 +57,14 @@ fun MainTabScreen(
         ) {
             when (selectedDestination) {
                 TopLevelDestination.HOME -> HomeScreen(user = user)
-                TopLevelDestination.DIARY -> DiaryScreen()
+                TopLevelDestination.DIARY -> DiaryScreen(
+                    onNavigateToAddFood = { _, _ -> selectedDestination = TopLevelDestination.ADD }
+                )
                 TopLevelDestination.ADD -> AddScreen()
                 TopLevelDestination.PROGRESS -> ProgressScreen()
                 TopLevelDestination.MORE -> MoreScreen(user = user, onLogout = onLogout)
             }
+
         }
     }
 }

@@ -52,21 +52,22 @@ Implementar núcleo diario con snapshots históricos y dashboard Today.
 - Tests en Pest (`DiaryApiTest.php`) con 75 tests pasando al 100% (802 aserciones)
 
 
-### [ ] PH06-T03 — Android diary UI
+### [x] PH06-T03 — Android diary UI
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Date
-- [ ] Meal sections
-- [ ] Add/edit/delete
-- [ ] Copy
-- [ ] Totals
+- [x] Date (Navegación entre fechas con flechas, etiqueta dinámica [Hoy, Ayer, Mañana] y selector rápido)
+- [x] Meal sections (Tarjetas para Desayuno, Almuerzo, Cena y Meriendas con desglose calórico y listado de items)
+- [x] Add/edit/delete (Eliminación de entradas, navegación a búsqueda/registro de alimentos)
+- [x] Copy (Modales interactivos para copiar comida específica o duplicar el día completo a otra fecha)
+- [x] Totals (Barra de progreso de calorías consumidas vs meta, chips de macronutrientes [Proteínas, Carbohidratos, Grasas] y widget de hidratación con registros rápidos de agua +250ml/+500ml)
 
 **Acceptance criteria:**
-- Complete day management
+- Gestión integral y reactiva del diario nutricional del día
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests unitarios en Android (`DiaryRepositoryTest.kt`, `DiaryViewModelTest.kt`)
+
 
 ### [ ] PH06-T04 — Today dashboard
 **Depends on:** None
