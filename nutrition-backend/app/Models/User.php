@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -50,5 +51,15 @@ class User extends Authenticatable
     public function profile(): HasOne
     {
         return $this->hasOne(UserProfile::class);
+    }
+
+    public function nutritionGoals(): HasMany
+    {
+        return $this->hasMany(NutritionGoal::class);
+    }
+
+    public function currentNutritionGoal(): HasOne
+    {
+        return $this->hasOne(NutritionGoal::class)->latestOfMany('effective_from');
     }
 }

@@ -29,20 +29,20 @@ Implementar perfil inicial, cálculo versionado de objetivos y flujo Android.
 **Tests / verification:**
 - Especificación formal y matemática en `DECISIONS.md` y `08_NUTRITION_ENGINE.md`
 
-### [ ] PH03-T02 — Backend goal calculator
+### [x] PH03-T02 — Backend goal calculator
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Domain service
-- [ ] Calculate endpoint
-- [ ] Persist goal
-- [ ] Manual overrides
+- [x] Domain service (`NutritionGoalCalculatorService.php` con Mifflin-St Jeor)
+- [x] Calculate endpoint (`POST /api/v1/goals/calculate`)
+- [x] Persist goal (`nutrition_goals` tabla, `NutritionGoal` modelo, `GET /api/v1/goals/current`)
+- [x] Manual overrides (`PUT /api/v1/goals`)
 
 **Acceptance criteria:**
-- Deterministic result
+- Cálculo determinista de metas calóricas, macronutrientes, agua y fibra con soporte para sobreescritura manual
 
 **Tests / verification:**
-- Formula/boundary tests
+- Tests en Pest (`NutritionGoalTest.php`) con 100% de aserciones pasando (28 tests totales)
 
 ### [ ] PH03-T03 — Android onboarding
 **Depends on:** None

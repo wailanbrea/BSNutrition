@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\GoalController;
 use App\Http\Controllers\Api\V1\HealthController;
 use App\Http\Controllers\Api\V1\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -19,4 +20,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/profile', [ProfileController::class, 'show'])->name('api.v1.profile.show');
     Route::put('/profile', [ProfileController::class, 'update'])->name('api.v1.profile.update');
+
+    Route::post('/goals/calculate', [GoalController::class, 'calculate'])->name('api.v1.goals.calculate');
+    Route::get('/goals/current', [GoalController::class, 'current'])->name('api.v1.goals.current');
+    Route::put('/goals', [GoalController::class, 'update'])->name('api.v1.goals.update');
 });

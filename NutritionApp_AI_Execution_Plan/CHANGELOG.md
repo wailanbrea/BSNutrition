@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH03-T02
+**Added**
+- Migración `2026_08_21_180000_create_nutrition_goals_table.php` para almacenar objetivos calóricos, macronutrientes, agua, fibra y versión de cálculo.
+- Modelo Eloquent `app/Models/NutritionGoal.php` y relaciones `nutritionGoals()`, `currentNutritionGoal()` en `User.php`.
+- Servicio de dominio `app/Services/NutritionGoalCalculatorService.php` con la implementación canónica de Mifflin-St Jeor, TDEE, ajustes por objetivo y distribución de macronutrientes (`mifflin_v1.0`).
+- FormRequests de validación `CalculateGoalRequest.php` y `SaveGoalRequest.php`.
+- Recurso de serialización JSON `NutritionGoalResource.php`.
+- Controlador `GoalController.php` con endpoints:
+  - `POST /api/v1/goals/calculate` (cálculo y previsualización).
+  - `GET /api/v1/goals/current` (consulta y auto-generación de metas iniciales).
+  - `PUT /api/v1/goals` (guardado y ajustes personalizados).
+- Suite de pruebas exhaustiva en `tests/Feature/NutritionGoalTest.php` (28 tests pasando al 100%).
+
 ### 2026-08-21 — PH03-T01
 **Added**
 - Formalización de **ADR-009** (Nutrition Goals & Energy Expenditure Calculation Algorithm) en `DECISIONS.md`.

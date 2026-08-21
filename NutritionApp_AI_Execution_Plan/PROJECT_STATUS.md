@@ -3,13 +3,13 @@
 ## Current state
 - Project status: IN PROGRESS
 - Current phase: Phase 03 — Onboarding and Goals
-- Current task: PH03-T02
+- Current task: PH03-T03
 - Current task status: `[ ]`
-- Last completed task: PH03-T01
+- Last completed task: PH03-T02
 - Last update: 2026-08-21
 
 ## Exact next action
-Abrir `phases/PHASE_03_ONBOARDING_AND_GOALS.md` y ejecutar `PH03-T02` (Backend goal calculator: migración `nutrition_goals`, modelo `NutritionGoal`, servicio de cálculo `NutritionGoalCalculatorService`, endpoints `POST /api/v1/goals/calculate`, `GET /api/v1/goals/current`, `PUT /api/v1/goals` y tests con Pest).
+Abrir `phases/PHASE_03_ONBOARDING_AND_GOALS.md` y ejecutar `PH03-T03` (Android onboarding: pasos en Compose para fecha/sexo, altura/peso, actividad, objetivo/ritmo, unidades y pantalla de resumen).
 
 ## Active blockers
 None.
@@ -23,6 +23,7 @@ None.
 - detalles finales de deployment.
 
 ## Recently completed
+- PH03-T02 — Backend Goal Calculator: Migración `nutrition_goals`, modelo `NutritionGoal`, servicio de dominio `NutritionGoalCalculatorService` (Mifflin-St Jeor `mifflin_v1.0`), endpoints `POST /api/v1/goals/calculate`, `GET /api/v1/goals/current`, `PUT /api/v1/goals` y suite de tests en Pest (`NutritionGoalTest.php`).
 - PH03-T01 — Goal formula ADR: ADR-009 formalizado en `DECISIONS.md` con la ecuación Mifflin-St Jeor, multiplicadores TDEE, ajustes por objetivo con déficit/superávit calibrado, límites de seguridad (1200/1500 kcal), distribución de macronutrientes y versión de algoritmo `mifflin_v1.0`.
 - **Fase 02 (Android Foundation and Authentication) completada al 100%**.
 - PH02-T05 — Navigation shell en Android (`com.bsnutrition.app.navigation`): `Route`, `TopLevelDestination`, `MainTabScreen` con Bottom Navigation Bar (Hoy, Diario, Registrar, Progreso, Más), `AppNavHost` reactivo a autenticación, integración en `MainActivity` y tests unitarios en `NavigationTest`.
@@ -38,7 +39,8 @@ None.
 - PH00 — Repositorios locales, gobernanza, convenciones de branching, CI skeleton y estrategias de entorno.
 
 ## Files/modules changed in last task
-- `NutritionApp_AI_Execution_Plan/`: DECISIONS.md, PROJECT_STATUS.md, CHANGELOG.md, phases/PHASE_03_ONBOARDING_AND_GOALS.md
+- `nutrition-backend/`: database/migrations/2026_08_21_180000_create_nutrition_goals_table.php, app/Models/NutritionGoal.php, app/Models/User.php, app/Services/NutritionGoalCalculatorService.php, app/Http/Requests/Goal/*, app/Http/Resources/NutritionGoalResource.php, app/Http/Controllers/Api/V1/GoalController.php, routes/api.php, tests/Feature/NutritionGoalTest.php
+- `NutritionApp_AI_Execution_Plan/`: PROJECT_STATUS.md, CHANGELOG.md, phases/PHASE_03_ONBOARDING_AND_GOALS.md
 
 ## Tests from last task
 - `NavigationTest` unit tests (verificación de 5 tabs canónicos, títulos, descripciones e iconos)
