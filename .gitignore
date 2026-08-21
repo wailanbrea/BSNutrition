@@ -1,0 +1,51 @@
+# IDE & OS
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+*.swn
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Backend (nutrition-backend)
+nutrition-backend/vendor/
+nutrition-backend/node_modules/
+nutrition-backend/.env
+nutrition-backend/.env.backup
+nutrition-backend/.env.production
+nutrition-backend/.phpunit.cache/
+nutrition-backend/.phpunit.result.cache
+nutrition-backend/public/build/
+nutrition-backend/public/hot
+nutrition-backend/public/storage
+nutrition-backend/storage/*.key
+nutrition-backend/storage/logs/*.log
+nutrition-backend/storage/framework/cache/data/*
+nutrition-backend/storage/framework/sessions/*
+nutrition-backend/storage/framework/views/*
+!nutrition-backend/storage/framework/cache/.gitignore
+!nutrition-backend/storage/framework/sessions/.gitignore
+!nutrition-backend/storage/framework/views/.gitignore
+!nutrition-backend/storage/logs/.gitignore
+
+# Android (NutritionApp)
+NutritionApp/.gradle/
+NutritionApp/build/
+NutritionApp/*/build/
+NutritionApp/local.properties
+NutritionApp/.caches/
+NutritionApp/Distributable/
+NutritionApp/captures/
+NutritionApp/.externalNativeBuild/
+NutritionApp/*.jks
+NutritionApp/*.keystore
+NutritionApp/secrets.properties
+NutritionApp/google-services.json
+
+# Logs & temp
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

@@ -1,0 +1,212 @@
+[
+  {
+    "path": "00_AI_OPERATING_PROTOCOL.md",
+    "lines": 150,
+    "bytes": 3615
+  },
+  {
+    "path": "01_PRODUCT_SCOPE.md",
+    "lines": 80,
+    "bytes": 1324
+  },
+  {
+    "path": "02_TECH_STACK.md",
+    "lines": 61,
+    "bytes": 1295
+  },
+  {
+    "path": "03_SYSTEM_ARCHITECTURE.md",
+    "lines": 78,
+    "bytes": 1150
+  },
+  {
+    "path": "04_DATABASE_DESIGN.md",
+    "lines": 213,
+    "bytes": 2976
+  },
+  {
+    "path": "05_API_CONTRACT.md",
+    "lines": 70,
+    "bytes": 1286
+  },
+  {
+    "path": "06_ANDROID_ARCHITECTURE.md",
+    "lines": 106,
+    "bytes": 1417
+  },
+  {
+    "path": "07_BACKEND_ARCHITECTURE.md",
+    "lines": 60,
+    "bytes": 922
+  },
+  {
+    "path": "08_NUTRITION_ENGINE.md",
+    "lines": 55,
+    "bytes": 914
+  },
+  {
+    "path": "09_AI_PIPELINE.md",
+    "lines": 81,
+    "bytes": 1288
+  },
+  {
+    "path": "10_OFFLINE_SYNC.md",
+    "lines": 47,
+    "bytes": 778
+  },
+  {
+    "path": "11_SECURITY_PRIVACY.md",
+    "lines": 46,
+    "bytes": 870
+  },
+  {
+    "path": "12_TESTING_QUALITY_GATES.md",
+    "lines": 32,
+    "bytes": 681
+  },
+  {
+    "path": "13_DEVOPS_DEPLOYMENT.md",
+    "lines": 47,
+    "bytes": 697
+  },
+  {
+    "path": "14_ADMIN_PANEL.md",
+    "lines": 27,
+    "bytes": 479
+  },
+  {
+    "path": "15_MONETIZATION.md",
+    "lines": 24,
+    "bytes": 480
+  },
+  {
+    "path": "16_RELEASE_ROADMAP.md",
+    "lines": 15,
+    "bytes": 540
+  },
+  {
+    "path": "CHANGELOG.md",
+    "lines": 28,
+    "bytes": 226
+  },
+  {
+    "path": "DECISIONS.md",
+    "lines": 32,
+    "bytes": 690
+  },
+  {
+    "path": "LOCAL_AI_START_PROMPT.md",
+    "lines": 40,
+    "bytes": 1470
+  },
+  {
+    "path": "PHASE_INDEX.md",
+    "lines": 24,
+    "bytes": 1119
+  },
+  {
+    "path": "PROJECT_STATUS.md",
+    "lines": 55,
+    "bytes": 995
+  },
+  {
+    "path": "README_FIRST.md",
+    "lines": 94,
+    "bytes": 3030
+  },
+  {
+    "path": "phases/PHASE_00_BOOTSTRAP_AND_GOVERNANCE.md",
+    "lines": 88,
+    "bytes": 2018
+  },
+  {
+    "path": "phases/PHASE_01_BACKEND_FOUNDATION_AND_AUTHENTICATION.md",
+    "lines": 93,
+    "bytes": 1801
+  },
+  {
+    "path": "phases/PHASE_02_ANDROID_FOUNDATION_AND_AUTHENTICATION.md",
+    "lines": 105,
+    "bytes": 2078
+  },
+  {
+    "path": "phases/PHASE_03_ONBOARDING_AND_GOALS.md",
+    "lines": 88,
+    "bytes": 1785
+  },
+  {
+    "path": "phases/PHASE_04_NUTRITION_CATALOG_AND_ENGINE.md",
+    "lines": 124,
+    "bytes": 2460
+  },
+  {
+    "path": "phases/PHASE_05_FOOD_SEARCH,_FAVORITES_AND_RECENTS.md",
+    "lines": 85,
+    "bytes": 1605
+  },
+  {
+    "path": "phases/PHASE_06_DIARY_AND_DASHBOARD.md",
+    "lines": 105,
+    "bytes": 1998
+  },
+  {
+    "path": "phases/PHASE_07_OFFLINE-FIRST_AND_SYNC.md",
+    "lines": 106,
+    "bytes": 2036
+  },
+  {
+    "path": "phases/PHASE_08_BARCODE.md",
+    "lines": 72,
+    "bytes": 1382
+  },
+  {
+    "path": "phases/PHASE_09_AI_FOOD_PHOTO.md",
+    "lines": 138,
+    "bytes": 2722
+  },
+  {
+    "path": "phases/PHASE_10_NUTRITION_LABEL_OCR.md",
+    "lines": 70,
+    "bytes": 1434
+  },
+  {
+    "path": "phases/PHASE_11_TEXT_AND_VOICE.md",
+    "lines": 68,
+    "bytes": 1371
+  },
+  {
+    "path": "phases/PHASE_12_HEALTH_CONNECT.md",
+    "lines": 70,
+    "bytes": 1404
+  },
+  {
+    "path": "phases/PHASE_13_PROGRESS_AND_STATISTICS.md",
+    "lines": 84,
+    "bytes": 1602
+  },
+  {
+    "path": "phases/PHASE_14_RECIPES.md",
+    "lines": 67,
+    "bytes": 1298
+  },
+  {
+    "path": "phases/PHASE_15_ADMINISTRATION.md",
+    "lines": 103,
+    "bytes": 1943
+  },
+  {
+    "path": "phases/PHASE_16_BILLING_AND_PREMIUM.md",
+    "lines": 85,
+    "bytes": 1717
+  },
+  {
+    "path": "phases/PHASE_17_HARDENING_AND_RELEASE.md",
+    "lines": 126,
+    "bytes": 2397
+  },
+  {
+    "path": "templates/TASK_TEMPLATE.md",
+    "lines": 27,
+    "bytes": 480
+  }
+]

@@ -1,0 +1,138 @@
+# Phase 09 — AI Food Photo
+
+## Goal
+Crear foto IA segura, structured output, matching, correction y diary.
+
+## Read for this phase
+- `09_AI_PIPELINE.md`
+- `11_SECURITY_PRIVACY.md`
+- `08_NUTRITION_ENGINE.md`
+- `05_API_CONTRACT.md`
+
+## Entry criteria
+- [ ] Diary/catalog/barcode stable
+- [ ] AI/storage credentials available
+
+## Tasks
+
+### [ ] PH09-T01 — Private image storage
+**Depends on:** None
+
+**Implementation checklist:**
+- [ ] Metadata
+- [ ] Signed/private upload
+- [ ] Validation
+- [ ] Delete
+
+**Acceptance criteria:**
+- No public permanent image requirement
+
+**Tests / verification:**
+- Build/tests relevantes deben pasar
+
+### [ ] PH09-T02 — AI provider abstraction
+**Depends on:** None
+
+**Implementation checklist:**
+- [ ] Interface
+- [ ] OpenAI provider
+- [ ] JSON schema
+- [ ] Timeout/errors
+- [ ] Usage/cost
+
+**Acceptance criteria:**
+- Provider isolated
+- Malformed output rejected
+
+**Tests / verification:**
+- Build/tests relevantes deben pasar
+
+### [ ] PH09-T03 — Food matcher v1
+**Depends on:** None
+
+**Implementation checklist:**
+- [ ] Normalization
+- [ ] Aliases
+- [ ] Locale
+- [ ] Preparation
+- [ ] Scoring
+- [ ] Threshold
+
+**Acceptance criteria:**
+- Canonical match or review candidates
+
+**Tests / verification:**
+- Build/tests relevantes deben pasar
+
+### [ ] PH09-T04 — Analysis orchestration
+**Depends on:** None
+
+**Implementation checklist:**
+- [ ] Analysis lifecycle
+- [ ] AI call
+- [ ] Items
+- [ ] Match
+- [ ] Nutrition
+
+**Acceptance criteria:**
+- Auditable deterministic nutrition
+
+**Tests / verification:**
+- Build/tests relevantes deben pasar
+
+### [ ] PH09-T05 — Android capture/upload
+**Depends on:** None
+
+**Implementation checklist:**
+- [ ] Camera
+- [ ] Gallery
+- [ ] Resize/compress
+- [ ] Progress
+- [ ] Retry
+
+**Acceptance criteria:**
+- Image within budget
+
+**Tests / verification:**
+- Build/tests relevantes deben pasar
+
+### [ ] PH09-T06 — Review/correction UI
+**Depends on:** None
+
+**Implementation checklist:**
+- [ ] Items
+- [ ] Confidence
+- [ ] Change food/grams
+- [ ] Add/remove
+- [ ] Confirm
+
+**Acceptance criteria:**
+- User controls final diary data
+
+**Tests / verification:**
+- Build/tests relevantes deben pasar
+
+### [ ] PH09-T07 — Feedback/E2E
+**Depends on:** None
+
+**Implementation checklist:**
+- [ ] Corrections
+- [ ] Diary snapshots
+- [ ] Source
+- [ ] Evaluation logs
+
+**Acceptance criteria:**
+- Photo -> review -> diary complete
+
+**Tests / verification:**
+- Build/tests relevantes deben pasar
+
+## Phase exit criteria
+- [ ] AI photo stable
+- [ ] Status -> Phase 10
+
+## Mandatory closeout
+- [ ] Actualizar `PROJECT_STATUS.md`
+- [ ] Actualizar `CHANGELOG.md`
+- [ ] Actualizar `DECISIONS.md` si hubo decisión permanente
+- [ ] No dejar tareas `[-]` sin checkpoint
