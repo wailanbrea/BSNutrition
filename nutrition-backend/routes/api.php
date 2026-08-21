@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\FoodController;
 use App\Http\Controllers\Api\V1\GoalController;
 use App\Http\Controllers\Api\V1\HealthController;
 use App\Http\Controllers\Api\V1\ProfileController;
@@ -24,4 +25,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/goals/calculate', [GoalController::class, 'calculate'])->name('api.v1.goals.calculate');
     Route::get('/goals/current', [GoalController::class, 'current'])->name('api.v1.goals.current');
     Route::put('/goals', [GoalController::class, 'update'])->name('api.v1.goals.update');
+
+    // Foods Catalog & Calculation
+    Route::get('/foods/search', [FoodController::class, 'search'])->name('api.v1.foods.search');
+    Route::get('/foods/{id}', [FoodController::class, 'show'])->whereNumber('id')->name('api.v1.foods.show');
+    Route::get('/foods/barcode/{barcode}', [FoodController::class, 'byBarcode'])->name('api.v1.foods.barcode');
+    Route::post('/foods/{id}/calculate', [FoodController::class, 'calculate'])->whereNumber('id')->name('api.v1.foods.calculate');
 });

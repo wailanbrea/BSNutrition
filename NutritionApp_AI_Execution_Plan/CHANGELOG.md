@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH05-T01
+**Added**
+- Controlador REST `app/Http/Controllers/Api/V1/FoodController.php` con endpoints:
+  - `GET /api/v1/foods/search`: Búsqueda de alimentos por nombre, alias y marca con ranking priorizado para República Dominicana (`country_code = 'DO'`), filtrado por categoría y paginación.
+  - `GET /api/v1/foods/{id}`: Detalle exhaustivo del alimento con todas sus porciones, nutrientes, códigos de barras y alias.
+  - `GET /api/v1/foods/barcode/{barcode}`: Búsqueda rápida por código de barras en base local con fallback automático a Open Food Facts.
+  - `POST /api/v1/foods/{id}/calculate`: Cálculo de macros y micronutrientes para porciones o gramos personalizados.
+- Recursos JSON estructurados `FoodSummaryResource`, `FoodDetailResource`, `FoodPortionResource`, `FoodNutrientResource`.
+- Suite de pruebas en `tests/Feature/FoodSearchApiTest.php` (53 tests pasando al 100%).
+
 ### 2026-08-21 — PH04-T06 (Fase 04 Completada al 100%)
 **Added**
 - Seeder de base de datos `DominicanFoodDatasetSeeder.php` con 15 platos y alimentos canónicos dominicanos (Mangú, Los tres golpes, La bandera, Habichuelas guisadas, Pollo guisado, Moro de guandules, Sancocho, Tostones, Queso frito, Salami frito, Morir soñando, Mofongo, etc.).

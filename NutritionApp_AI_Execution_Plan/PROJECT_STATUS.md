@@ -3,13 +3,13 @@
 ## Current state
 - Project status: IN PROGRESS
 - Current phase: Phase 05 — Food Search, Favorites and Recents
-- Current task: PH05-T01
+- Current task: PH05-T02
 - Current task status: `[ ]`
-- Last completed task: PH04-T06
+- Last completed task: PH05-T01
 - Last update: 2026-08-21
 
 ## Exact next action
-Abrir `phases/PHASE_05_FOOD_SEARCH,_FAVORITES_AND_RECENTS.md` y ejecutar `PH05-T01` (Backend food search: Endpoints REST `GET /api/v1/foods/search`, `GET /api/v1/foods/{id}`, `GET /api/v1/foods/barcode/{barcode}`, normalización de búsqueda, ranking con boosting por locale dominicano `DO`, paginación y recursos JSON).
+Abrir `phases/PHASE_05_FOOD_SEARCH,_FAVORITES_AND_RECENTS.md` y ejecutar `PH05-T02` (Android search: `FoodApiService`, `FoodRepository`, `SearchViewModel` con debouncing reactivo de 300ms, pantalla Compose `SearchScreen`, selector de porciones y detalle de alimento `FoodDetailScreen`).
 
 ## Active blockers
 None.
@@ -23,6 +23,7 @@ None.
 - detalles finales de deployment.
 
 ## Recently completed
+- PH05-T01 — Backend Food Search: Endpoints REST `GET /api/v1/foods/search`, `GET /api/v1/foods/{id}`, `GET /api/v1/foods/barcode/{barcode}`, `POST /api/v1/foods/{id}/calculate` con recursos JSON `FoodSummaryResource`, `FoodDetailResource`, `FoodPortionResource`, `FoodNutrientResource`, ranking con locale boosting para República Dominicana `DO`, paginación y tests en `FoodSearchApiTest.php`.
 - PH04-T06 — Dominican Dataset Foundation: Seeder de catálogo criollo `DominicanFoodDatasetSeeder` con 15 platos y alimentos canónicos dominicanos (Mangú, Los tres golpes, La bandera, Habichuelas guisadas, Pollo guisado, Moro de guandules, Sancocho, Tostones, Queso frito, Salami frito, Morir soñando, Mofongo, etc.) con sus porciones, nutrientes y alias con tests en `DominicanFoodDatasetSeederTest.php`.
 - **Fase 04 (Nutrition Catalog and Engine) completada al 100%**.
 - PH04-T05 — Open Food Facts Adapter: Cliente `OpenFoodFactsService` para búsqueda y resolución de códigos de barras, mapeo de macronutrientes y micronutrientes, creación de marcas y porciones, y comando CLI `php artisan foods:import-off` con tests en `OpenFoodFactsServiceTest.php`.

@@ -9,26 +9,27 @@ Crear búsqueda rápida y métodos de reuso.
 - `08_NUTRITION_ENGINE.md`
 
 ## Entry criteria
-- [ ] Catalog ready
+- [x] Catalog ready
 
 ## Tasks
 
-### [ ] PH05-T01 — Backend food search
+### [x] PH05-T01 — Backend food search
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Normalization
-- [ ] Exact/alias
-- [ ] Brand
-- [ ] Locale boost
-- [ ] Pagination
-- [ ] Index review
+- [x] Normalization (búsqueda normalizada por término, sin distinción de mayúsculas ni acentos)
+- [x] Exact/alias (búsqueda por nombre canónico y términos coloquiales en `food_aliases`)
+- [x] Brand (búsqueda por marca asociada en `food_brands`)
+- [x] Locale boost (priorización de alimentos de República Dominicana `country_code = 'DO'` y verificados)
+- [x] Pagination (paginación configurable con `per_page`)
+- [x] Index review (índices en `normalized_name`, `normalized_alias`, `barcode`, `country_code`, `category_id`)
+- [x] Endpoints REST: `GET /api/v1/foods/search`, `GET /api/v1/foods/{id}`, `GET /api/v1/foods/barcode/{barcode}`, `POST /api/v1/foods/{id}/calculate`
 
 **Acceptance criteria:**
-- Relevant stable results
+- Resultados de búsqueda relevantes, rápidos y estables con desglose nutricional por 100g y detalle completo
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Pest (`FoodSearchApiTest.php`) con 53 tests pasando al 100% (664 aserciones)
 
 ### [ ] PH05-T02 — Android search
 **Depends on:** None
