@@ -63,21 +63,21 @@ Crear app Kotlin/Compose, arquitectura core, red, almacenamiento y login.
 **Tests / verification:**
 - Unit tests de `SafeApiCallTest` y parseo de errores tipados
 
-### [ ] PH02-T04 — Auth UI/repository
+### [x] PH02-T04 — Auth UI/repository
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Register
-- [ ] Login
-- [ ] Token persistence
-- [ ] Session restore
-- [ ] Logout
+- [x] Register (`RegisterScreen`, `AuthRepository.register`, validación de campos)
+- [x] Login (`LoginScreen`, `AuthRepository.login`, captura de errores)
+- [x] Token persistence (`AuthTokenDataSourceImpl` vía DataStore)
+- [x] Session restore (`currentUser`, `isAuthenticated`, cache en Room `UserDao`)
+- [x] Logout (`AuthRepository.logout` y limpieza de sesión local)
 
 **Acceptance criteria:**
-- E2E auth works
+- Flujo de autenticación completo desacoplado con Repository, ViewModel y UI Compose
 
 **Tests / verification:**
-- ViewModel/repository/UI tests
+- Tests unitarios en `AuthRepositoryTest` y `AuthViewModelTest`
 
 ### [ ] PH02-T05 — Navigation shell
 **Depends on:** None

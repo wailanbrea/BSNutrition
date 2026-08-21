@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH02-T04
+**Added**
+- Capa de datos y repositorio de autenticación: `AuthRepository` y `AuthRepositoryImpl` con persistencia de token en DataStore y cache de usuario en Room (`UserDao`).
+- `DataModule` para inyección de dependencias con Hilt.
+- Feature de Autenticación (`com.bsnutrition.app.feature.auth`):
+  - `AuthUiState` y `AuthViewModel` con manejo de estados asíncronos y errores de validación tipados.
+  - `LoginScreen` con Jetpack Compose, Material 3 y Design System.
+  - `RegisterScreen` con Jetpack Compose, validación de contraseñas y campos.
+- Pruebas unitarias completas: `AuthRepositoryTest.kt` y `AuthViewModelTest.kt`.
+
+**Changed**
+- Flujo de autenticación y persistencia de sesión conectado de extremo a extremo en Android.
+
 ### 2026-08-21 — PH02-T03
 **Added**
 - Interfaces de servicios Retrofit: `AuthApiService`, `ProfileApiService` y `HealthApiService`.
