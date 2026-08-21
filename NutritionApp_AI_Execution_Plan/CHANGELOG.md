@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH04-T03
+**Added**
+- Servicio de cálculo de nutrición `app/Services/NutritionCalculatorService.php`:
+  - Conversión y normalización exacta por base (100g/ml) para cantidades arbitrarias.
+  - Escalado de porciones registradas en `food_portions` o gramos libres.
+  - Agregación multinivel para comidas (`meals`) y días completos con cálculo de porcentajes calóricos de macronutrientes.
+  - Generación de snapshots históricos inmutables (`calories_snapshot`, `protein_snapshot`, `carbs_snapshot`, `fat_snapshot`, `fiber_snapshot`, `nutrient_snapshot_json`).
+- Suite de pruebas exhaustiva en `tests/Feature/NutritionCalculatorServiceTest.php` (39 tests pasando al 100%).
+
 ### 2026-08-21 — PH04-T02
 **Added**
 - Seeder de catálogo canónico `NutrientSeeder.php` con 33 nutrientes normalizados (calorías, macronutrientes, subtipos de ácidos grasos, azúcares añadidos, electrolitos, minerales y vitaminas clave).

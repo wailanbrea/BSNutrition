@@ -52,21 +52,22 @@ Crear esquema canónico, cálculo nutricional y adapters externos.
 **Tests / verification:**
 - Tests en Pest (`NutrientSeederTest.php`) verificando catálogo maestro de 33 nutrientes, categorías y fuentes
 
-### [ ] PH04-T03 — Nutrition calculation service
+### [x] PH04-T03 — Nutrition calculation service
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Basis normalization
-- [ ] Portions
-- [ ] Scaling
-- [ ] Aggregation
-- [ ] Precision
+- [x] Basis normalization (conversión desde base 100g/ml a cantidades libres)
+- [x] Portions (escalado de medidas caseras definidas en `food_portions`)
+- [x] Scaling (escalado lineal de todos los nutrientes asociados)
+- [x] Aggregation (consolidación de múltiples alimentos en comidas y diarios con porcentajes de distribución)
+- [x] Precision (calorías en enteros, macronutrientes en 2 decimales, micronutrientes en 4 decimales)
+- [x] Snapshot generation (`calories_snapshot`, `protein_snapshot`, `carbs_snapshot`, `fat_snapshot`, `fiber_snapshot`, `nutrient_snapshot_json`)
 
 **Acceptance criteria:**
-- Deterministic calculations
+- Motor de cálculo nutricional determinista, inmutable para históricos y con agregación de macronutrientes
 
 **Tests / verification:**
-- 100g/fraction/portion/rounding
+- Tests en Pest (`NutritionCalculatorServiceTest.php`) verificando base 100g, fracciones, porciones, comidas mixtas e inmutabilidad de snapshots
 
 ### [ ] PH04-T04 — USDA adapter
 **Depends on:** None
