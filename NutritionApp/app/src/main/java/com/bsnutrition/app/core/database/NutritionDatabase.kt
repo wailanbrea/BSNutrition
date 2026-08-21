@@ -5,11 +5,14 @@ import androidx.room.RoomDatabase
 
 @Database(
     entities = [
-        UserEntity::class
+        UserEntity::class,
+        FavoriteFoodEntity::class
     ],
     version = 1,
     exportSchema = false
 )
 abstract class NutritionDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
+    abstract fun favoriteFoodDao(): FavoriteFoodDao
 }
+

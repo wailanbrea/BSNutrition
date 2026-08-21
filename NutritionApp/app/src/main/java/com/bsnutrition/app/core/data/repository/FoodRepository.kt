@@ -25,4 +25,11 @@ interface FoodRepository {
         portionId: Long? = null,
         unit: String? = "g"
     ): Result<NutritionCalculation>
+
+    suspend fun getFavorites(): Result<List<FoodSummary>>
+
+    suspend fun toggleFavorite(food: FoodSummary): Result<Boolean>
+
+    suspend fun isFavorite(foodId: Long): Boolean
 }
+

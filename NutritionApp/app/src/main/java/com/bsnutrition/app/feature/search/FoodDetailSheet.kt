@@ -47,6 +47,9 @@ import com.bsnutrition.app.core.model.FoodDetail
 import com.bsnutrition.app.core.model.FoodPortion
 import com.bsnutrition.app.core.model.NutritionCalculation
 
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.outlined.StarOutline
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FoodDetailSheet(
@@ -55,6 +58,8 @@ fun FoodDetailSheet(
     quantity: Double,
     calculation: NutritionCalculation?,
     isCalculating: Boolean,
+    isFavorite: Boolean = false,
+    onToggleFavorite: (() -> Unit)? = null,
     onPortionSelected: (FoodPortion) -> Unit,
     onQuantityChanged: (Double) -> Unit,
     onDismiss: () -> Unit,
@@ -113,8 +118,19 @@ fun FoodDetailSheet(
                     }
                 }
 
-                IconButton(onClick = onDismiss) {
-                    Icon(imageVector = Icons.Default.Close, contentDescription = "Cerrar")
+                Row {
+                    if (onToggleFavorite != null) {
+                        IconButton(onClick = onToggleFavorite) {
+                            Icon(
+                                imageVector = if (isFavorite) Icons.Filled.Star else Icons.Outlined.StarOutline,
+                                contentDescription = if (isFavorite) "Quitar de favoritos" else "Agregar a favoritos",
+                                tint = if (isFavorite) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    }
+                    IconButton(onClick = onDismiss) {
+                        Icon(imageVector = Icons.Default.Close, contentDescription = "Cerrar")
+                    }
                 }
             }
 
@@ -123,6 +139,7 @@ fun FoodDetailSheet(
             // Portions Selector
             if (food.portions.isNotEmpty()) {
                 Text(
+
                     text = "Porción / Medida",
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.SemiBold

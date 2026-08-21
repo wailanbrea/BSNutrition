@@ -36,4 +36,21 @@ interface FoodApiService {
         @Path("id") id: Long,
         @Body request: CalculateFoodNutritionRequestDto
     ): CalculateFoodNutritionResponseDto
+
+    @GET("foods/favorites")
+    suspend fun getFavoriteFoods(
+        @Query("page") page: Int? = 1,
+        @Query("per_page") perPage: Int? = 50
+    ): FoodSearchResponseDto
+
+    @POST("foods/{id}/favorite")
+    suspend fun toggleFavoriteFood(
+        @Path("id") id: Long
+    ): com.bsnutrition.app.core.network.model.ToggleFavoriteResponseDto
+
+    @GET("foods/{id}/favorite")
+    suspend fun isFavoriteFood(
+        @Path("id") id: Long
+    ): com.bsnutrition.app.core.network.model.ToggleFavoriteResponseDto
 }
+

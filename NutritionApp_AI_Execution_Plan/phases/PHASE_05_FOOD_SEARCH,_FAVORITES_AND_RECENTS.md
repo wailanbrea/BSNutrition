@@ -47,19 +47,20 @@ Crear búsqueda rápida y métodos de reuso.
 **Tests / verification:**
 - Tests unitarios en Android (`FoodRepositoryTest.kt` y `SearchViewModelTest.kt`)
 
-### [ ] PH05-T03 — Favorites
+### [x] PH05-T03 — Favorites
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] API
-- [ ] Room/cache
-- [ ] Toggle/list
+- [x] API (Migración `user_food_favorites`, relación `favoriteFoods`, endpoints `GET /api/v1/foods/favorites`, `POST /api/v1/foods/{id}/favorite`, `GET /api/v1/foods/{id}/favorite`)
+- [x] Room/cache (`FavoriteFoodEntity`, `FavoriteFoodDao`, `NutritionDatabase`, caché offline y sincronización bidireccional)
+- [x] Toggle/list (Filtro '⭐ Favoritos' en `SearchScreen`, estrella de favoritos interactiva en `FoodResultCard` y `FoodDetailSheet`)
 
 **Acceptance criteria:**
-- Persists/reconciles
+- Persistencia inmediata, reconciliación con backend, soporte offline y aislamiento por usuario
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Pest (`FoodFavoriteTest.php`) con 56 tests pasando al 100% (684 aserciones)
+- Tests unitarios en Android (`FoodRepositoryTest.kt`, `SearchViewModelTest.kt`)
 
 ### [ ] PH05-T04 — Recents
 **Depends on:** None

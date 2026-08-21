@@ -21,6 +21,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.QrCodeScanner
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.outlined.StarOutline
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -42,7 +44,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.bsnutrition.app.core.designsystem.component.BsnCard
 import com.bsnutrition.app.core.model.FoodSummary
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -96,10 +97,10 @@ fun SearchScreen(
                 shape = RoundedCornerShape(12.dp)
             )
 
-            // Category Filter Chips
+            // Category & Favorites Filter Chips
             val categories = listOf(
                 Pair(null, "Todos"),
-                Pair(1L, "Carnes y Aves"),
+                Pair(1L, "Carnes"),
                 Pair(4L, "Frutas"),
                 Pair(6L, "Cereales"),
                 Pair(7L, "Legumbres"),
@@ -111,9 +112,18 @@ fun SearchScreen(
                 contentPadding = PaddingValues(horizontal = 16.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
+                // Favorites chip
+                item {
+                    FilterChip(
+                        selected = uiState.isFavoritesTab,
+                        onClick = { viewModel.onFavoritesTabToggled() },
+                        label = { Text("⭐ Favoritos") }
+                    )
+                }
+
                 items(categories) { (id, name) ->
                     FilterChip(
-                        selected = uiState.selectedCategoryId == id,
+                        selected = !uiState.isFavoritesTab && uiState.selectedCategoryId == id,
                         onClick = { viewModel.onCategorySelected(id) },
                         label = { Text(name) }
                     )
@@ -157,7 +167,7 @@ fun SearchScreen(
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = "No se encontraron alimentos para '${uiState.query}'",
+                            text = if (uiState.isFavoritesTab) "No tienes alimentos favoritos guardados." else "No se encontraron alimentos para '${uiState.query}'",
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -172,8 +182,11 @@ fun SearchScreen(
                         verticalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
                         items(uiState.searchResults, key = { it.id }) { food ->
+                            val isFav = uiState.favoriteFoodIds.contains(food.id)
                             FoodResultCard(
                                 food = food,
+                                isFavorite = isFav,
+                                onToggleFavorite = { viewModel.toggleFavorite(food) },
                                 onClick = { viewModel.selectFood(food.id) }
                             )
                         }
@@ -184,12 +197,34 @@ fun SearchScreen(
 
         // Food Detail Bottom Sheet
         if (uiState.selectedFood != null) {
+            val selectedFood = uiState.selectedFood!!
+            val isFav = uiState.favoriteFoodIds.contains(selectedFood.id)
+
             FoodDetailSheet(
-                food = uiState.selectedFood!!,
+                food = selectedFood,
                 selectedPortion = uiState.selectedPortion,
                 quantity = uiState.customQuantity,
                 calculation = uiState.calculation,
                 isCalculating = uiState.isCalculating,
+                isFavorite = isFav,
+                onToggleFavorite = {
+                    val summary = uiState.searchResults.firstOrNull { it.id == selectedFood.id }
+                        ?: FoodSummary(
+                            id = selectedFood.id,
+                            canonicalName = selectedFood.canonicalName,
+                            brand = selectedFood.brand,
+                            category = selectedFood.category,
+                            countryCode = selectedFood.countryCode,
+                            verified = selectedFood.verified,
+                            macrosPer100g = com.bsnutrition.app.core.model.MacroBreakdown(
+                                calories = uiState.calculation?.caloriesSnapshot ?: 0,
+                                proteinG = uiState.calculation?.proteinSnapshot ?: 0.0,
+                                carbsG = uiState.calculation?.carbsSnapshot ?: 0.0,
+                                fatG = uiState.calculation?.fatSnapshot ?: 0.0
+                            )
+                        )
+                    viewModel.toggleFavorite(summary)
+                },
                 onPortionSelected = viewModel::onPortionChanged,
                 onQuantityChanged = viewModel::onQuantityChanged,
                 onDismiss = viewModel::dismissFoodDetail
@@ -201,6 +236,8 @@ fun SearchScreen(
 @Composable
 fun FoodResultCard(
     food: FoodSummary,
+    isFavorite: Boolean = false,
+    onToggleFavorite: () -> Unit = {},
     onClick: () -> Unit
 ) {
     Card(
@@ -259,12 +296,29 @@ fun FoodResultCard(
                     }
                 }
 
-                Text(
-                    text = "${food.macrosPer100g.calories} kcal",
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.primary
-                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    Text(
+                        text = "${food.macrosPer100g.calories} kcal",
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+
+                    IconButton(
+                        onClick = onToggleFavorite,
+                        modifier = Modifier.size(32.dp)
+                    ) {
+                        Icon(
+                            imageVector = if (isFavorite) Icons.Filled.Star else Icons.Outlined.StarOutline,
+                            contentDescription = if (isFavorite) "Quitar de favoritos" else "Agregar a favoritos",
+                            tint = if (isFavorite) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.size(20.dp)
+                        )
+                    }
+                }
             }
 
             // Macros preview

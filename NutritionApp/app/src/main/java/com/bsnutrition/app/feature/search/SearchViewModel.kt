@@ -6,6 +6,7 @@ import com.bsnutrition.app.core.common.Result
 import com.bsnutrition.app.core.data.repository.FoodRepository
 import com.bsnutrition.app.core.model.FoodDetail
 import com.bsnutrition.app.core.model.FoodPortion
+import com.bsnutrition.app.core.model.FoodSummary
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -33,12 +34,15 @@ class SearchViewModel @Inject constructor(
     init {
         // Initial search to display popular / verified Dominican foods
         searchFoods(query = "", categoryId = null)
+        loadFavorites()
 
         _queryFlow
             .debounce(300)
             .distinctUntilChanged()
             .onEach { query ->
-                searchFoods(query = query, categoryId = _uiState.value.selectedCategoryId)
+                if (!_uiState.value.isFavoritesTab) {
+                    searchFoods(query = query, categoryId = _uiState.value.selectedCategoryId)
+                }
             }
             .launchIn(viewModelScope)
     }
@@ -50,8 +54,81 @@ class SearchViewModel @Inject constructor(
 
     fun onCategorySelected(categoryId: Long?) {
         val nextCategoryId = if (_uiState.value.selectedCategoryId == categoryId) null else categoryId
-        _uiState.update { it.copy(selectedCategoryId = nextCategoryId) }
+        _uiState.update { it.copy(selectedCategoryId = nextCategoryId, isFavoritesTab = false) }
         searchFoods(query = _uiState.value.query, categoryId = nextCategoryId)
+    }
+
+    fun onFavoritesTabToggled() {
+        val nextState = !_uiState.value.isFavoritesTab
+        _uiState.update { it.copy(isFavoritesTab = nextState, selectedCategoryId = null) }
+        if (nextState) {
+            loadFavorites(displayAsResults = true)
+        } else {
+            searchFoods(query = _uiState.value.query, categoryId = null)
+        }
+    }
+
+    fun loadFavorites(displayAsResults: Boolean = false) {
+        viewModelScope.launch {
+            if (displayAsResults) {
+                _uiState.update { it.copy(isLoading = true, error = null) }
+            }
+            when (val result = foodRepository.getFavorites()) {
+                is Result.Success -> {
+                    val favorites = result.data
+                    val favIds = favorites.map { it.id }.toSet()
+                    _uiState.update {
+                        it.copy(
+                            favoriteFoodIds = favIds,
+                            searchResults = if (displayAsResults) favorites else it.searchResults,
+                            isLoading = if (displayAsResults) false else it.isLoading,
+                            error = null
+                        )
+                    }
+                }
+                is Result.Error -> {
+                    if (displayAsResults) {
+                        _uiState.update {
+                            it.copy(
+                                isLoading = false,
+                                error = result.message ?: "Error al cargar favoritos"
+                            )
+                        }
+                    }
+                }
+                is Result.Loading -> Unit
+            }
+        }
+    }
+
+    fun toggleFavorite(food: FoodSummary) {
+        viewModelScope.launch {
+            when (val result = foodRepository.toggleFavorite(food)) {
+                is Result.Success -> {
+                    val isFav = result.data
+                    _uiState.update { state ->
+                        val updatedSet = if (isFav) {
+                            state.favoriteFoodIds + food.id
+                        } else {
+                            state.favoriteFoodIds - food.id
+                        }
+                        val updatedResults = if (state.isFavoritesTab && !isFav) {
+                            state.searchResults.filter { it.id != food.id }
+                        } else {
+                            state.searchResults
+                        }
+                        state.copy(
+                            favoriteFoodIds = updatedSet,
+                            searchResults = updatedResults
+                        )
+                    }
+                }
+                is Result.Error -> {
+                    _uiState.update { it.copy(error = result.message ?: "No se pudo actualizar favorito") }
+                }
+                is Result.Loading -> Unit
+            }
+        }
     }
 
     fun searchFoods(query: String, categoryId: Long?) {

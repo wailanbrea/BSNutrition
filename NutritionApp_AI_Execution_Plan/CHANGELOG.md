@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH05-T03
+**Added**
+- Migración de base de datos `2026_08_21_200000_create_user_food_favorites_table.php` para persistencia relacional con clave compuesta única e índices.
+- Relación `favoriteFoods()` en `User` y `favoritedByUsers()` en `Food`.
+- Endpoints REST en `FoodController.php`:
+  - `GET /api/v1/foods/favorites`: Listado paginado de favoritos del usuario autenticado.
+  - `POST /api/v1/foods/{id}/favorite`: Alternar (toggle) alimento como favorito.
+  - `GET /api/v1/foods/{id}/favorite`: Verificación del estado de favorito.
+- Entidad Room `FavoriteFoodEntity`, interfaz `FavoriteFoodDao`, e integración en `NutritionDatabase` y `DatabaseModule` para soporte offline y rendimiento instantáneo.
+- Métodos `getFavorites()`, `toggleFavorite()` y `isFavorite()` en `FoodRepository` y `FoodRepositoryImpl`.
+- Pestaña '⭐ Favoritos' en `SearchScreen` y botones de estrella de favoritos interactivos en `FoodResultCard` y `FoodDetailSheet`.
+- Tests en Pest `tests/Feature/FoodFavoriteTest.php` (56 tests pasando al 100%) y tests unitarios en Android.
+
 ### 2026-08-21 — PH05-T02
 **Added**
 - Modelos de dominio de alimentos (`FoodSummary`, `FoodDetail`, `FoodPortion`, `FoodNutrient`, `NutritionCalculation`, `MacroBreakdown`).

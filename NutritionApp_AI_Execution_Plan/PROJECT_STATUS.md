@@ -3,13 +3,13 @@
 ## Current state
 - Project status: IN PROGRESS
 - Current phase: Phase 05 — Food Search, Favorites and Recents
-- Current task: PH05-T03
+- Current task: PH05-T04
 - Current task status: `[ ]`
-- Last completed task: PH05-T02
+- Last completed task: PH05-T03
 - Last update: 2026-08-21
 
 ## Exact next action
-Abrir `phases/PHASE_05_FOOD_SEARCH,_FAVORITES_AND_RECENTS.md` y ejecutar `PH05-T03` (Favorites: Backend API para alternar favoritos `POST /api/v1/foods/{id}/favorite` y listar `GET /api/v1/foods/favorites`, entidad Room `FavoriteFoodEntity`, sincronización y pestaña de Favoritos en la UI de Android).
+Abrir `phases/PHASE_05_FOOD_SEARCH,_FAVORITES_AND_RECENTS.md` y ejecutar `PH05-T04` (Recents: Historial de alimentos consumidos, ordenamiento por frecuencia y uso reciente en backend/Android, sección 'Recientes' en la UI de búsqueda y Room cache).
 
 ## Active blockers
 None.
@@ -23,6 +23,7 @@ None.
 - detalles finales de deployment.
 
 ## Recently completed
+- PH05-T03 — Favorites: Migración `user_food_favorites`, relación `favoriteFoods` en `User` y `Food`, endpoints `GET /api/v1/foods/favorites`, `POST /api/v1/foods/{id}/favorite` y `GET /api/v1/foods/{id}/favorite`, entidad Room `FavoriteFoodEntity`, `FavoriteFoodDao`, soporte en `FoodRepositoryImpl`, pestaña de favoritos y botones interactivos en `SearchScreen` y `FoodDetailSheet` con tests en `FoodFavoriteTest.php` (56 tests pasando al 100%).
 - PH05-T02 — Android Search: Modelos de dominio (`FoodSummary`, `FoodDetail`, `FoodPortion`, `FoodNutrient`, `NutritionCalculation`), `FoodApiService`, `FoodRepository` / `FoodRepositoryImpl`, `SearchViewModel` con debouncing de 300ms, pantalla `SearchScreen` en Compose con badges de cocina dominicana `🇩🇴 RD`, `FoodDetailSheet` modal con selector interactivo de porciones y recálculo en tiempo real, e integración en `AddScreen` con tests en `FoodRepositoryTest.kt` y `SearchViewModelTest.kt`.
 - PH05-T01 — Backend Food Search: Endpoints REST `GET /api/v1/foods/search`, `GET /api/v1/foods/{id}`, `GET /api/v1/foods/barcode/{barcode}`, `POST /api/v1/foods/{id}/calculate` con recursos JSON `FoodSummaryResource`, `FoodDetailResource`, `FoodPortionResource`, `FoodNutrientResource`, ranking con locale boosting para República Dominicana `DO`, paginación y tests en `FoodSearchApiTest.php`.
 - PH04-T06 — Dominican Dataset Foundation: Seeder de catálogo criollo `DominicanFoodDatasetSeeder` con 15 platos y alimentos canónicos dominicanos (Mangú, Los tres golpes, La bandera, Habichuelas guisadas, Pollo guisado, Moro de guandules, Sancocho, Tostones, Queso frito, Salami frito, Morir soñando, Mofongo, etc.) con sus porciones, nutrientes y alias con tests en `DominicanFoodDatasetSeederTest.php`.

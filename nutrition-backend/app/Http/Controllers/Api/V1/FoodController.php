@@ -126,4 +126,60 @@ class FoodController extends Controller
             'data' => $calculation,
         ]);
     }
+
+    /**
+     * List authenticated user's favorite foods.
+     */
+    public function favorites(Request $request): AnonymousResourceCollection
+    {
+        $user = $request->user();
+
+        $favorites = $user->favoriteFoods()
+            ->with(['brand', 'category', 'foodNutrients.nutrient', 'portions'])
+            ->latest('user_food_favorites.created_at')
+            ->paginate((int) $request->input('per_page', 20));
+
+        return FoodSummaryResource::collection($favorites);
+    }
+
+    /**
+     * Toggle favorite status for a food.
+     */
+    public function toggleFavorite(Request $request, int $id): JsonResponse
+    {
+        $user = $request->user();
+        $food = Food::findOrFail($id);
+
+        $exists = $user->favoriteFoods()->where('food_id', $food->id)->exists();
+
+        if ($exists) {
+            $user->favoriteFoods()->detach($food->id);
+            $isFavorite = false;
+            $message = 'Alimento eliminado de favoritos.';
+        } else {
+            $user->favoriteFoods()->attach($food->id);
+            $isFavorite = true;
+            $message = 'Alimento agregado a favoritos.';
+        }
+
+        return response()->json([
+            'is_favorite' => $isFavorite,
+            'message' => $message,
+            'food_id' => $food->id,
+        ]);
+    }
+
+    /**
+     * Check if a food is in the user's favorites.
+     */
+    public function isFavorite(Request $request, int $id): JsonResponse
+    {
+        $user = $request->user();
+        $isFavorite = $user->favoriteFoods()->where('food_id', $id)->exists();
+
+        return response()->json([
+            'is_favorite' => $isFavorite,
+            'food_id' => $id,
+        ]);
+    }
 }

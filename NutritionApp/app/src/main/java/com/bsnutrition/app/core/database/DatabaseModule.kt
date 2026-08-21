@@ -32,4 +32,10 @@ object DatabaseModule {
     fun provideUserDao(database: NutritionDatabase): UserDao {
         return database.userDao()
     }
+
+    @Provides
+    fun provideFavoriteFoodDao(database: NutritionDatabase): FavoriteFoodDao {
+        return database.favoriteFoodDao()
+    }
 }
+

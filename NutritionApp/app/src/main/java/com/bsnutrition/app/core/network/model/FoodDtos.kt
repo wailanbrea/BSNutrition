@@ -212,3 +212,11 @@ data class NutritionCalculationDto(
 data class CalculateFoodNutritionResponseDto(
     val data: NutritionCalculationDto
 )
+
+@Serializable
+data class ToggleFavoriteResponseDto(
+    @SerialName("is_favorite") val isFavorite: Boolean,
+    val message: String? = null,
+    @SerialName("food_id") val foodId: Long
+)
+

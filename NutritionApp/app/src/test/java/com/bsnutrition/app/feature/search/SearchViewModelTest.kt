@@ -23,6 +23,7 @@ import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 
@@ -75,6 +76,8 @@ class SearchViewModelTest {
         coEvery { foodRepository.searchFoods(any(), any(), any(), any(), any()) } returns Result.Success(listOf(sampleFoodSummary))
         coEvery { foodRepository.getFoodDetail(1L) } returns Result.Success(sampleFoodDetail)
         coEvery { foodRepository.calculateNutrition(1L, any(), any(), any()) } returns Result.Success(sampleCalculation)
+        coEvery { foodRepository.getFavorites() } returns Result.Success(listOf(sampleFoodSummary))
+        coEvery { foodRepository.toggleFavorite(any()) } returns Result.Success(true)
     }
 
     @After
@@ -90,6 +93,7 @@ class SearchViewModelTest {
         val state = viewModel.uiState.value
         assertEquals(1, state.searchResults.size)
         assertEquals("Mangú de Plátano Verde", state.searchResults[0].canonicalName)
+        assertTrue(state.favoriteFoodIds.contains(1L))
     }
 
     @Test
@@ -123,6 +127,30 @@ class SearchViewModelTest {
         assertEquals(10L, state.selectedPortion?.id)
         assertNotNull(state.calculation)
         assertEquals(310, state.calculation?.caloriesSnapshot)
+    }
+
+    @Test
+    fun `toggleFavorite updates favoriteFoodIds`() = runTest {
+        viewModel = SearchViewModel(foodRepository)
+        advanceUntilIdle()
+
+        viewModel.toggleFavorite(sampleFoodSummary)
+        advanceUntilIdle()
+
+        assertTrue(viewModel.uiState.value.favoriteFoodIds.contains(1L))
+        coVerify { foodRepository.toggleFavorite(sampleFoodSummary) }
+    }
+
+    @Test
+    fun `onFavoritesTabToggled switches to favorites results`() = runTest {
+        viewModel = SearchViewModel(foodRepository)
+        advanceUntilIdle()
+
+        viewModel.onFavoritesTabToggled()
+        advanceUntilIdle()
+
+        assertTrue(viewModel.uiState.value.isFavoritesTab)
+        assertEquals(1, viewModel.uiState.value.searchResults.size)
     }
 
     @Test

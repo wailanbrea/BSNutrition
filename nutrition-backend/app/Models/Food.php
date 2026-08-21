@@ -78,6 +78,12 @@ class Food extends Model
             ->withTimestamps();
     }
 
+    public function favoritedByUsers(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'user_food_favorites')
+            ->withTimestamps();
+    }
+
     public function scopeVerified(Builder $query): Builder
     {
         return $query->where('verified', true);

@@ -2,6 +2,10 @@ package com.bsnutrition.app.core.data
 
 import com.bsnutrition.app.core.common.Result
 import com.bsnutrition.app.core.data.repository.FoodRepositoryImpl
+import com.bsnutrition.app.core.database.FavoriteFoodDao
+import com.bsnutrition.app.core.model.FoodCategory
+import com.bsnutrition.app.core.model.FoodSummary
+import com.bsnutrition.app.core.model.MacroBreakdown
 import com.bsnutrition.app.core.network.api.FoodApiService
 import com.bsnutrition.app.core.network.model.BrandDto
 import com.bsnutrition.app.core.network.model.CalculateFoodNutritionResponseDto
@@ -14,7 +18,9 @@ import com.bsnutrition.app.core.network.model.FoodSearchResponseDto
 import com.bsnutrition.app.core.network.model.FoodSummaryDto
 import com.bsnutrition.app.core.network.model.MacroBreakdownDto
 import com.bsnutrition.app.core.network.model.NutritionCalculationDto
+import com.bsnutrition.app.core.network.model.ToggleFavoriteResponseDto
 import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
@@ -27,6 +33,7 @@ import org.junit.Test
 class FoodRepositoryTest {
 
     private lateinit var foodApiService: FoodApiService
+    private lateinit var favoriteFoodDao: FavoriteFoodDao
     private lateinit var repository: FoodRepositoryImpl
     private val testDispatcher = StandardTestDispatcher()
     private val json = Json { ignoreUnknownKeys = true }
@@ -34,8 +41,10 @@ class FoodRepositoryTest {
     @Before
     fun setUp() {
         foodApiService = mockk()
+        favoriteFoodDao = mockk(relaxed = true)
         repository = FoodRepositoryImpl(
             foodApiService = foodApiService,
+            favoriteFoodDao = favoriteFoodDao,
             ioDispatcher = testDispatcher,
             json = json
         )
@@ -127,5 +136,22 @@ class FoodRepositoryTest {
         val data = (result as Result.Success).data
         assertEquals(300.0, data.grams, 0.01)
         assertEquals(465, data.caloriesSnapshot)
+    }
+
+    @Test
+    fun `toggleFavorite calls API and caches in Room`() = runTest(testDispatcher) {
+        val food = FoodSummary(
+            id = 1L,
+            canonicalName = "Mangú",
+            macrosPer100g = MacroBreakdown(155, 1.5, 31.0, 3.2)
+        )
+
+        coEvery { foodApiService.toggleFavoriteFood(1L) } returns ToggleFavoriteResponseDto(isFavorite = true, foodId = 1L)
+
+        val result = repository.toggleFavorite(food)
+
+        assertTrue(result is Result.Success)
+        assertEquals(true, (result as Result.Success).data)
+        coVerify { favoriteFoodDao.insertFavorite(any()) }
     }
 }

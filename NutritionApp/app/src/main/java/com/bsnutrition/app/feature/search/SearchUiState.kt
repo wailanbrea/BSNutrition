@@ -16,5 +16,8 @@ data class SearchUiState(
     val selectedPortion: FoodPortion? = null,
     val customQuantity: Double = 1.0,
     val calculation: NutritionCalculation? = null,
-    val isCalculating: Boolean = false
+    val isCalculating: Boolean = false,
+    val isFavoritesTab: Boolean = false,
+    val favoriteFoodIds: Set<Long> = emptySet()
 )
+
