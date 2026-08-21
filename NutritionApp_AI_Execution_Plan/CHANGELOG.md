@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH01-T02
+**Added**
+- `app/Http/Responses/ApiErrorResponse.php` para estandarización de payloads de error JSON `{ error: { code, message, fields } }`.
+- `app/Exceptions/ApiExceptionHandler.php` para captura global y mapeo de excepciones API (401, 403, 404, 405, 422, 429, 500).
+- `app/Http/Middleware/ForceJsonResponse.php` para asegurar cabeceras JSON en peticiones `/api/*`.
+- Suite de pruebas de contrato de errores en `tests/Feature/ApiErrorContractTest.php`.
+
+**Changed**
+- Configuración de excepciones y middleware en `bootstrap/app.php`.
+
+**Tests**
+- `php ./vendor/bin/pest` (9 passed, 42 assertions).
+- `php ./vendor/bin/pint` (formato limpio verificado).
+
 ### 2026-08-21 — PH01-T01
 **Added**
 - Inicialización de Laravel API en `nutrition-backend/` con Sanctum, Pest y Pint.

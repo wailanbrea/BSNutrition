@@ -35,19 +35,20 @@ Crear Laravel API, MySQL, errores JSON, Sanctum y perfil.
 - Backend test suite (Pest)
 - DB smoke (migrations on MySQL)
 
-### [ ] PH01-T02 — API error contract
+### [x] PH01-T02 — API error contract
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Validation errors
-- [ ] 401/404
-- [ ] Production exception mapping
+- [x] Validation errors (422 con formato estándar y fields)
+- [x] 401/404/405/429 estructurados en JSON
+- [x] Production exception mapping (500 SERVER_ERROR)
+- [x] Middleware ForceJsonResponse para garantizar JSON sin HTML
 
 **Acceptance criteria:**
 - Android never receives arbitrary HTML errors
 
 **Tests / verification:**
-- Feature tests
+- Feature tests (`tests/Feature/ApiErrorContractTest.php`)
 
 ### [ ] PH01-T03 — Sanctum auth
 **Depends on:** None
