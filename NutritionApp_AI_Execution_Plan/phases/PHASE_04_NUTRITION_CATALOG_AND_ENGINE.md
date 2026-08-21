@@ -69,20 +69,20 @@ Crear esquema canónico, cálculo nutricional y adapters externos.
 **Tests / verification:**
 - Tests en Pest (`NutritionCalculatorServiceTest.php`) verificando base 100g, fracciones, porciones, comidas mixtas e inmutabilidad de snapshots
 
-### [ ] PH04-T04 — USDA adapter
+### [x] PH04-T04 — USDA adapter
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Search/detail
-- [ ] Normalize
-- [ ] Cache/source trace
-- [ ] Error handling
+- [x] Search/detail (`UsdaFoodDataService.php` search y getFoodDetails con caching)
+- [x] Normalize (Mapeo estricto de más de 30 IDs de nutrientes USDA a códigos canónicos)
+- [x] Cache/source trace (`source = 'usda_fdc'`, `external_source_id = fdcId`)
+- [x] Error handling (Manejo de excepciones HTTP, logging y comando `foods:import-usda`)
 
 **Acceptance criteria:**
-- USDA result imports as canonical food
+- Los alimentos de USDA FoodData Central se importan y mapean fielmente a la estructura canónica local con porciones y nutrientes
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Pest (`UsdaFoodDataServiceTest.php`) con 42 tests pasando al 100% (285 aserciones)
 
 ### [ ] PH04-T05 — Open Food Facts adapter
 **Depends on:** None

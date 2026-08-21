@@ -31,4 +31,9 @@ return [
         ],
     ],
 
+    'usda' => [
+        'api_key' => env('USDA_API_KEY', 'DEMO_KEY'),
+        'base_url' => env('USDA_BASE_URL', 'https://api.nal.usda.gov/fdc/v1'),
+    ],
+
 ];

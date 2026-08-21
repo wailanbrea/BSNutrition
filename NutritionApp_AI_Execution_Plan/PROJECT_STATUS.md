@@ -3,13 +3,13 @@
 ## Current state
 - Project status: IN PROGRESS
 - Current phase: Phase 04 — Nutrition Catalog and Engine
-- Current task: PH04-T04
+- Current task: PH04-T05
 - Current task status: `[ ]`
-- Last completed task: PH04-T03
+- Last completed task: PH04-T04
 - Last update: 2026-08-21
 
 ## Exact next action
-Abrir `phases/PHASE_04_NUTRITION_CATALOG_AND_ENGINE.md` y ejecutar `PH04-T04` (USDA adapter: Cliente HTTP y servicio de integración con USDA FoodData Central API, normalización de nutrientes USDA a códigos canónicos de BSNutrition, caching y trazabilidad de fuentes).
+Abrir `phases/PHASE_04_NUTRITION_CATALOG_AND_ENGINE.md` y ejecutar `PH04-T05` (Open Food Facts adapter: Cliente HTTP e integración con Open Food Facts World API para escaneo y búsqueda por código de barras, mapeo a nutrientes canónicos, creación de marcas y almacenamiento local).
 
 ## Active blockers
 None.
@@ -23,9 +23,10 @@ None.
 - detalles finales de deployment.
 
 ## Recently completed
+- PH04-T04 — USDA Adapter: Cliente `UsdaFoodDataService` para búsqueda y detalle en FoodData Central, mapeo de más de 30 IDs de nutrientes a códigos canónicos, importación a base de datos con porciones y comando CLI `php artisan foods:import-usda` con tests en `UsdaFoodDataServiceTest.php`.
 - PH04-T03 — Nutrition Calculation Service: Servicio `NutritionCalculatorService` con normalización por base (100g/ml), escalado por porciones y gramos libres, agregación de comidas y días completos, distribución porcentual de macros e inmutabilidad de snapshots históricos con tests en `NutritionCalculatorServiceTest.php`.
 - PH04-T02 — Nutrient Seed: Seeder de catálogo canónico `NutrientSeeder` con 33 nutrientes normalizados (macros, subtipos lipídicos, azúcares, minerales y vitaminas clave), `FoodCategorySeeder` con 12 categorías taxonómicas y `FoodSourceSeeder` con tests en `NutrientSeederTest.php`.
-- PH04-T01 — Food/Nutrient Schema (`nutrition-backend/`): Migración `2026_08_21_190000_create_food_catalog_tables.php` (9 tablas: `food_categories`, `food_brands`, `food_sources`, `nutrients`, `foods`, `food_aliases`, `food_barcodes`, `food_portions`, `food_nutrients`), modelos Eloquent con relaciones y scopes de búsqueda (`search`, `byBarcode`, `verified`), y tests en `FoodCatalogSchemaTest.php`.
+- PH04-T01 — Food/Nutrient Schema (`nutrition-backend/`): Migración `2026_08_21_190000_create_food_catalog_tables.php` (9 tablas), modelos Eloquent con relaciones y scopes de búsqueda (`search`, `byBarcode`, `verified`), y tests en `FoodCatalogSchemaTest.php`.
 - PH03-T04 — Connect/save Goals & Dashboard Integration: `ProfileRepository` e implementación en `ProfileRepositoryImpl`, inyección en `OnboardingViewModel` para persistencia simultánea de perfil biométrico y metas calculadas, `HomeViewModel` y `HomeScreen` con tarjetas reactivas de calorías y macronutrientes reales, y conexión en `AppNavHost` con tests en `HomeViewModelTest` y `OnboardingViewModelTest`.
 - **Fase 03 (Onboarding and Goals) completada al 100%**.
 - PH03-T03 — Android Onboarding Flow (`com.bsnutrition.app.feature.onboarding`): `OnboardingStep` (6 pasos), `OnboardingUiState`, `OnboardingViewModel`, `OnboardingScreen` con Compose y Material 3, selector de sexo/fecha, medidas de altura/peso, nivel de actividad con multiplicadores TDEE, objetivo calórico/ritmo, sistema de unidades y previsualización de metas con tests unitarios en `OnboardingViewModelTest`.

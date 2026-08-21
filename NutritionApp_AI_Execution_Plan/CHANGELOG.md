@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH04-T04
+**Added**
+- Adaptador y cliente USDA `app/Services/UsdaFoodDataService.php` para búsqueda y detalle de alimentos en USDA FoodData Central con caching y manejo de errores.
+- Mapeo determinista de más de 30 IDs y números de nutrientes del USDA a códigos canónicos de BSNutrition (`calories`, `protein`, `carbohydrate`, `total_fat`, `fiber`, `sugar`, etc.).
+- Comando Artisan `php artisan foods:import-usda {--query=} {--fdcId=}` para importación automática de alimentos con sus porciones y nutrientes asociados.
+- Suite de pruebas con `Http::fake()` en `tests/Feature/UsdaFoodDataServiceTest.php` (42 tests pasando al 100%).
+
 ### 2026-08-21 — PH04-T03
 **Added**
 - Servicio de cálculo de nutrición `app/Services/NutritionCalculatorService.php`:
