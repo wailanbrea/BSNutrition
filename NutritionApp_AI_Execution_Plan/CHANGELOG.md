@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH04-T02
+**Added**
+- Seeder de catálogo canónico `NutrientSeeder.php` con 33 nutrientes normalizados (calorías, macronutrientes, subtipos de ácidos grasos, azúcares añadidos, electrolitos, minerales y vitaminas clave).
+- Seeder taxonómico `FoodCategorySeeder.php` con 12 categorías de alimentos con slug e icono.
+- Seeder de proveedores `FoodSourceSeeder.php` (`usda_fdc`, `openfoodfacts`, `generic`, `user_custom`).
+- Integración en `DatabaseSeeder.php` y suite de pruebas en `tests/Feature/NutrientSeederTest.php` (34 tests pasando al 100%).
+
 ### 2026-08-21 — PH04-T01
 **Added**
 - Migración de catálogo canónico `2026_08_21_190000_create_food_catalog_tables.php` estructurando: `food_categories`, `food_brands`, `food_sources`, `nutrients`, `foods`, `food_aliases`, `food_barcodes`, `food_portions`, `food_nutrients`.

@@ -3,13 +3,13 @@
 ## Current state
 - Project status: IN PROGRESS
 - Current phase: Phase 04 — Nutrition Catalog and Engine
-- Current task: PH04-T02
+- Current task: PH04-T03
 - Current task status: `[ ]`
-- Last completed task: PH04-T01
+- Last completed task: PH04-T02
 - Last update: 2026-08-21
 
 ## Exact next action
-Abrir `phases/PHASE_04_NUTRITION_CATALOG_AND_ENGINE.md` y ejecutar `PH04-T02` (Nutrient seed: Seeder de catálogo canónico de nutrientes con códigos estables para calorías, proteínas, carbohidratos, grasas, fibra, azúcares, sodio, vitaminas y minerales clave).
+Abrir `phases/PHASE_04_NUTRITION_CATALOG_AND_ENGINE.md` y ejecutar `PH04-T03` (Nutrition calculation service: Servicio de cálculo de nutrición para normalización de base 100g/ml, escalado por porción, agregación de comidas del diario y redondeo con precisión estándar).
 
 ## Active blockers
 None.
@@ -23,6 +23,7 @@ None.
 - detalles finales de deployment.
 
 ## Recently completed
+- PH04-T02 — Nutrient Seed: Seeder de catálogo canónico `NutrientSeeder` con 33 nutrientes normalizados (macros, subtipos lipídicos, azúcares, minerales y vitaminas clave), `FoodCategorySeeder` con 12 categorías taxonómicas y `FoodSourceSeeder` con tests en `NutrientSeederTest.php`.
 - PH04-T01 — Food/Nutrient Schema (`nutrition-backend/`): Migración `2026_08_21_190000_create_food_catalog_tables.php` (9 tablas: `food_categories`, `food_brands`, `food_sources`, `nutrients`, `foods`, `food_aliases`, `food_barcodes`, `food_portions`, `food_nutrients`), modelos Eloquent con relaciones y scopes de búsqueda (`search`, `byBarcode`, `verified`), y tests en `FoodCatalogSchemaTest.php`.
 - PH03-T04 — Connect/save Goals & Dashboard Integration: `ProfileRepository` e implementación en `ProfileRepositoryImpl`, inyección en `OnboardingViewModel` para persistencia simultánea de perfil biométrico y metas calculadas, `HomeViewModel` y `HomeScreen` con tarjetas reactivas de calorías y macronutrientes reales, y conexión en `AppNavHost` con tests en `HomeViewModelTest` y `OnboardingViewModelTest`.
 - **Fase 03 (Onboarding and Goals) completada al 100%**.

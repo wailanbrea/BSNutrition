@@ -33,24 +33,24 @@ Crear esquema canónico, cálculo nutricional y adapters externos.
 **Tests / verification:**
 - Tests en Pest (`FoodCatalogSchemaTest.php`) con 32 tests pasando al 100% (191 aserciones)
 
-### [ ] PH04-T02 — Nutrient seed
+### [x] PH04-T02 — Nutrient seed
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Calories
-- [ ] Protein
-- [ ] Carbs
-- [ ] Fat
-- [ ] Fiber
-- [ ] Sugar
-- [ ] Sodium
-- [ ] Core vitamins/minerals
+- [x] Calories (`calories`, kcal)
+- [x] Protein (`protein`, g)
+- [x] Carbs (`carbohydrate`, g)
+- [x] Fat (`total_fat`, g)
+- [x] Fiber (`fiber`, g)
+- [x] Sugar (`sugar`, g)
+- [x] Sodium (`sodium`, mg)
+- [x] Core vitamins/minerals (Ácidos grasos, azúcares añadidos, minerales, vitaminas A, C, D, E, K y complejo B)
 
 **Acceptance criteria:**
-- Stable nutrient codes
+- Códigos de nutrientes estables y normalizados con estándares USDA / FAO / INFOODS
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Pest (`NutrientSeederTest.php`) verificando catálogo maestro de 33 nutrientes, categorías y fuentes
 
 ### [ ] PH04-T03 — Nutrition calculation service
 **Depends on:** None
