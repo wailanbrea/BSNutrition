@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH07-T01
+**Added**
+- Entidades completas de Room para persistencia offline-first: `DiaryEntity`, `MealEntity`, `MealEntryEntity`, `MealWithEntries`, `DiaryWithMeals`, `WaterLogEntity`, `WeightLogEntity`, `FoodCacheEntity`, `SyncQueueEntity`.
+- DAOs de Room con soporte de reactividad Flow: `DiaryDao`, `MealEntryDao`, `WaterLogDao`, `WeightLogDao`, `FoodCacheDao`, `SyncQueueDao`.
+- Índices únicos y compuestos optimizados para queries locales instantáneos y estados de sincronización (`synced`, `pending_create`, `pending_update`, `pending_delete`).
+- Actualización a versión 2 de `NutritionDatabase` y registro de todos los DAOs en `DatabaseModule`.
+- Suite de pruebas unitarias en `RoomSchemaDaoTest.kt`.
+
 ### 2026-08-21 — PH06-T05
 **Added**
 - Navegación temporal e histórica en `DiaryViewModel` con selección de fechas arbitrarias y recarga dinámica de registros.

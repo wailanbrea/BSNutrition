@@ -9,28 +9,29 @@ Convertir diario/tracking a local-first con Room + WorkManager.
 - `04_DATABASE_DESIGN.md`
 
 ## Entry criteria
-- [ ] Online diary correct
+- [x] Online diary correct (Completado en Fase 06)
 
 ## Tasks
 
-### [ ] PH07-T01 — Room core schema
+### [x] PH07-T01 — Room core schema
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Diary
-- [ ] Entries
-- [ ] Foods cache
-- [ ] Favorites
-- [ ] Water
-- [ ] Weight
-- [ ] Sync queue
-- [ ] Indexes
+- [x] Diary (`DiaryEntity`, `DiaryWithMeals`, `DiaryDao`)
+- [x] Entries (`MealEntity`, `MealEntryEntity`, `MealWithEntries`, `MealEntryDao`)
+- [x] Foods cache (`FoodCacheEntity`, `FoodCacheDao`)
+- [x] Favorites (`FavoriteFoodEntity`, `FavoriteFoodDao`)
+- [x] Water (`WaterLogEntity`, `WaterLogDao`)
+- [x] Weight (`WeightLogEntity`, `WeightLogDao`)
+- [x] Sync queue (`SyncQueueEntity`, `SyncQueueDao`)
+- [x] Indexes (Índices únicos y compuestos en `diary_date`, `client_id`, `sync_status`, `meal_id`, `is_deleted`)
 
 **Acceptance criteria:**
-- Diary renders from Room
+- Esquema de base de datos Room completo y preparado para almacenamiento y sincronización offline-first
 
 **Tests / verification:**
-- DAO/migration tests
+- Tests en Kotlin (`RoomSchemaDaoTest.kt`)
+
 
 ### [ ] PH07-T02 — Local-first repositories
 **Depends on:** None

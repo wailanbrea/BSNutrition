@@ -42,6 +42,37 @@ object DatabaseModule {
     fun provideRecentFoodDao(database: NutritionDatabase): RecentFoodDao {
         return database.recentFoodDao()
     }
+
+    @Provides
+    fun provideDiaryDao(database: NutritionDatabase): DiaryDao {
+        return database.diaryDao()
+    }
+
+    @Provides
+    fun provideMealEntryDao(database: NutritionDatabase): MealEntryDao {
+        return database.mealEntryDao()
+    }
+
+    @Provides
+    fun provideWaterLogDao(database: NutritionDatabase): WaterLogDao {
+        return database.waterLogDao()
+    }
+
+    @Provides
+    fun provideWeightLogDao(database: NutritionDatabase): WeightLogDao {
+        return database.weightLogDao()
+    }
+
+    @Provides
+    fun provideFoodCacheDao(database: NutritionDatabase): FoodCacheDao {
+        return database.foodCacheDao()
+    }
+
+    @Provides
+    fun provideSyncQueueDao(database: NutritionDatabase): SyncQueueDao {
+        return database.syncQueueDao()
+    }
 }
+
 
 
