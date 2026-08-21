@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH09-T02
+**Added**
+- Interfaz `AiVisionProviderInterface` y DTOs estructurados `AiFoodAnalysisResult` y `AiRecognizedFoodItem`.
+- Implementación de `OpenAiVisionProvider` utilizando modelos multimodales GPT-4o / GPT-4o-mini con schema JSON estructurado, inteligencia culinaria dominicana y contabilidad de tokens y costes en USD.
+- Implementación `MockVisionProvider` para pruebas deterministas y ejecución offline.
+- Gestor `AiVisionManager` para resolución dinámica de proveedores de visión IA.
+- Tests en Pest (`AiVisionProviderTest.php`, 4 tests pasando).
+
 ### 2026-08-21 — PH09-T01
 **Added**
 - Tabla y migración `ai_image_uploads` y modelo Eloquent `AiImageUpload` para gestión segura de imágenes privadas.

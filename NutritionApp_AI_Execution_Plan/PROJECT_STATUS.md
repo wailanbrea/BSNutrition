@@ -3,13 +3,13 @@
 ## Current state
 - Project status: IN PROGRESS
 - Current phase: Phase 09 — AI Food Photo
-- Current task: PH09-T02
+- Current task: PH09-T03
 - Current task status: `[ ]`
-- Last completed task: PH09-T01
+- Last completed task: PH09-T02
 - Last update: 2026-08-21
 
 ## Exact next action
-Abrir `phases/PHASE_09_AI_FOOD_PHOTO.md` y ejecutar `PH09-T02` (AI provider abstraction: Interfaz `AiVisionProviderInterface`, implementación con OpenAI GPT-4o / Gemini Vision, schema estructurado en JSON para items de comida, porciones estimadas, nivel de confianza y control de timeout y costes).
+Abrir `phases/PHASE_09_AI_FOOD_PHOTO.md` y ejecutar `PH09-T03` (Food matcher v1: Implementación del servicio `FoodMatchingService.php` para vincular nombres reconocidos por la IA con alimentos del catálogo canónico, búsqueda por alias y normalización léxica, locale boosting dominicano y cálculo de scores de confianza).
 
 ## Active blockers
 None.
@@ -23,6 +23,7 @@ None.
 - detalles finales de deployment.
 
 ## Recently completed
+- PH09-T02 — AI provider abstraction: Interfaz `AiVisionProviderInterface`, implementaciones `OpenAiVisionProvider` (con esquema JSON estructurado y soporte gastronómico dominicano) y `MockVisionProvider`, y `AiVisionManager` para resolución dinámica de drivers con tests en `AiVisionProviderTest.php` (4 tests pasando).
 - PH09-T01 — Private image storage: Migración `ai_image_uploads`, modelo Eloquent `AiImageUpload` y servicio `ImageStorageService` para almacenamiento aislado en disco privado, extracción base64 para inferencia, whitelist de formatos (JPEG, PNG, WEBP, HEIC), límite de 10 MB y purga de expiración con tests en `ImageStorageServiceTest.php` (5 tests pasando).
 - PH08-T03 — Log scanned product: Bottom sheet `FoodDetailSheet` al detectar código de barras, selector de porciones dinámico con recálculo en tiempo real, registro en diario y en historial reciente con tests en `BarcodeScannerViewModelTest.kt`.
 - PH08-T02 — Android scanner: Integración completa de CameraX y Google ML Kit (`BarcodeScanning`) en `BarcodeScannerScreen` y `BarcodeAnalyzer`, control de permisos en tiempo de ejecución, retícula de visor con animación y debouncing de lectura de 1.5s.
@@ -44,11 +45,12 @@ None.
 - **Fase 05 (Food Search, Favorites and Recents) completada al 100%**.
 
 ## Files/modules changed in last task
-- `nutrition-backend/`: database/migrations/2026_08_21_230000_create_ai_image_uploads_table.php, app/Models/AiImageUpload.php, app/Services/ImageStorageService.php, tests/Feature/ImageStorageServiceTest.php
+- `nutrition-backend/`: app/Contracts/AiVisionProviderInterface.php, app/DTOs/AiFoodAnalysisResult.php, app/DTOs/AiRecognizedFoodItem.php, app/Services/Ai/OpenAiVisionProvider.php, app/Services/Ai/MockVisionProvider.php, app/Services/Ai/AiVisionManager.php, tests/Feature/AiVisionProviderTest.php
 - `NutritionApp_AI_Execution_Plan/`: PROJECT_STATUS.md, CHANGELOG.md, phases/PHASE_09_AI_FOOD_PHOTO.md
 
 ## Tests from last task
-- `php ./vendor/bin/pest tests/Feature/ImageStorageServiceTest.php` -> 5 passed (18 assertions)
+- `php ./vendor/bin/pest tests/Feature/AiVisionProviderTest.php` -> 4 passed (17 assertions)
+
 
 
 

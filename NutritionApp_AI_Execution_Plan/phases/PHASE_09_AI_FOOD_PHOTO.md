@@ -31,22 +31,22 @@ Crear foto IA segura, structured output, matching, correction y diary.
 - Tests en Pest (`ImageStorageServiceTest.php`, 5 tests pasando)
 
 
-### [ ] PH09-T02 — AI provider abstraction
+### [x] PH09-T02 — AI provider abstraction
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Interface
-- [ ] OpenAI provider
-- [ ] JSON schema
-- [ ] Timeout/errors
-- [ ] Usage/cost
+- [x] Interface (`AiVisionProviderInterface`)
+- [x] OpenAI provider (`OpenAiVisionProvider` con soporte de modelos multimodal GPT-4o / GPT-4o-mini)
+- [x] JSON schema (Contrato estructurado con `dish_name`, `summary`, `items`, `confidence_score` y métodos de preparación)
+- [x] Timeout/errors (Manejo robusto de caídas de red, excepciones HTTP y descarte de respuestas inválidas)
+- [x] Usage/cost (Conteo de tokens de entrada/salida y estimación de coste en USD)
 
 **Acceptance criteria:**
-- Provider isolated
-- Malformed output rejected
+- Proveedor de IA completamente desacoplado y protegido contra respuestas mal estructuradas
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Pest (`AiVisionProviderTest.php`, 4 tests pasando)
+
 
 ### [ ] PH09-T03 — Food matcher v1
 **Depends on:** None
