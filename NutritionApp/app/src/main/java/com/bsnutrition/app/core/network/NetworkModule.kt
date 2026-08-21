@@ -91,6 +91,13 @@ object NetworkModule {
     fun provideGoalApiService(retrofit: Retrofit): com.bsnutrition.app.core.network.api.GoalApiService {
         return retrofit.create(com.bsnutrition.app.core.network.api.GoalApiService::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideFoodApiService(retrofit: Retrofit): com.bsnutrition.app.core.network.api.FoodApiService {
+        return retrofit.create(com.bsnutrition.app.core.network.api.FoodApiService::class.java)
+    }
 }
+
 
 

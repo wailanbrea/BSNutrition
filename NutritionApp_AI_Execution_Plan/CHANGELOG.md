@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH05-T02
+**Added**
+- Modelos de dominio de alimentos (`FoodSummary`, `FoodDetail`, `FoodPortion`, `FoodNutrient`, `NutritionCalculation`, `MacroBreakdown`).
+- DTOs y adaptadores de serialización `FoodDtos.kt` con mapeo a entidades de dominio.
+- Cliente Retrofit `FoodApiService` con endpoints de búsqueda, detalle, código de barras y cálculo por porciones.
+- Repositorio `FoodRepository` e implementación `FoodRepositoryImpl` con manejo estructurado de errores y corrutinas.
+- `SearchViewModel` con debouncing reactivo de 300ms, filtrado por categorías taxonómicas, carga de detalles y recálculo de porciones.
+- Pantalla Compose `SearchScreen` con buscador rápido, chips de categorías, listado optimizado con distintivo de comida típica `🇩🇴 RD` y resumen de macronutrientes.
+- Componente interactivo `FoodDetailSheet` (ModalBottomSheet) con selector de medidas caseras, ajuste dinámico de cantidad, desglose de micronutrientes y cálculo de calorías/macros en vivo.
+- Integración en flujo de registro en `AddScreen`.
+- Suite de pruebas unitarias en `FoodRepositoryTest.kt` y `SearchViewModelTest.kt`.
+
 ### 2026-08-21 — PH05-T01
 **Added**
 - Controlador REST `app/Http/Controllers/Api/V1/FoodController.php` con endpoints:

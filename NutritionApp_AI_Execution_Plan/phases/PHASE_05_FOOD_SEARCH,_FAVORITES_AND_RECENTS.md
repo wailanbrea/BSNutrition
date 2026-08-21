@@ -31,21 +31,21 @@ Crear búsqueda rápida y métodos de reuso.
 **Tests / verification:**
 - Tests en Pest (`FoodSearchApiTest.php`) con 53 tests pasando al 100% (664 aserciones)
 
-### [ ] PH05-T02 — Android search
+### [x] PH05-T02 — Android search
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Debounce
-- [ ] States
-- [ ] Results
-- [ ] Food detail
-- [ ] Portion
+- [x] Debounce (Debouncing reactivo de 300ms en `_queryFlow` para evitar saturación de peticiones)
+- [x] States (`SearchUiState`: Query, Categorías, Loading, Resultados, Detalle, Porciones, Cálculo)
+- [x] Results (Listado optimizado en `SearchScreen` con badge dominicano `🇩🇴 RD` y resumen de macros)
+- [x] Food detail (`FoodDetailSheet` modal con desglose nutricional, micronutrientes y acciones)
+- [x] Portion (Selector de medidas caseras y gramos con recálculo dinámico en tiempo real)
 
 **Acceptance criteria:**
-- Fast search without request storm
+- Búsqueda reactiva fluida, visualización de macros y selector interactivo de porciones sin tormentas de peticiones
 
 **Tests / verification:**
-- ViewModel/MockWebServer
+- Tests unitarios en Android (`FoodRepositoryTest.kt` y `SearchViewModelTest.kt`)
 
 ### [ ] PH05-T03 — Favorites
 **Depends on:** None

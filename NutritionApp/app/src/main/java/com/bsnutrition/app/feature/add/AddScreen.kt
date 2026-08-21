@@ -28,10 +28,28 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.bsnutrition.app.core.designsystem.component.BsnCard
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.foundation.clickable
+import com.bsnutrition.app.feature.search.SearchScreen
+
 @Composable
 fun AddScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onNavigateToSearch: (() -> Unit)? = null
 ) {
+    var isSearching by rememberSaveable { mutableStateOf(false) }
+
+    if (isSearching) {
+        SearchScreen(
+            modifier = modifier,
+            onScanBarcodeClick = { /* Barcode scan */ }
+        )
+        return
+    }
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -60,7 +78,20 @@ fun AddScreen(
         )
 
         addMethods.forEach { (title, subtitle, icon) ->
-            AddMethodCard(title = title, subtitle = subtitle, icon = icon)
+            AddMethodCard(
+                title = title,
+                subtitle = subtitle,
+                icon = icon,
+                onClick = {
+                    if (title == "Búsqueda en catálogo") {
+                        if (onNavigateToSearch != null) {
+                            onNavigateToSearch()
+                        } else {
+                            isSearching = true
+                        }
+                    }
+                }
+            )
         }
     }
 }
@@ -69,10 +100,16 @@ fun AddScreen(
 private fun AddMethodCard(
     title: String,
     subtitle: String,
-    icon: ImageVector
+    icon: ImageVector,
+    onClick: () -> Unit = {}
 ) {
-    BsnCard(modifier = Modifier.fillMaxWidth()) {
+    BsnCard(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onClick() }
+    ) {
         Row(
+
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
