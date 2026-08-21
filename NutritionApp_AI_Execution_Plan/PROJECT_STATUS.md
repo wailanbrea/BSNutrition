@@ -3,13 +3,13 @@
 ## Current state
 - Project status: IN PROGRESS
 - Current phase: Phase 04 — Nutrition Catalog and Engine
-- Current task: PH04-T05
+- Current task: PH04-T06
 - Current task status: `[ ]`
-- Last completed task: PH04-T04
+- Last completed task: PH04-T05
 - Last update: 2026-08-21
 
 ## Exact next action
-Abrir `phases/PHASE_04_NUTRITION_CATALOG_AND_ENGINE.md` y ejecutar `PH04-T05` (Open Food Facts adapter: Cliente HTTP e integración con Open Food Facts World API para escaneo y búsqueda por código de barras, mapeo a nutrientes canónicos, creación de marcas y almacenamiento local).
+Abrir `phases/PHASE_04_NUTRITION_CATALOG_AND_ENGINE.md` y ejecutar `PH04-T06` (Dominican dataset foundation: Seeder canónico de alimentos y preparaciones tradicionales dominicanas con variantes, alias criollos, porciones y boosting por locale `es_DO`).
 
 ## Active blockers
 None.
@@ -23,6 +23,7 @@ None.
 - detalles finales de deployment.
 
 ## Recently completed
+- PH04-T05 — Open Food Facts Adapter: Cliente `OpenFoodFactsService` para búsqueda y resolución de códigos de barras, mapeo de macronutrientes y micronutrientes, creación de marcas y porciones, y comando CLI `php artisan foods:import-off` con tests en `OpenFoodFactsServiceTest.php`.
 - PH04-T04 — USDA Adapter: Cliente `UsdaFoodDataService` para búsqueda y detalle en FoodData Central, mapeo de más de 30 IDs de nutrientes a códigos canónicos, importación a base de datos con porciones y comando CLI `php artisan foods:import-usda` con tests en `UsdaFoodDataServiceTest.php`.
 - PH04-T03 — Nutrition Calculation Service: Servicio `NutritionCalculatorService` con normalización por base (100g/ml), escalado por porciones y gramos libres, agregación de comidas y días completos, distribución porcentual de macros e inmutabilidad de snapshots históricos con tests en `NutritionCalculatorServiceTest.php`.
 - PH04-T02 — Nutrient Seed: Seeder de catálogo canónico `NutrientSeeder` con 33 nutrientes normalizados (macros, subtipos lipídicos, azúcares, minerales y vitaminas clave), `FoodCategorySeeder` con 12 categorías taxonómicas y `FoodSourceSeeder` con tests en `NutrientSeederTest.php`.

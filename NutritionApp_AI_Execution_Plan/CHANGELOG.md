@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH04-T05
+**Added**
+- Adaptador y cliente `app/Services/OpenFoodFactsService.php` para búsqueda, escaneo y resolución de códigos de barras (EAN-13, UPC-A) en Open Food Facts World Database.
+- Mapeo de macronutrientes y micronutrientes (`energy-kcal`, `proteins`, `carbohydrates`, `fat`, `fiber`, `sugars`, `sodium`, `calcium`, etc.) con conversión de unidades estándar.
+- Resolución de marcas en `food_brands` y porciones en `food_portions`.
+- Comando Artisan `php artisan foods:import-off {--barcode=} {--query=}`.
+- Suite de pruebas con `Http::fake()` en `tests/Feature/OpenFoodFactsServiceTest.php` (45 tests pasando al 100%).
+
 ### 2026-08-21 — PH04-T04
 **Added**
 - Adaptador y cliente USDA `app/Services/UsdaFoodDataService.php` para búsqueda y detalle de alimentos en USDA FoodData Central con caching y manejo de errores.

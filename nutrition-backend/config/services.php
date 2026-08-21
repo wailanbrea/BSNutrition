@@ -36,4 +36,9 @@ return [
         'base_url' => env('USDA_BASE_URL', 'https://api.nal.usda.gov/fdc/v1'),
     ],
 
+    'openfoodfacts' => [
+        'base_url' => env('OPENFOODFACTS_BASE_URL', 'https://world.openfoodfacts.org/api/v2'),
+        'user_agent' => env('OPENFOODFACTS_USER_AGENT', 'BSNutrition - Android - Version 1.0 - www.bsnutrition.com'),
+    ],
+
 ];

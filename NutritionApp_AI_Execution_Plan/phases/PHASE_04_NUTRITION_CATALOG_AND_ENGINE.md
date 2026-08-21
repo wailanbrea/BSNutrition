@@ -84,20 +84,20 @@ Crear esquema canónico, cálculo nutricional y adapters externos.
 **Tests / verification:**
 - Tests en Pest (`UsdaFoodDataServiceTest.php`) con 42 tests pasando al 100% (285 aserciones)
 
-### [ ] PH04-T05 — Open Food Facts adapter
+### [x] PH04-T05 — Open Food Facts adapter
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Barcode lookup
-- [ ] Nutrition mapping
-- [ ] Brand/image
-- [ ] Cache/source
+- [x] Barcode lookup (`OpenFoodFactsService.php` con búsqueda local previa e integración API v2)
+- [x] Nutrition mapping (Mapeo de `energy-kcal_100g`, `proteins_100g`, `carbohydrates_100g`, `fat_100g`, `sodium_100g`, etc. con conversión de gramos a miligramos)
+- [x] Brand/image (Resolución/creación automática de marcas en `food_brands`)
+- [x] Cache/source (`source = 'openfoodfacts'`, `external_source_id = barcode`, creación de `food_barcodes` y `food_portions`)
 
 **Acceptance criteria:**
-- External barcode becomes local canonical food
+- Los códigos de barras escaneados o buscados se importan y mapean a alimentos locales canónicos
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Pest (`OpenFoodFactsServiceTest.php`) con 45 tests pasando al 100% (304 aserciones)
 
 ### [ ] PH04-T06 — Dominican dataset foundation
 **Depends on:** None
