@@ -9,26 +9,26 @@ Agregar escaneo CameraX/ML Kit y lookup local/externo.
 - `04_DATABASE_DESIGN.md`
 
 ## Entry criteria
-- [ ] Catalog/search ready
+- [x] Catalog/search ready (Fases 04 y 05 completadas)
 
 ## Tasks
 
-### [ ] PH08-T01 — Barcode lookup API
+### [x] PH08-T01 — Barcode lookup API
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Local first
-- [ ] OFF fallback
-- [ ] Import/cache
-- [ ] Not found
-- [ ] Rate limit
+- [x] Local first (`Food::byBarcode($cleanBarcode)->first()`)
+- [x] OFF fallback (`OpenFoodFactsService::getByBarcode($cleanBarcode)`)
+- [x] Import/cache (Importación y persistencia automática en base de datos de productos OFF)
+- [x] Not found (Respuesta JSON 404 estructurada con código `NOT_FOUND`)
+- [x] Rate limit (Protección contra abusos con middleware `throttle:api`)
 
 **Acceptance criteria:**
-- Known local no external call
-- External cached
+- Productos locales no realizan llamadas externas; productos de Open Food Facts se importan y quedan en caché
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Pest (`FoodSearchApiTest.php` y `OpenFoodFactsServiceTest.php`)
+
 
 ### [ ] PH08-T02 — Android scanner
 **Depends on:** None

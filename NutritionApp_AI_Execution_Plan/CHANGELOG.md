@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH08-T01
+**Added**
+- Endpoint `GET /api/v1/foods/barcode/{barcode}` con lookup local en base de datos de alimentos.
+- Fallback automático e importación transparente de productos desde Open Food Facts mediante `OpenFoodFactsService`.
+- Creación y persistencia estructurada de marcas, nutrientes canónicos y porciones en la base de datos canónica.
+- Respuesta HTTP 404 estructurada con formato JSON estandarizado si el producto no existe en ninguna fuente.
+- Tests completos en `FoodSearchApiTest.php` y `OpenFoodFactsServiceTest.php`.
+
 ### 2026-08-21 — PH07-T05
 **Added**
 - Suite integral de pruebas E2E `OfflineSyncE2ETest.kt` cubriendo ciclo completo offline (creación, edición, eliminación de comidas y agua sin red).

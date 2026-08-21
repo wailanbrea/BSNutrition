@@ -3,13 +3,13 @@
 ## Current state
 - Project status: IN PROGRESS
 - Current phase: Phase 08 — Barcode
-- Current task: PH08-T01
+- Current task: PH08-T02
 - Current task status: `[ ]`
-- Last completed task: PH07-T05
+- Last completed task: PH08-T01
 - Last update: 2026-08-21
 
 ## Exact next action
-Abrir `phases/PHASE_08_BARCODE.md` y ejecutar `PH08-T01` (Barcode lookup API: Búsqueda local por código de barras `GET /api/v1/foods/barcode/{barcode}`, fallback a Open Food Facts con importación automática y caching en base de datos canónica, respuesta 404 estructurada si no existe y rate limiting).
+Abrir `phases/PHASE_08_BARCODE.md` y ejecutar `PH08-T02` (Android scanner: Implementación del escáner en Android usando CameraX y Google ML Kit Barcode Scanning con `BarcodeScanning`, `ImageAnalysis`, `PreviewView`, control de permisos en tiempo de ejecución, ciclo de vida Compose y debouncing de lectura).
 
 ## Active blockers
 None.
@@ -23,6 +23,7 @@ None.
 - detalles finales de deployment.
 
 ## Recently completed
+- PH08-T01 — Barcode lookup API: Endpoint `GET /api/v1/foods/barcode/{barcode}` con búsqueda local directa en base de datos canónica, fallback transparente a Open Food Facts (`OpenFoodFactsService`), importación y caching automático con marcas, porciones y nutrientes, respuesta 404 estructurada si no existe y tests en `FoodSearchApiTest.php` y `OpenFoodFactsServiceTest.php` (75 tests pasando al 100%).
 - PH07-T05 — Offline E2E: Suite integral de pruebas end-to-end (`OfflineSyncE2ETest.kt`) validando creación, edición, eliminación de comidas y agua sin conexión, retención en Room y en `SyncQueueDao`, drenado y reconciliación garantizada al reconectar y manejo tolerante a fallos de servidor.
 - **Fase 07 (Offline-First and Sync) completada al 100%**.
 - PH07-T04 — Idempotency/conflicts: Validación de idempotencia con `client_id` (UUID), versionado optimista, tombstones mediante soft deletes en Room y Eloquent, deduplicación de reintentos en `SyncQueueDao` y formalización de ADR-010 en `DECISIONS.md`.
@@ -39,12 +40,12 @@ None.
 - **Fase 05 (Food Search, Favorites and Recents) completada al 100%**.
 
 ## Files/modules changed in last task
-- `NutritionApp/`: test/java/com/bsnutrition/app/core/sync/OfflineSyncE2ETest.kt
-- `NutritionApp_AI_Execution_Plan/`: PROJECT_STATUS.md, CHANGELOG.md, phases/PHASE_07_OFFLINE-FIRST_AND_SYNC.md
+- `nutrition-backend/`: app/Http/Controllers/Api/V1/FoodController.php, tests/Feature/FoodSearchApiTest.php, tests/Feature/OpenFoodFactsServiceTest.php
+- `NutritionApp_AI_Execution_Plan/`: PROJECT_STATUS.md, CHANGELOG.md, phases/PHASE_08_BARCODE.md
 
 ## Tests from last task
 - `php ./vendor/bin/pest` -> 75 passed (802 assertions)
-- `OfflineSyncE2ETest` -> Full offline CRUD, simulated process restart, and online reconciliation passing
+
 
 
 ## Known issues
