@@ -188,4 +188,74 @@ class AiPhotoRepositoryImpl @Inject constructor(
             Result.Error(e, e.localizedMessage ?: "Error al registrar en el diario.")
         }
     }
+
+    override suspend fun parseMealText(
+        text: String,
+        locale: String,
+        mealType: String
+    ): Result<AiPhotoAnalysis> = withContext(Dispatchers.IO) {
+        try {
+            val response = apiService.parseMealText(
+                com.bsnutrition.app.core.network.dto.ParseTextRequest(
+                    text = text,
+                    locale = locale,
+                    mealType = mealType
+                )
+            )
+            if (response.isSuccessful && response.body() != null) {
+                val dto = response.body()!!.data
+                Result.Success(
+                    AiPhotoAnalysis(
+                        id = dto.id,
+                        status = dto.status,
+                        dishName = dto.dishName ?: "Registro de Texto / Voz",
+                        summary = dto.summary ?: text,
+                        confidenceScore = dto.confidenceScore ?: 0.95,
+                        provider = dto.provider ?: "text_nlp",
+                        totalCalories = dto.totals?.calories ?: 0,
+                        totalProteinG = dto.totals?.proteinG ?: 0.0,
+                        totalCarbsG = dto.totals?.carbsG ?: 0.0,
+                        totalFatG = dto.totals?.fatG ?: 0.0,
+                        items = dto.items.map { item ->
+                            AiPhotoItem(
+                                id = item.id,
+                                foodId = item.foodId,
+                                name = item.name,
+                                matchedName = item.matchedName,
+                                weightGrams = item.estimatedWeightGrams,
+                                portionDescription = item.portionDescription ?: "1 porción",
+                                preparationMethod = item.preparationMethod,
+                                confidence = item.confidence,
+                                calories = item.calories,
+                                proteinG = item.proteinG,
+                                carbsG = item.carbsG,
+                                fatG = item.fatG,
+                                candidates = item.candidates.map { c ->
+                                    FoodCandidate(
+                                        foodId = c.foodId,
+                                        canonicalName = c.canonicalName,
+                                        brandName = c.brandName,
+                                        score = c.score,
+                                        matchType = c.matchType,
+                                        calories100g = c.calories100g,
+                                        protein100g = c.protein100g,
+                                        carbs100g = c.carbs100g,
+                                        fat100g = c.fat100g
+                                    )
+                                }
+                            )
+                        }
+                    )
+                )
+            } else {
+                Result.Error(
+                    exception = Exception("Error al procesar el texto (${response.code()})"),
+                    code = response.code()
+                )
+            }
+        } catch (e: Exception) {
+            Result.Error(e, e.localizedMessage ?: "Error al procesar la comida.")
+        }
+    }
 }
+

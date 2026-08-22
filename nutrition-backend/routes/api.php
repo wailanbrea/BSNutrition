@@ -48,6 +48,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/ai/photo/analyses/{id}', [AiPhotoController::class, 'show'])->whereNumber('id')->name('api.v1.ai.photo.show');
     Route::post('/ai/photo/analyses/{id}/confirm', [AiPhotoController::class, 'confirm'])->whereNumber('id')->name('api.v1.ai.photo.confirm');
 
+    // AI Text & Voice Meal Logging
+    Route::post('/ai/text/parse', [\App\Http\Controllers\Api\V1\AiTextVoiceController::class, 'parseText'])->name('api.v1.ai.text.parse');
+    Route::post('/ai/text/confirm/{id}', [\App\Http\Controllers\Api\V1\AiTextVoiceController::class, 'confirm'])->whereNumber('id')->name('api.v1.ai.text.confirm');
+
+
     // Daily Diary & Meals Logging
     Route::get('/diary/{date}', [DiaryController::class, 'show'])->where('date', '\d{4}-\d{2}-\d{2}')->name('api.v1.diary.show');
     Route::post('/diary/{date}/entries', [DiaryController::class, 'addEntry'])->where('date', '\d{4}-\d{2}-\d{2}')->name('api.v1.diary.entries.add');

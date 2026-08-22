@@ -33,4 +33,10 @@ interface AiPhotoApiService {
         @Path("id") id: Long,
         @Body request: ConfirmPhotoAnalysisRequest
     ): Response<ConfirmPhotoAnalysisResponse>
+
+    @POST("ai/text/parse")
+    suspend fun parseMealText(
+        @Body request: com.bsnutrition.app.core.network.dto.ParseTextRequest
+    ): Response<AiPhotoAnalysisApiResponse>
 }
+

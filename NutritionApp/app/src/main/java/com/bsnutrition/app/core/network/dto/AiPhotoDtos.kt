@@ -94,3 +94,11 @@ data class ConfirmPhotoDataDto(
     @SerialName("analysis_id") val analysisId: Long,
     @SerialName("logged_entries_count") val loggedEntriesCount: Int
 )
+
+@Serializable
+data class ParseTextRequest(
+    @SerialName("text") val text: String,
+    @SerialName("locale") val locale: String? = "DO",
+    @SerialName("meal_type") val mealType: String? = "lunch"
+)
+

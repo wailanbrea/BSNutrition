@@ -8,61 +8,62 @@ Permitir quick logging en lenguaje natural reutilizando matching/review.
 - `05_API_CONTRACT.md`
 
 ## Entry criteria
-- [ ] AI gateway/matcher stable
+- [x] AI gateway/matcher stable
 
 ## Tasks
 
-### [ ] PH11-T01 — Meal text parser
+### [x] PH11-T01 — Meal text parser
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Schema
-- [ ] Quantity/unit
-- [ ] Matching
-- [ ] Confidence
-- [ ] Quota
+- [x] Schema (Estructura de respuesta unificada con `AiPhotoAnalysisDataDto`)
+- [x] Quantity/unit (Detección de unidades culinarias: taza, gramos, porción, unidades)
+- [x] Matching (Vinculación determinista con el catálogo canónico mediante `FoodMatchingService`)
+- [x] Confidence (Puntuación de certeza y preservación de candidatos alternativos)
+- [x] Quota (Estimación de tokens y coste en USD)
 
 **Acceptance criteria:**
-- Spanish sentence -> candidates
+- Oraciones en lenguaje natural en español -> Alimentos reconocidos con desglose nutricional
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Pest (`AiTextParserServiceTest.php`, `AiTextVoiceApiTest.php`)
 
-### [ ] PH11-T02 — Android text quick-add
+### [x] PH11-T02 — Android text quick-add
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Input
-- [ ] Submit
-- [ ] Reuse review
-- [ ] Confirm
+- [x] Input (Área de texto multilinea con chips de sugerencias rápidas)
+- [x] Submit (Envío al endpoint `POST /api/v1/ai/text/parse`)
+- [x] Reuse review (Reutilización de pantalla interactiva con controles deslizantes y cambio de candidatos)
+- [x] Confirm (Registro directo en el diario en `POST /api/v1/ai/text/confirm/{id}`)
 
 **Acceptance criteria:**
-- Text -> diary E2E
+- Flujo Texto -> Revisión -> Diario E2E completo
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Kotlin (`TextVoiceLoggingViewModelTest.kt`)
 
-### [ ] PH11-T03 — Voice path
+### [x] PH11-T03 — Voice path
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] ADR SpeechRecognizer/server transcription
-- [ ] Permissions
-- [ ] Transcript -> text parser
+- [x] ADR SpeechRecognizer/server transcription (Integración de Android `RecognizerIntent.ACTION_RECOGNIZE_SPEECH`)
+- [x] Permissions (Control de audio y captura de voz)
+- [x] Transcript -> text parser (Transcripción local redirigida automáticamente al pipeline de texto AI)
 
 **Acceptance criteria:**
-- Voice reuses same pipeline
+- El canal de voz reutiliza exactamente el mismo pipeline del backend y la misma UI de revisión
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Kotlin (`TextVoiceLoggingViewModelTest.kt`) y Pest (`AiTextVoiceApiTest.php`)
 
 ## Phase exit criteria
-- [ ] Text/voice complete
-- [ ] Status -> Phase 12
+- [x] Text/voice complete (Backend NLP + UI Compose con entrada de texto, dictado por voz y confirmación en diario)
+- [x] Status -> Phase 12
 
 ## Mandatory closeout
-- [ ] Actualizar `PROJECT_STATUS.md`
-- [ ] Actualizar `CHANGELOG.md`
-- [ ] Actualizar `DECISIONS.md` si hubo decisión permanente
-- [ ] No dejar tareas `[-]` sin checkpoint
+- [x] Actualizar `PROJECT_STATUS.md`
+- [x] Actualizar `CHANGELOG.md`
+- [x] Actualizar `DECISIONS.md` si hubo decisión permanente
+- [x] No dejar tareas `[-]` sin checkpoint
+

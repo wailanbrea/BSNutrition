@@ -36,6 +36,7 @@ import androidx.compose.foundation.clickable
 import com.bsnutrition.app.feature.photo.AiFoodPhotoScreen
 import com.bsnutrition.app.feature.scanner.BarcodeScannerScreen
 import com.bsnutrition.app.feature.search.SearchScreen
+import com.bsnutrition.app.feature.voice.TextVoiceLoggingScreen
 
 @Composable
 fun AddScreen(
@@ -45,6 +46,15 @@ fun AddScreen(
     var isSearching by rememberSaveable { mutableStateOf(false) }
     var isScanning by rememberSaveable { mutableStateOf(false) }
     var isTakingPhoto by rememberSaveable { mutableStateOf(false) }
+    var isLoggingVoiceText by rememberSaveable { mutableStateOf(false) }
+
+    if (isLoggingVoiceText) {
+        TextVoiceLoggingScreen(
+            onNavigateBack = { isLoggingVoiceText = false },
+            onFoodLogged = { isLoggingVoiceText = false }
+        )
+        return
+    }
 
     if (isTakingPhoto) {
         AiFoodPhotoScreen(
@@ -117,12 +127,16 @@ fun AddScreen(
                         "Foto con IA" -> {
                             isTakingPhoto = true
                         }
+                        "Dictado por voz", "Entrada manual" -> {
+                            isLoggingVoiceText = true
+                        }
                     }
                 }
             )
         }
     }
 }
+
 
 
 

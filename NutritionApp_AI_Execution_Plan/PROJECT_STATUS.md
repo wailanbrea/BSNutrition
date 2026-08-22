@@ -2,14 +2,14 @@
 
 ## Current state
 - Project status: IN PROGRESS
-- Current phase: Phase 11 — Text and Voice
-- Current task: PH11-T01
+- Current phase: Phase 12 — Health Connect
+- Current task: PH12-T01
 - Current task status: `[ ]`
-- Last completed task: PH10-T03
+- Last completed task: PH11-T03
 - Last update: 2026-08-21
 
 ## Exact next action
-Abrir `phases/PHASE_11_TEXT_AND_VOICE.md` y ejecutar `PH11-T01` (Meal text parser: Pipeline backend con NLP/IA para descomponer oraciones en español e ingredientes, cantidades/unidades, matching determinista con el catálogo y scoring de confianza).
+Abrir `phases/PHASE_12_HEALTH_CONNECT.md` y ejecutar `PH12-T01` (Permissions/availability: Integración de Health Connect SDK en Android, chequeo de disponibilidad, gestor de permisos granulares y pantalla de configuración de sincronización).
 
 ## Active blockers
 None.
@@ -23,6 +23,10 @@ None.
 - detalles finales de deployment.
 
 ## Recently completed
+- PH11-T03 — Voice path: Integración de dictado por voz mediante `RecognizerIntent.ACTION_RECOGNIZE_SPEECH`, transcripción local automática y reutilización directa del pipeline de revisión con tests en `TextVoiceLoggingViewModelTest.kt`.
+- PH11-T02 — Android text quick-add: Pantalla `TextVoiceLoggingScreen`, chips de sugerencias rápidas, envío a `/api/v1/ai/text/parse` y confirmación de comidas en bloque en el diario nutricional con tests en `TextVoiceLoggingViewModelTest.kt`.
+- PH11-T01 — Meal text parser: Servicio `AiTextParserService` en Laravel con extracción de porciones, cantidades y métodos de cocción en español, matching determinista contra catálogo canónico dominicano e internacional, y controlador `AiTextVoiceController` con tests en `AiTextParserServiceTest.php` y `AiTextVoiceApiTest.php` (4 tests pasando).
+- **Fase 11 (Text and Voice) completada al 100%**.
 - PH10-T03 — Confirm/create product: Formulario `EditAndConfirmProductView`, integración con código de barras como fallback inteligente, endpoint `POST /api/v1/foods/from-label` con persistencia canónica completa en catálogo y diario, con tests en `NutritionLabelOcrApiTest.php` y `NutritionLabelScanViewModelTest.kt`.
 - PH10-T02 — Structured label parser: Servicio `NutritionLabelParserService.php` con extracción regex heurística bilingüe de tamaño de porción, calorías y macronutrientes por porción y por 100g sin inventar valores, con tests en `NutritionLabelParserServiceTest.php` (5/5 tests pasando).
 - PH10-T01 — Label capture/OCR: Retícula guía rectangular en `NutritionLabelScanScreen.kt`, analyzer `NutritionLabelAnalyzer` con Google ML Kit Text Recognition (`play-services-mlkit-text-recognition`), extracción de texto crudo y ViewModel `NutritionLabelScanViewModel.kt`.
@@ -43,6 +47,7 @@ None.
 - **Fase 07 (Offline-First and Sync) completada al 100%**.
 - PH07-T04 — Idempotency/conflicts: Validación de idempotencia con `client_id` (UUID), versionado optimista, tombstones mediante soft deletes en Room y Eloquent, deduplicación de reintentos en `SyncQueueDao` y formalización de ADR-010 en `DECISIONS.md`.
 - PH07-T03 — Sync worker: `DiarySyncWorker` con HiltWorker, drenado de cola de mutaciones `SyncQueueDao`, restricciones de red `NetworkType.CONNECTED`, política de backoff exponencial, descarte seguro de errores cliente permanentes y `SyncManager` para sincronización periódica y bajo demanda con tests en `DiarySyncWorkerTest.kt`.
+
 - PH07-T02 — Local-first repositories: Adaptación de `DiaryRepositoryImpl` para persistencia offline-first con Room, lectura reactiva mediante `Flow` (`observeDiaryDay`, `observeWaterLogs`, `observeTotalWater`), encolado y procesamiento de mutaciones (`SyncQueueEntity`) y reconciliación transparente en segundo plano con tests en `DiaryRepositoryTest.kt`.
 - PH07-T01 — Room core schema: Entidades Room completas (`DiaryEntity`, `MealEntity`, `MealEntryEntity`, `MealWithEntries`, `DiaryWithMeals`, `WaterLogEntity`, `WeightLogEntity`, `FoodCacheEntity`, `SyncQueueEntity`), DAOs correspondientes (`DiaryDao`, `MealEntryDao`, `WaterLogDao`, `WeightLogDao`, `FoodCacheDao`, `SyncQueueDao`), índices compuestos para búsquedas offline, actualización a versión 2 de `NutritionDatabase` y registro en `DatabaseModule` con tests en `RoomSchemaDaoTest.kt`.
 - PH06-T05 — History navigation: Navegación de historial con fechas relativas (Hoy, Ayer, Mañana) y fechas arbitrarias, modal `DiaryDatePickerModal` con `DatePickerDialog` de Material 3, soporte y renderizado limpio de días vacíos y tests en `DiaryViewModelTest.kt`.

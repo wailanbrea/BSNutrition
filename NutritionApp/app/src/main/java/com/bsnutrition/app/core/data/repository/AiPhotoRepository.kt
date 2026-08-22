@@ -20,7 +20,14 @@ interface AiPhotoRepository {
         mealType: String,
         items: List<ConfirmedPhotoItem>
     ): Result<Int>
+
+    suspend fun parseMealText(
+        text: String,
+        locale: String = "DO",
+        mealType: String = "lunch"
+    ): Result<AiPhotoAnalysis>
 }
+
 
 data class ConfirmedPhotoItem(
     val name: String,

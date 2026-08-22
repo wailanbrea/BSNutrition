@@ -2,6 +2,26 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH11-T03
+**Added**
+- Integración de dictado por voz local en Android con `RecognizerIntent.ACTION_RECOGNIZE_SPEECH` y español dominicano/latinoamericano.
+- Pipeline unificado donde la transcripción por voz alimenta de forma transparente al parser de lenguaje natural y UI interactiva de revisión.
+- Tests unitarios en `TextVoiceLoggingViewModelTest.kt`.
+- **Fase 11 (Text and Voice) completada al 100%**.
+
+### 2026-08-21 — PH11-T02
+**Added**
+- Pantalla Compose `TextVoiceLoggingScreen` con campo de texto multilinea, botón de micrófono y chips de sugerencias rápidas ("Mangú con 2 huevos y salami", "Arroz con habichuelas y pollo guisado", etc.).
+- Vista interactiva de revisión con controles deslizantes de peso en gramos, selección de candidatos alternativos y confirmación en bloque.
+- Conexión de "Dictado por voz" y "Entrada manual" en `AddScreen`.
+
+### 2026-08-21 — PH11-T01
+**Added**
+- Servicio `AiTextParserService` en Laravel para parsing inteligente de texto de comidas en español, desglosando alimentos, porciones, unidades y métodos de cocción.
+- Vinculación determinista con el catálogo canónico mediante `FoodMatchingService` y cálculo de macronutrientes.
+- Endpoints `POST /api/v1/ai/text/parse` y `POST /api/v1/ai/text/confirm/{id}`.
+- Suite de pruebas en Pest (`AiTextParserServiceTest.php`, `AiTextVoiceApiTest.php`, 4 tests pasando).
+
 ### 2026-08-21 — PH10-T03
 **Added**
 - Formulario de edición y confirmación `EditAndConfirmProductView` en Android con cálculo automático y validación.
