@@ -103,7 +103,14 @@ object NetworkModule {
     fun provideDiaryApiService(retrofit: Retrofit): com.bsnutrition.app.core.network.api.DiaryApiService {
         return retrofit.create(com.bsnutrition.app.core.network.api.DiaryApiService::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideAiPhotoApiService(retrofit: Retrofit): com.bsnutrition.app.core.network.api.AiPhotoApiService {
+        return retrofit.create(com.bsnutrition.app.core.network.api.AiPhotoApiService::class.java)
+    }
 }
+
 
 
 

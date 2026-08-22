@@ -2,14 +2,14 @@
 
 ## Current state
 - Project status: IN PROGRESS
-- Current phase: Phase 09 — AI Food Photo
-- Current task: PH09-T05
+- Current phase: Phase 10 — Nutrition Label OCR
+- Current task: PH10-T01
 - Current task status: `[ ]`
-- Last completed task: PH09-T04
+- Last completed task: PH09-T07
 - Last update: 2026-08-21
 
 ## Exact next action
-Abrir `phases/PHASE_09_AI_FOOD_PHOTO.md` y ejecutar `PH09-T05` y `PH09-T06` (Android capture/upload & Review/correction UI: Pantalla `AiFoodPhotoCameraScreen.kt` con captura CameraX, selección de galería, compresión/redimensionado inteligente, `AiPhotoRepository`, `AiFoodPhotoViewModel` y `AiFoodPhotoReviewScreen.kt` para ajuste fino de porciones y confirmación en el diario).
+Abrir `phases/PHASE_10_NUTRITION_LABEL_OCR.md` y ejecutar `PH10-T01` (Label capture/OCR: Guía visual para captura de tabla nutricional, recorte/crop, ML Kit Text Recognition en Android y extracción de texto crudo).
 
 ## Active blockers
 None.
@@ -23,6 +23,10 @@ None.
 - detalles finales de deployment.
 
 ## Recently completed
+- PH09-T07 — Feedback/E2E: Flujo integral de revisión interactiva de alimentos identificados con ajuste fino de peso en gramos, selección de candidatos alternativos y confirmación directa en el diario con tests en `AiFoodPhotoViewModelTest.kt`.
+- PH09-T06 — Review/correction UI: Pantalla Jetpack Compose `AiFoodPhotoScreen` con tarjetas interactivas de ingredientes, selector de candidatos (`FilterChip`), control deslizante de peso y recálculo instantáneo de macronutrientes.
+- PH09-T05 — Android capture/upload: Captura de cámara, selector de galería, compresión/redimensionado inteligente (<800KB, max 1600px), DTOs `AiPhotoDtos`, `AiPhotoApiService` y `AiPhotoRepositoryImpl`.
+- **Fase 09 (AI Food Photo) completada al 100%**.
 - PH09-T04 — Analysis orchestration: Migración y modelos `AiPhotoAnalysis` y `AiPhotoAnalysisItem`, servicio orquestador `FoodAnalysisService`, controlador `AiPhotoController` con endpoints `POST /api/v1/ai/photo/analyze`, `GET /api/v1/ai/photo/analyses/{id}` y `POST /api/v1/ai/photo/analyses/{id}/confirm` para registro directo en diario con tests en `AiPhotoApiTest.php` (93 tests pasando al 100%).
 - PH09-T03 — Food matcher v1: Servicio `FoodMatchingService.php` y DTO `FoodMatchCandidate` para normalización de texto, matching de alias dominicanos y cocina criolla, scoring léxico y de tokens con tests en `FoodMatchingServiceTest.php` (5 tests pasando).
 - PH09-T02 — AI provider abstraction: Interfaz `AiVisionProviderInterface`, implementaciones `OpenAiVisionProvider` (con esquema JSON estructurado y soporte gastronómico dominicano) y `MockVisionProvider`, y `AiVisionManager` para resolución dinámica de drivers con tests en `AiVisionProviderTest.php` (4 tests pasando).
@@ -47,11 +51,13 @@ None.
 - **Fase 05 (Food Search, Favorites and Recents) completada al 100%**.
 
 ## Files/modules changed in last task
-- `nutrition-backend/`: database/migrations/2026_08_21_240000_create_ai_photo_analyses_table.php, app/Models/AiPhotoAnalysis.php, app/Models/AiPhotoAnalysisItem.php, app/Services/FoodAnalysisService.php, app/Http/Controllers/Api/V1/AiPhotoController.php, routes/api.php, tests/Feature/AiPhotoApiTest.php, app/Models/Food.php
+- `NutritionApp/`: core/network/dto/AiPhotoDtos.kt, core/network/api/AiPhotoApiService.kt, core/model/AiPhotoModels.kt, core/data/repository/AiPhotoRepository.kt, core/data/repository/AiPhotoRepositoryImpl.kt, core/network/NetworkModule.kt, core/data/di/DataModule.kt, feature/photo/AiFoodPhotoViewModel.kt, feature/photo/AiFoodPhotoScreen.kt, feature/add/AddScreen.kt, test/java/com/bsnutrition/app/feature/photo/AiFoodPhotoViewModelTest.kt
 - `NutritionApp_AI_Execution_Plan/`: PROJECT_STATUS.md, CHANGELOG.md, phases/PHASE_09_AI_FOOD_PHOTO.md
 
 ## Tests from last task
+- `AiFoodPhotoViewModelTest` -> Review state calculation, weight adjustment, candidate switching, item removal, and diary confirmation verified
 - `php ./vendor/bin/pest` -> 93 passed (928 assertions)
+
 
 
 

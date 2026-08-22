@@ -33,6 +33,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.foundation.clickable
+import com.bsnutrition.app.feature.photo.AiFoodPhotoScreen
 import com.bsnutrition.app.feature.scanner.BarcodeScannerScreen
 import com.bsnutrition.app.feature.search.SearchScreen
 
@@ -43,6 +44,15 @@ fun AddScreen(
 ) {
     var isSearching by rememberSaveable { mutableStateOf(false) }
     var isScanning by rememberSaveable { mutableStateOf(false) }
+    var isTakingPhoto by rememberSaveable { mutableStateOf(false) }
+
+    if (isTakingPhoto) {
+        AiFoodPhotoScreen(
+            onNavigateBack = { isTakingPhoto = false },
+            onFoodLogged = { isTakingPhoto = false }
+        )
+        return
+    }
 
     if (isScanning) {
         BarcodeScannerScreen(
@@ -104,12 +114,16 @@ fun AddScreen(
                         "Escáner de código de barras" -> {
                             isScanning = true
                         }
+                        "Foto con IA" -> {
+                            isTakingPhoto = true
+                        }
                     }
                 }
             )
         }
     }
 }
+
 
 
 @Composable

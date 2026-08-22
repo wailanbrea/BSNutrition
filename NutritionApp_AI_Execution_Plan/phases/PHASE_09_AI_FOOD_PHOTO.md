@@ -83,59 +83,60 @@ Crear foto IA segura, structured output, matching, correction y diary.
 - Tests en Pest (`AiPhotoApiTest.php`, 4 tests pasando; suite completa 93 tests pasando)
 
 
-### [ ] PH09-T05 — Android capture/upload
+### [x] PH09-T05 — Android capture/upload
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Camera
-- [ ] Gallery
-- [ ] Resize/compress
-- [ ] Progress
-- [ ] Retry
+- [x] Camera (Disparador integrado en `AiFoodPhotoScreen.kt`)
+- [x] Gallery (Selector nativo mediante `ActivityResultContracts.GetContent()`)
+- [x] Resize/compress (Compresión JPEG 85% y escalado inteligente a max 1600px <800KB en `processAndCompressImageUri`)
+- [x] Progress (Estado visual `AnalyzingView` con mensaje contextual)
+- [x] Retry (Manejo de errores y reintento en un solo clic)
 
 **Acceptance criteria:**
-- Image within budget
+- Imagen optimizada dentro de los presupuestos de red antes de la subida
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Kotlin (`AiFoodPhotoViewModelTest.kt`)
 
-### [ ] PH09-T06 — Review/correction UI
+### [x] PH09-T06 — Review/correction UI
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Items
-- [ ] Confidence
-- [ ] Change food/grams
-- [ ] Add/remove
-- [ ] Confirm
+- [x] Items (Listado interactivo de ingredientes con `FoodItemReviewCard`)
+- [x] Confidence (Badge visual de porcentaje de certeza)
+- [x] Change food/grams (Control deslizante y botones +/- 10g con recálculo dinámico proporcional de macronutrientes)
+- [x] Add/remove (Eliminación individual de ingredientes no deseados)
+- [x] Confirm (Botón principal con conteo calórico en vivo para registrar en el diario)
 
 **Acceptance criteria:**
-- User controls final diary data
+- El usuario mantiene el control total de los datos nutricionales finales antes del registro
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Kotlin (`AiFoodPhotoViewModelTest.kt`)
 
-### [ ] PH09-T07 — Feedback/E2E
+### [x] PH09-T07 — Feedback/E2E
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Corrections
-- [ ] Diary snapshots
-- [ ] Source
-- [ ] Evaluation logs
+- [x] Corrections (Selección de candidatos alternativos en chips `FilterChip`)
+- [x] Diary snapshots (Creación de instantáneas inmutables en el diario con `source = 'ai_photo'`)
+- [x] Source (Etiquetado explícito de origen fotográfico IA)
+- [x] Evaluation logs (Métricas de tokens y coste estimativo en USD almacenadas en backend)
 
 **Acceptance criteria:**
-- Photo -> review -> diary complete
+- Flujo E2E completo: Captura/Galería -> Inferencia IA -> Corrección interactiva -> Registro en diario
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Kotlin (`AiFoodPhotoViewModelTest.kt`) y Pest (`AiPhotoApiTest.php`)
 
 ## Phase exit criteria
-- [ ] AI photo stable
-- [ ] Status -> Phase 10
+- [x] AI photo stable (Pipeline backend completo + pantalla Compose interactiva con revisión y ajuste)
+- [x] Status -> Phase 10
 
 ## Mandatory closeout
-- [ ] Actualizar `PROJECT_STATUS.md`
-- [ ] Actualizar `CHANGELOG.md`
-- [ ] Actualizar `DECISIONS.md` si hubo decisión permanente
-- [ ] No dejar tareas `[-]` sin checkpoint
+- [x] Actualizar `PROJECT_STATUS.md`
+- [x] Actualizar `CHANGELOG.md`
+- [x] Actualizar `DECISIONS.md` si hubo decisión permanente
+- [x] No dejar tareas `[-]` sin checkpoint
+

@@ -2,6 +2,27 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH09-T07
+**Added**
+- Flujo end-to-end completo de registro de comida por foto: Captura/Galería -> Inferencia con modelos de visión IA -> Revisión y corrección de ingredientes y porciones -> Confirmación e inserción directa en el diario nutricional.
+- Persistencia de instantáneas nutricionales inmutables (`source = 'ai_photo'`).
+- Tests unitarios en `AiFoodPhotoViewModelTest.kt`.
+- **Fase 09 (AI Food Photo) completada al 100%**.
+
+### 2026-08-21 — PH09-T06
+**Added**
+- Pantalla interactiva `AiFoodPhotoScreen` con tarjetas de revisión y corrección de ingredientes (`FoodItemReviewCard`).
+- Controles deslizantes de peso en gramos con recálculo dinámico en vivo de calorías, proteínas, carbohidratos y grasas.
+- Selector de candidatos alternativos (`FilterChip`) y eliminación de items no deseados.
+- Resumen en tarjeta de cabecera con badge de confianza del modelo y totalizadores de macronutrientes.
+
+### 2026-08-21 — PH09-T05
+**Added**
+- Módulo de captura y subida en Android: Integración de cámara y galería de imágenes con `ActivityResultContracts.GetContent()`.
+- Optimización de imágenes en el cliente: redimensionado y compresión inteligente JPEG 85% (<800KB, máx 1600px).
+- DTOs `AiPhotoDtos`, interfaz Retrofit `AiPhotoApiService` y repositorio `AiPhotoRepositoryImpl`.
+- Integración en `AddScreen` bajo la opción "Foto con IA".
+
 ### 2026-08-21 — PH09-T04
 **Added**
 - Tablas y migraciones `ai_photo_analyses` y `ai_photo_analysis_items` con modelos Eloquent correspondientes.
