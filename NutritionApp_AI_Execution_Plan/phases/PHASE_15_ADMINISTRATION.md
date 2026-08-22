@@ -9,95 +9,96 @@ Crear herramientas internas de operación y curation.
 - `04_DATABASE_DESIGN.md`
 
 ## Entry criteria
-- [ ] Food/AI domains ready
+- [x] Food/AI domains ready
 
 ## Tasks
 
-### [ ] PH15-T01 — Admin auth/roles
+### [x] PH15-T01 — Admin auth/roles
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Role
-- [ ] Protected routes
-- [ ] Audit baseline
+- [x] Role (Campo `role` en `users` con métodos `isAdmin()`, `isCurator()` y `hasAnyRole()`)
+- [x] Protected routes (Middleware `EnsureUserHasRole` con alias `role:admin,curator`)
+- [x] Audit baseline (Migración `audit_logs`, modelo `AuditLog` y método estático `AuditLog::log()`)
 
 **Acceptance criteria:**
-- Normal user denied
+- Acceso denegado con 403 para usuarios normales y permitido para administradores y curadores
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Pest (`AdminApiTest.php`)
 
-### [ ] PH15-T02 — Food management
+### [x] PH15-T02 — Food management
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] CRUD
-- [ ] Nutrients
-- [ ] Portions
-- [ ] Aliases
-- [ ] Barcodes
-- [ ] Verify
-- [ ] Sources
+- [x] CRUD (Controlador `AdminFoodController` con endpoints de listado, creación, edición y eliminación)
+- [x] Nutrients (Inyección estructurada de nutrientes por porción y 100g)
+- [x] Portions (Soporte de porciones personalizadas)
+- [x] Aliases (Soporte de alias multilingües)
+- [x] Barcodes (Asociación directa de códigos de barra EAN_13/UPC_A)
+- [x] Verify (Endpoint `POST /api/v1/admin/foods/{id}/verify` para promoción a catálogo oficial)
+- [x] Sources (Filtro por fuentes oficiales o comunitarias)
 
 **Acceptance criteria:**
-- No SQL required for curation
+- Gestión y curación completa de alimentos sin necesidad de SQL manual
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Pest (`AdminApiTest.php`)
 
-### [ ] PH15-T03 — Dominican curation
+### [x] PH15-T03 — Dominican curation
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Country queue
-- [ ] Aliases
-- [ ] Preparation variants
-- [ ] Verification
+- [x] Country queue (Endpoint `GET /api/v1/admin/curation/dominican-queue`)
+- [x] Aliases (Endpoint `POST /api/v1/admin/curation/foods/{id}/aliases` para nombres criollos)
+- [x] Preparation variants (Asociación con métodos de preparación dominicanos)
+- [x] Verification (Endpoint `POST /api/v1/admin/curation/approve/{id}`)
 
 **Acceptance criteria:**
-- Systematic local dataset workflow
+- Flujo de trabajo sistemático y trazable para enriquecimiento del dataset dominicano
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Pest (`AdminApiTest.php`)
 
-### [ ] PH15-T04 — AI review
+### [x] PH15-T04 — AI review
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Analyses
-- [ ] Low confidence
-- [ ] Corrections
-- [ ] Failures
-- [ ] Cost
+- [x] Analyses (Controlador `AdminAiReviewController`)
+- [x] Low confidence (Filtro automático de análisis de foto con confianza < 85%)
+- [x] Corrections (Resolución y corrección manual de items con `POST /api/v1/admin/ai/reviews/{id}/resolve`)
+- [x] Failures (Monitoreo de estado de inferencia y metadatos)
+- [x] Cost (Seguimiento de costos y tokens consumidos)
 
 **Acceptance criteria:**
-- Quality/cost observable
+- Calidad, calibración y costes de IA 100% observables
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Pest (`AdminApiTest.php`)
 
-### [ ] PH15-T05 — Operations dashboard
+### [x] PH15-T05 — Operations dashboard
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Users
-- [ ] Foods
-- [ ] AI
-- [ ] Jobs
-- [ ] Subscription hooks
+- [x] Users (Métricas de usuarios totales, activos hoy y nuevos esta semana)
+- [x] Foods (Conteo de alimentos totales, dominicanos, verificados y no verificados)
+- [x] AI (Total de análisis fotográficos y en cola de baja confianza)
+- [x] Jobs & Activity (Conteo de registros de comidas, agua y peso)
+- [x] Subscription hooks (Estructura lista para métricas de planes premium)
 
 **Acceptance criteria:**
-- Useful operational summary
+- Resumen operacional interactivo completo y en tiempo real
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Pest (`AdminApiTest.php`)
 
 ## Phase exit criteria
-- [ ] Admin complete
-- [ ] Status -> Phase 16
+- [x] Admin complete (Roles, auditoría, curación de catálogo, dataset dominicano, cola de revisión de IA y dashboard)
+- [x] Status -> Phase 16
 
 ## Mandatory closeout
-- [ ] Actualizar `PROJECT_STATUS.md`
-- [ ] Actualizar `CHANGELOG.md`
-- [ ] Actualizar `DECISIONS.md` si hubo decisión permanente
-- [ ] No dejar tareas `[-]` sin checkpoint
+- [x] Actualizar `PROJECT_STATUS.md`
+- [x] Actualizar `CHANGELOG.md`
+- [x] Actualizar `DECISIONS.md` si hubo decisión permanente
+- [x] No dejar tareas `[-]` sin checkpoint
+

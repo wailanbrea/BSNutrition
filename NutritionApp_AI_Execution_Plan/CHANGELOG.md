@@ -2,6 +2,37 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH15-T05
+**Added**
+- Endpoint `GET /api/v1/admin/dashboard/stats` para monitoreo en vivo de usuarios, salud del catálogo, operaciones de IA, volumen del diario y auditorías recientes.
+- Tests en Pest (`AdminApiTest.php`).
+- **Fase 15 (Administration) completada al 100%**.
+
+### 2026-08-21 — PH15-T04
+**Added**
+- Controlador `AdminAiReviewController` con endpoints `GET /api/v1/admin/ai/review-queue`, `GET /api/v1/admin/ai/reviews/{id}` y `POST /api/v1/admin/ai/reviews/{id}/resolve`.
+- Filtro inteligente de fotos con confianza menor al 85% y resolución manual con registro de auditoría.
+- Tests en Pest (`AdminApiTest.php`).
+
+### 2026-08-21 — PH15-T03
+**Added**
+- Controlador `AdminDominicanCurationController` con endpoints `GET /api/v1/admin/curation/dominican-queue`, `POST /api/v1/admin/curation/approve/{id}` y `POST /api/v1/admin/curation/foods/{id}/aliases`.
+- Flujo sistemático de enriquecimiento y aprobación del catálogo criollo dominicano.
+- Tests en Pest (`AdminApiTest.php`).
+
+### 2026-08-21 — PH15-T02
+**Added**
+- Controlador `AdminFoodController` con CRUD completo de alimentos, nutrientes, porciones, alias, códigos de barra y endpoint de verificación.
+- Inyección de nutrientes estandarizada por porción y por 100g.
+- Tests en Pest (`AdminApiTest.php`).
+
+### 2026-08-21 — PH15-T01
+**Added**
+- Middleware `EnsureUserHasRole` con protección por roles (`role:admin`, `role:curator`).
+- Migración `audit_logs` y modelo `AuditLog` para registro inmutable de auditoría con IP, User Agent y deltas de cambios.
+- Métodos de rol en `User`: `isAdmin()`, `isCurator()`, `hasAnyRole()`.
+- Tests en Pest (`AdminApiTest.php`).
+
 ### 2026-08-21 — PH14-T03
 **Added**
 - Endpoint `POST /api/v1/recipes/{id}/log-to-diary` para registro instantáneo de porciones de recetas en el diario nutricional con snapshot inmutable.

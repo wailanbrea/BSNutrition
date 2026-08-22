@@ -24,7 +24,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -85,4 +87,20 @@ class User extends Authenticatable
     {
         return $this->hasMany(WaterLog::class);
     }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isCurator(): bool
+    {
+        return in_array($this->role, ['admin', 'curator']);
+    }
+
+    public function hasAnyRole(array $roles): bool
+    {
+        return in_array($this->role, $roles);
+    }
 }
+

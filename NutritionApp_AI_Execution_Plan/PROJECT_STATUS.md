@@ -2,14 +2,14 @@
 
 ## Current state
 - Project status: IN PROGRESS
-- Current phase: Phase 15 — Administration
-- Current task: PH15-T01
+- Current phase: Phase 16 — Billing and Premium
+- Current task: PH16-T01
 - Current task status: `[ ]`
-- Last completed task: PH14-T03
+- Last completed task: PH15-T05
 - Last update: 2026-08-21
 
 ## Exact next action
-Abrir `phases/PHASE_15_ADMINISTRATION.md` y ejecutar `PH15-T01` (Admin auth/roles: Middleware de autorización `role:admin`, auditoría de cambios en catálogo y endpoints de administración protegidos con tests).
+Abrir `phases/PHASE_16_BILLING_AND_PREMIUM.md` y ejecutar `PH16-T01` (Product/entitlement ADR: Formalizar ADR-012 en `DECISIONS.md`, esquema de suscripciones, cuotas atómicas de inferencia IA en backend y verificación de compras de Google Play Billing).
 
 ## Active blockers
 None.
@@ -23,10 +23,17 @@ None.
 - detalles finales de deployment.
 
 ## Recently completed
+- PH15-T05 — Operations dashboard: Endpoint `GET /api/v1/admin/dashboard/stats` con métricas operacionales de usuarios, catálogo, operaciones IA, actividad del diario y trazabilidad de logs administrativos con tests en `AdminApiTest.php`.
+- PH15-T04 — AI review: Cola de revisión de análisis fotográficos con baja confianza (<85%), endpoint `GET /api/v1/admin/ai/review-queue` y resolución manual de matches con tests en `AdminApiTest.php`.
+- PH15-T03 — Dominican curation: Cola de curación del dataset dominicano `GET /api/v1/admin/curation/dominican-queue`, aprobación formal y adición de alias criollos con tests en `AdminApiTest.php`.
+- PH15-T02 — Food management: Controlador `AdminFoodController` con CRUD completo, inyección de nutrientes, alias, códigos de barra y verificación de alimentos con tests en `AdminApiTest.php`.
+- PH15-T01 — Admin auth/roles: Middleware `EnsureUserHasRole` (`role:admin,curator`), campo `role` en `users`, modelo `AuditLog` con auditoría automática de mutaciones administrativas y tests en `AdminApiTest.php`.
+- **Fase 15 (Administration) completada al 100%**.
 - PH14-T03 — Recipe to diary: Registro directo de porciones de recetas en el diario del usuario con snapshot nutricional inmutable mediante `POST /api/v1/recipes/{id}/log-to-diary` y diálogo Compose `LogRecipeDialog` con tests en `RecipeApiTest.php` y `RecipeViewModelTest.kt`.
 - PH14-T02 — Recipe CRUD: Endpoints REST `GET /api/v1/recipes`, `POST /api/v1/recipes`, `GET /api/v1/recipes/{id}`, `PUT /api/v1/recipes/{id}`, `DELETE /api/v1/recipes/{id}`, y pantallas Jetpack Compose `RecipeListScreen`, `RecipeDetailScreen`, `RecipeCreateScreen` con tests en `RecipeApiTest.php` y `RecipeRepositoryTest.kt`.
 - PH14-T01 — Recipe schema/calculation: Migraciones `recipes`, `recipe_ingredients`, `recipe_steps`, modelos Eloquent con relaciones, y servicio `RecipeCalculationService.php` para cálculo exacto de rendimiento total y desglose por porción con tests en `RecipeCalculationServiceTest.php` (5/5 tests pasando).
 - **Fase 14 (Recipes) completada al 100%**.
+
 - PH13-T04 — Progress UI: Pantalla Jetpack Compose `ProgressScreen` con widgets interactivos de consumo de agua con botones rápidos (+250ml a +1L), tarjeta de control y registro de peso, y visualización de macros y consistencia con tests en `ProgressViewModelTest.kt`.
 - PH13-T03 — Statistics services: Servicio `StatisticsService.php` y controlador `StatisticsController.php` con agregación dinámica de 7d, 30d, 90d, tasa de adherencia calórica, distribución porcentual de macros y tests en `StatisticsApiTest.php`.
 - PH13-T02 — Weight tracking: Migración `weight_logs`, modelo `WeightLog`, controlador `WeightTrackingController` con conversión a libras y repositorio local-first `WeightRepositoryImpl` con tests en `WeightTrackingApiTest.php` y `WeightRepositoryTest.kt`.

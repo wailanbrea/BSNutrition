@@ -85,7 +85,32 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/recipes/{id}', [\App\Http\Controllers\Api\V1\RecipeController::class, 'update'])->whereNumber('id')->name('api.v1.recipes.update');
     Route::delete('/recipes/{id}', [\App\Http\Controllers\Api\V1\RecipeController::class, 'destroy'])->whereNumber('id')->name('api.v1.recipes.destroy');
     Route::post('/recipes/{id}/log-to-diary', [\App\Http\Controllers\Api\V1\RecipeController::class, 'logToDiary'])->whereNumber('id')->name('api.v1.recipes.log_to_diary');
+
+    // Administration & Curation API (Role: admin, curator)
+    Route::prefix('admin')->middleware(['role:admin,curator'])->group(function () {
+        // Dashboard Stats
+        Route::get('/dashboard/stats', [\App\Http\Controllers\Api\V1\Admin\AdminDashboardController::class, 'stats'])->name('api.v1.admin.dashboard.stats');
+
+        // Food Curation
+        Route::get('/foods', [\App\Http\Controllers\Api\V1\Admin\AdminFoodController::class, 'index'])->name('api.v1.admin.foods.index');
+        Route::post('/foods', [\App\Http\Controllers\Api\V1\Admin\AdminFoodController::class, 'store'])->name('api.v1.admin.foods.store');
+        Route::get('/foods/{id}', [\App\Http\Controllers\Api\V1\Admin\AdminFoodController::class, 'show'])->whereNumber('id')->name('api.v1.admin.foods.show');
+        Route::put('/foods/{id}', [\App\Http\Controllers\Api\V1\Admin\AdminFoodController::class, 'update'])->whereNumber('id')->name('api.v1.admin.foods.update');
+        Route::delete('/foods/{id}', [\App\Http\Controllers\Api\V1\Admin\AdminFoodController::class, 'destroy'])->whereNumber('id')->name('api.v1.admin.foods.destroy');
+        Route::post('/foods/{id}/verify', [\App\Http\Controllers\Api\V1\Admin\AdminFoodController::class, 'verify'])->whereNumber('id')->name('api.v1.admin.foods.verify');
+
+        // Dominican Food Curation Queue
+        Route::get('/curation/dominican-queue', [\App\Http\Controllers\Api\V1\Admin\AdminDominicanCurationController::class, 'queue'])->name('api.v1.admin.curation.dominican_queue');
+        Route::post('/curation/approve/{id}', [\App\Http\Controllers\Api\V1\Admin\AdminDominicanCurationController::class, 'approve'])->whereNumber('id')->name('api.v1.admin.curation.approve');
+        Route::post('/curation/foods/{id}/aliases', [\App\Http\Controllers\Api\V1\Admin\AdminDominicanCurationController::class, 'addAlias'])->whereNumber('id')->name('api.v1.admin.curation.add_alias');
+
+        // AI Review Queue
+        Route::get('/ai/review-queue', [\App\Http\Controllers\Api\V1\Admin\AdminAiReviewController::class, 'queue'])->name('api.v1.admin.ai.review_queue');
+        Route::get('/ai/reviews/{id}', [\App\Http\Controllers\Api\V1\Admin\AdminAiReviewController::class, 'show'])->whereNumber('id')->name('api.v1.admin.ai.reviews.show');
+        Route::post('/ai/reviews/{id}/resolve', [\App\Http\Controllers\Api\V1\Admin\AdminAiReviewController::class, 'resolve'])->whereNumber('id')->name('api.v1.admin.ai.reviews.resolve');
+    });
 });
+
 
 
 
