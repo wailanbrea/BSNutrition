@@ -39,6 +39,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/foods/{id}', [FoodController::class, 'show'])->whereNumber('id')->name('api.v1.foods.show');
     Route::get('/foods/barcode/{barcode}', [FoodController::class, 'byBarcode'])->name('api.v1.foods.barcode');
     Route::post('/foods/{id}/calculate', [FoodController::class, 'calculate'])->whereNumber('id')->name('api.v1.foods.calculate');
+    Route::post('/foods/ocr/parse-label', [\App\Http\Controllers\Api\V1\NutritionLabelOcrController::class, 'parseLabel'])->name('api.v1.foods.ocr.parse');
+    Route::post('/foods/from-label', [\App\Http\Controllers\Api\V1\NutritionLabelOcrController::class, 'createFromLabel'])->name('api.v1.foods.from_label');
+
 
     // AI Food Photo Analysis
     Route::post('/ai/photo/analyze', [AiPhotoController::class, 'analyze'])->name('api.v1.ai.photo.analyze');

@@ -2,6 +2,29 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH10-T03
+**Added**
+- Formulario de edición y confirmación `EditAndConfirmProductView` en Android con cálculo automático y validación.
+- Endpoint `POST /api/v1/foods/from-label` con persistencia canónica en tablas `foods`, `food_brands`, `food_portions`, `food_nutrients` y `food_barcodes`.
+- Integración directa con el escáner de código de barras como opción de fallback cuando un producto no existe en base de datos.
+- Tests unitarios en Kotlin (`NutritionLabelScanViewModelTest.kt`) y de integración en Pest (`NutritionLabelOcrApiTest.php`).
+- **Fase 10 (Nutrition Label OCR) completada al 100%**.
+
+### 2026-08-21 — PH10-T02
+**Added**
+- Servicio `NutritionLabelParserService` en Laravel con extracción heurística/regex bilingüe (español e inglés) para tablas de información nutricional.
+- Detección de tamaño de porción, calorías, grasas totales, saturadas, trans, sodio, carbohidratos, fibra, azúcares y proteínas.
+- Normalización matemática precisa de cantidades por 100g sin inventar valores ausentes.
+- Endpoint API REST `POST /api/v1/foods/ocr/parse-label` con validación y response estructurado.
+- Suite de pruebas en Pest (`NutritionLabelParserServiceTest.php`, 3 tests pasando).
+
+### 2026-08-21 — PH10-T01
+**Added**
+- Dependencia Google ML Kit Text Recognition (`play-services-mlkit-text-recognition:16.0.1`).
+- Analyzer `NutritionLabelAnalyzer` para procesamiento de fotogramas de cámara en tiempo real con debouncing inteligente.
+- Pantalla `NutritionLabelScanScreen` con retícula guía rectangular y alternador de flash.
+- ViewModel `NutritionLabelScanViewModel` para gestión de estados de escaneo y borrador de producto.
+
 ### 2026-08-21 — PH09-T07
 **Added**
 - Flujo end-to-end completo de registro de comida por foto: Captura/Galería -> Inferencia con modelos de visión IA -> Revisión y corrección de ingredientes y porciones -> Confirmación e inserción directa en el diario nutricional.

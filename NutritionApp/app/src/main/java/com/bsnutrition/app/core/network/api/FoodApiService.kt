@@ -63,6 +63,17 @@ interface FoodApiService {
     suspend fun recordRecentFood(
         @Path("id") id: Long
     ): com.bsnutrition.app.core.network.model.MessageResponseDto
+
+    @POST("foods/ocr/parse-label")
+    suspend fun parseNutritionLabel(
+        @Body request: com.bsnutrition.app.core.network.dto.ParseLabelRequest
+    ): com.bsnutrition.app.core.network.dto.ParseLabelApiResponse
+
+    @POST("foods/from-label")
+    suspend fun createFoodFromLabel(
+        @Body request: com.bsnutrition.app.core.network.dto.CreateFromLabelRequest
+    ): com.bsnutrition.app.core.network.dto.CreateFromLabelApiResponse
 }
+
 
 

@@ -9,62 +9,63 @@ Crear fallback para productos desconocidos mediante etiqueta.
 - `11_SECURITY_PRIVACY.md`
 
 ## Entry criteria
-- [ ] Barcode/camera pipeline ready
+- [x] Barcode/camera pipeline ready
 
 ## Tasks
 
-### [ ] PH10-T01 — Label capture/OCR
+### [x] PH10-T01 — Label capture/OCR
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Guided UI
-- [ ] Crop
-- [ ] ML Kit OCR
-- [ ] Raw text
+- [x] Guided UI (Retícula guía en `NutritionLabelScanScreen.kt`)
+- [x] Crop (Área rectangular delimitada para tabla de hechos nutricionales)
+- [x] ML Kit OCR (Integración de `play-services-mlkit-text-recognition` con `NutritionLabelAnalyzer`)
+- [x] Raw text (Extracción y debouncing de bloques de texto crudo)
 
 **Acceptance criteria:**
-- Readable label -> OCR text
+- Lectura continua de etiqueta nutricional con extracción precisa de texto OCR
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Pest (`NutritionLabelParserServiceTest.php`) y Kotlin (`NutritionLabelScanViewModelTest.kt`)
 
-### [ ] PH10-T02 — Structured label parser
+### [x] PH10-T02 — Structured label parser
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Serving size
-- [ ] Nutrients
-- [ ] Units
-- [ ] Validation
-- [ ] Structured output
+- [x] Serving size (Detección de tamaño de porción en gramos/ml)
+- [x] Nutrients (Calorías, grasas totales, saturadas, trans, sodio, carbohidratos, fibra, azúcares y proteínas)
+- [x] Units (Normalización de g/mg a base de 100g)
+- [x] Validation (No inventa valores faltantes si no aparecen en la etiqueta)
+- [x] Structured output (Endpoint `POST /api/v1/foods/ocr/parse-label` con JSON normalizado)
 
 **Acceptance criteria:**
-- Does not invent missing values
+- No inventa valores nutricionales ausentes y calcula proporciones por 100g
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Pest (`NutritionLabelParserServiceTest.php`, `NutritionLabelOcrApiTest.php`, 5 tests pasando)
 
-### [ ] PH10-T03 — Confirm/create product
+### [x] PH10-T03 — Confirm/create product
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Editable data
-- [ ] Barcode link
-- [ ] Brand/name
-- [ ] Persist canonical
+- [x] Editable data (Formulario `EditAndConfirmProductView` para ajustes por el usuario)
+- [x] Barcode link (Vinculación automática con código de barras en caso de fallback desde el escáner)
+- [x] Brand/name (Campos de nombre del producto y marca/fabricante)
+- [x] Persist canonical (Endpoint `POST /api/v1/foods/from-label` creando registros en `foods`, `food_brands`, `food_portions`, `food_nutrients` y `food_barcodes`)
 
 **Acceptance criteria:**
-- Unknown barcode becomes reusable food
+- Producto desconocido escaneado se convierte en alimento canónico reutilizable en el catálogo y registrado en el diario
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Pest (`NutritionLabelOcrApiTest.php`) y Kotlin (`NutritionLabelScanViewModelTest.kt`)
 
 ## Phase exit criteria
-- [ ] OCR product creation works
-- [ ] Status -> Phase 11
+- [x] OCR product creation works (Flujo completo: Escáner -> ML Kit OCR -> Parseo regex -> Edición -> Persistencia canónica y diario)
+- [x] Status -> Phase 11
 
 ## Mandatory closeout
-- [ ] Actualizar `PROJECT_STATUS.md`
-- [ ] Actualizar `CHANGELOG.md`
-- [ ] Actualizar `DECISIONS.md` si hubo decisión permanente
-- [ ] No dejar tareas `[-]` sin checkpoint
+- [x] Actualizar `PROJECT_STATUS.md`
+- [x] Actualizar `CHANGELOG.md`
+- [x] Actualizar `DECISIONS.md` si hubo decisión permanente
+- [x] No dejar tareas `[-]` sin checkpoint
+

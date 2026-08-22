@@ -35,6 +35,11 @@ interface FoodRepository {
     suspend fun getRecentFoods(): Result<List<FoodSummary>>
 
     suspend fun recordRecentFood(food: FoodSummary): Result<Unit>
+
+    suspend fun parseNutritionLabel(rawText: String): Result<com.bsnutrition.app.core.network.dto.ParsedLabelDataDto>
+
+    suspend fun createFoodFromLabel(request: com.bsnutrition.app.core.network.dto.CreateFromLabelRequest): Result<FoodDetail>
 }
+
 
 

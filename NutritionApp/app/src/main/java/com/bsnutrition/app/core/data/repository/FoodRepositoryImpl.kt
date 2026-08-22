@@ -200,4 +200,49 @@ class FoodRepositoryImpl @Inject constructor(
             is Result.Loading -> Result.Loading
         }
     }
+
+    override suspend fun parseNutritionLabel(rawText: String): Result<com.bsnutrition.app.core.network.dto.ParsedLabelDataDto> = withContext(Dispatchers.IO) {
+        try {
+            val response = foodApiService.parseNutritionLabel(com.bsnutrition.app.core.network.dto.ParseLabelRequest(rawText))
+            Result.Success(response.data)
+        } catch (e: Exception) {
+            Result.Error(e, e.localizedMessage ?: "Error al procesar la etiqueta nutricional.")
+        }
+    }
+
+    override suspend fun createFoodFromLabel(request: com.bsnutrition.app.core.network.dto.CreateFromLabelRequest): Result<FoodDetail> = withContext(Dispatchers.IO) {
+        try {
+            val response = foodApiService.createFoodFromLabel(request)
+            val foodDto = response.data.food
+            val foodDetail = FoodDetail(
+                id = foodDto.id,
+                canonicalName = foodDto.canonicalName,
+                brandName = foodDto.brand?.name,
+                categoryName = foodDto.category?.name ?: "General",
+                countryCode = foodDto.countryCode ?: "DO",
+                defaultBasisAmount = foodDto.defaultBasisAmount,
+                defaultBasisUnit = foodDto.defaultBasisUnit,
+                nutrients = foodDto.nutrients.map { n ->
+                    com.bsnutrition.app.core.model.NutrientAmount(
+                        name = n.name,
+                        code = n.code,
+                        amount = n.amount,
+                        unit = n.unit
+                    )
+                },
+                portions = foodDto.portions.map { p ->
+                    com.bsnutrition.app.core.model.Portion(
+                        id = p.id,
+                        portionName = p.portionName,
+                        gramWeight = p.gramWeight,
+                        isDefault = p.isDefault
+                    )
+                }
+            )
+            Result.Success(foodDetail)
+        } catch (e: Exception) {
+            Result.Error(e, e.localizedMessage ?: "Error al crear el producto.")
+        }
+    }
 }
+

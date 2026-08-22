@@ -2,14 +2,14 @@
 
 ## Current state
 - Project status: IN PROGRESS
-- Current phase: Phase 10 — Nutrition Label OCR
-- Current task: PH10-T01
+- Current phase: Phase 11 — Text and Voice
+- Current task: PH11-T01
 - Current task status: `[ ]`
-- Last completed task: PH09-T07
+- Last completed task: PH10-T03
 - Last update: 2026-08-21
 
 ## Exact next action
-Abrir `phases/PHASE_10_NUTRITION_LABEL_OCR.md` y ejecutar `PH10-T01` (Label capture/OCR: Guía visual para captura de tabla nutricional, recorte/crop, ML Kit Text Recognition en Android y extracción de texto crudo).
+Abrir `phases/PHASE_11_TEXT_AND_VOICE.md` y ejecutar `PH11-T01` (Meal text parser: Pipeline backend con NLP/IA para descomponer oraciones en español e ingredientes, cantidades/unidades, matching determinista con el catálogo y scoring de confianza).
 
 ## Active blockers
 None.
@@ -23,6 +23,10 @@ None.
 - detalles finales de deployment.
 
 ## Recently completed
+- PH10-T03 — Confirm/create product: Formulario `EditAndConfirmProductView`, integración con código de barras como fallback inteligente, endpoint `POST /api/v1/foods/from-label` con persistencia canónica completa en catálogo y diario, con tests en `NutritionLabelOcrApiTest.php` y `NutritionLabelScanViewModelTest.kt`.
+- PH10-T02 — Structured label parser: Servicio `NutritionLabelParserService.php` con extracción regex heurística bilingüe de tamaño de porción, calorías y macronutrientes por porción y por 100g sin inventar valores, con tests en `NutritionLabelParserServiceTest.php` (5/5 tests pasando).
+- PH10-T01 — Label capture/OCR: Retícula guía rectangular en `NutritionLabelScanScreen.kt`, analyzer `NutritionLabelAnalyzer` con Google ML Kit Text Recognition (`play-services-mlkit-text-recognition`), extracción de texto crudo y ViewModel `NutritionLabelScanViewModel.kt`.
+- **Fase 10 (Nutrition Label OCR) completada al 100%**.
 - PH09-T07 — Feedback/E2E: Flujo integral de revisión interactiva de alimentos identificados con ajuste fino de peso en gramos, selección de candidatos alternativos y confirmación directa en el diario con tests en `AiFoodPhotoViewModelTest.kt`.
 - PH09-T06 — Review/correction UI: Pantalla Jetpack Compose `AiFoodPhotoScreen` con tarjetas interactivas de ingredientes, selector de candidatos (`FilterChip`), control deslizante de peso y recálculo instantáneo de macronutrientes.
 - PH09-T05 — Android capture/upload: Captura de cámara, selector de galería, compresión/redimensionado inteligente (<800KB, max 1600px), DTOs `AiPhotoDtos`, `AiPhotoApiService` y `AiPhotoRepositoryImpl`.
@@ -51,12 +55,14 @@ None.
 - **Fase 05 (Food Search, Favorites and Recents) completada al 100%**.
 
 ## Files/modules changed in last task
-- `NutritionApp/`: core/network/dto/AiPhotoDtos.kt, core/network/api/AiPhotoApiService.kt, core/model/AiPhotoModels.kt, core/data/repository/AiPhotoRepository.kt, core/data/repository/AiPhotoRepositoryImpl.kt, core/network/NetworkModule.kt, core/data/di/DataModule.kt, feature/photo/AiFoodPhotoViewModel.kt, feature/photo/AiFoodPhotoScreen.kt, feature/add/AddScreen.kt, test/java/com/bsnutrition/app/feature/photo/AiFoodPhotoViewModelTest.kt
-- `NutritionApp_AI_Execution_Plan/`: PROJECT_STATUS.md, CHANGELOG.md, phases/PHASE_09_AI_FOOD_PHOTO.md
+- `nutrition-backend/`: app/Services/NutritionLabelParserService.php, app/Http/Controllers/Api/V1/NutritionLabelOcrController.php, routes/api.php, tests/Feature/NutritionLabelParserServiceTest.php, tests/Feature/NutritionLabelOcrApiTest.php
+- `NutritionApp/`: gradle/libs.versions.toml, app/build.gradle.kts, core/network/dto/NutritionLabelDtos.kt, core/network/api/FoodApiService.kt, core/data/repository/FoodRepository.kt, core/data/repository/FoodRepositoryImpl.kt, feature/ocr/NutritionLabelAnalyzer.kt, feature/ocr/NutritionLabelScanViewModel.kt, feature/ocr/NutritionLabelScanScreen.kt, feature/scanner/BarcodeScannerScreen.kt, test/java/com/bsnutrition/app/feature/ocr/NutritionLabelScanViewModelTest.kt
+- `NutritionApp_AI_Execution_Plan/`: PROJECT_STATUS.md, CHANGELOG.md, phases/PHASE_10_NUTRITION_LABEL_OCR.md
 
 ## Tests from last task
-- `AiFoodPhotoViewModelTest` -> Review state calculation, weight adjustment, candidate switching, item removal, and diary confirmation verified
-- `php ./vendor/bin/pest` -> 93 passed (928 assertions)
+- `NutritionLabelScanViewModelTest` -> OCR text parsing, draft updating, and canonical food creation verified
+- `php ./vendor/bin/pest` -> 98 passed (962 assertions)
+
 
 
 

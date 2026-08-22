@@ -90,6 +90,20 @@ fun BarcodeScannerScreen(
     onFoodLogged: () -> Unit,
     viewModel: BarcodeScannerViewModel = hiltViewModel()
 ) {
+    var scanningLabelForBarcode by remember { mutableStateOf<String?>(null) }
+
+    if (scanningLabelForBarcode != null) {
+        com.bsnutrition.app.feature.ocr.NutritionLabelScanScreen(
+            initialBarcode = scanningLabelForBarcode,
+            onNavigateBack = { scanningLabelForBarcode = null },
+            onFoodCreated = {
+                scanningLabelForBarcode = null
+                onFoodLogged()
+            }
+        )
+        return
+    }
+
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -113,6 +127,7 @@ fun BarcodeScannerScreen(
     LaunchedEffect(Unit) {
         if (!hasCameraPermission) {
             permissionLauncher.launch(Manifest.permission.CAMERA)
+
         }
     }
 
@@ -292,24 +307,28 @@ fun BarcodeScannerScreen(
                         title = { Text("Producto no encontrado") },
                         text = {
                             Text(
-                                "No pudimos encontrar información para el código de barras:\n${state.barcode}\n\n¿Deseas intentar escanearlo nuevamente o crearlo manualmente?"
+                                "No pudimos encontrar información para el código de barras:\n${state.barcode}\n\n¿Deseas leer la tabla nutricional con la cámara (OCR) para registrarlo automáticamente?"
                             )
                         },
                         confirmButton = {
-                            Button(onClick = { viewModel.resumeScanning() }) {
-                                Text("Reintentar")
+                            Button(onClick = {
+                                val bc = state.barcode
+                                viewModel.resumeScanning()
+                                scanningLabelForBarcode = bc
+                            }) {
+                                Text("Escanear Etiqueta (OCR)")
                             }
                         },
                         dismissButton = {
                             TextButton(onClick = {
                                 viewModel.resumeScanning()
-                                onNavigateBack()
                             }) {
-                                Text("Volver a Búsqueda")
+                                Text("Reintentar Código")
                             }
                         }
                     )
                 }
+
 
                 is BarcodeScannerUiState.Error -> {
                     AlertDialog(
