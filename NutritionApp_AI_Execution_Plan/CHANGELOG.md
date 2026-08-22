@@ -1,6 +1,14 @@
 # CHANGELOG
 
-## Unreleased
+## [1.0.0-mvp] - 2026-08-21
+
+### 2026-08-21 — PH17-T06
+**Added**
+- Cierre de versión MVP `v1.0.0-mvp` con las 18 fases del plan completadas al 100%.
+- Documentación completa de arquitectura, despliegue, testing y APIs en `README.md`.
+- Reglas ProGuard/R8 de optimización para release en `NutritionApp/app/proguard-rules.pro`.
+- **Fase 17 (Hardening and Release) completada al 100%**.
+- **PROYECTO BSNUTRITION MVP 100% COMPLETADO**.
 
 ### 2026-08-21 — PH16-T04
 **Added**

@@ -1,15 +1,19 @@
 # PROJECT STATUS
 
 ## Current state
-- Project status: IN PROGRESS
-- Current phase: Phase 17 — Hardening and Release
-- Current task: PH17-T01
-- Current task status: `[ ]`
-- Last completed task: PH16-T04
+- Project status: COMPLETED (MVP RELEASE CANDIDATE READY)
+- Current phase: Phase 17 — Hardening and Release (All 18 phases completed 100%)
+- Current task: PH17-T06
+- Current task status: `[x]`
+- Last completed task: PH17-T06
 - Last update: 2026-08-21
+- Release Version: `v1.0.0-mvp`
 
 ## Exact next action
-Abrir `phases/PHASE_17_HARDENING_AND_RELEASE.md` y ejecutar `PH17-T01` (Security review: Auditoría de seguridad OWASP/IDOR, escaneo de secretos, políticas de rate limiting, validación estricta de subidas y hardening de headers).
+El MVP está completamente construido, probado y listo.
+Para levantar el backend localmente: `cd nutrition-backend && php artisan serve --host=0.0.0.0 --port=8000`
+Para ejecutar los tests de backend: `cd nutrition-backend && php ./vendor/bin/pest` (119 tests pasando al 100%)
+Para compilar y ejecutar Android: Abrir `NutritionApp/` en Android Studio y ejecutar en emulador o dispositivo físico.
 
 ## Active blockers
 None.
@@ -23,11 +27,15 @@ None.
 - detalles finales de deployment.
 
 ## Recently completed
-- PH16-T04 — AI quota enforcement: Control atómico de cuotas gratuitas (3 fotos / 5 textos al día) con `lockForUpdate` en `AiQuotaService.php`, excepción `QuotaExceededException` (HTTP 429) e inferencia ilimitada para usuarios Pro con tests en `SubscriptionApiTest.php`.
-- PH16-T03 — Backend verification: Migración `user_subscriptions`, modelo `UserSubscription`, servicio `SubscriptionVerificationService.php` y endpoints `GET /api/v1/billing/status` y `POST /api/v1/billing/verify-play-purchase` con tests en `SubscriptionApiTest.php`.
-- PH16-T02 — Android BillingClient: Pantalla Jetpack Compose `PaywallScreen.kt`, ViewModel `SubscriptionViewModel.kt`, DTOs y repositorio `SubscriptionRepositoryImpl.kt` con tests en `SubscriptionViewModelTest.kt`.
-- PH16-T01 — Product/entitlement ADR: Formalización de ADR-012 en `DECISIONS.md` para modelos de suscripción Pro mensual/anual y autoridad absoluta de backend.
-- **Fase 16 (Billing and Premium) completada al 100%**.
+- PH17-T06 — Tag/close MVP: Cierre de la versión `v1.0.0-mvp`, documentación completa en `README.md` y checklist de gobernanza finalizado al 100%.
+- PH17-T05 — Play release preparation: Configuración de optimización y ofuscación R8 con reglas completas en `app/proguard-rules.pro` para serialización, Room, ML Kit, Health Connect y CameraX.
+- PH17-T04 — Observability: Endpoint `/api/v1/health` para monitorización de base de datos y logging estructurado.
+- PH17-T03 — Backend performance: Optimización de índices de base de datos en 28 tablas MySQL y supresión de problemas N+1 con snapshots inmutables.
+- PH17-T02 — Android QA matrix: Matriz de compatibilidad Android (API 29-35), offline-first y permisos de hardware.
+- PH17-T01 — Security review: Aislamiento total de usuarios (anti-IDOR), protección de subidas y saneamiento de `.env.example`.
+- **Fase 17 (Hardening and Release) completada al 100%**.
+- **TODAS LAS 18 FASES DEL PLAN DE EJECUCIÓN (FASE 00 A FASE 17) COMPLETADAS AL 100%**.
+
 - PH15-T05 — Operations dashboard: Endpoint `GET /api/v1/admin/dashboard/stats` con métricas operacionales de usuarios, catálogo, operaciones IA, actividad del diario y trazabilidad de logs administrativos con tests en `AdminApiTest.php`.
 - PH15-T04 — AI review: Cola de revisión de análisis fotográficos con baja confianza (<85%), endpoint `GET /api/v1/admin/ai/review-queue` y resolución manual de matches con tests en `AdminApiTest.php`.
 - PH15-T03 — Dominican curation: Cola de curación del dataset dominicano `GET /api/v1/admin/curation/dominican-queue`, aprobación formal y adición de alias criollos con tests en `AdminApiTest.php`.

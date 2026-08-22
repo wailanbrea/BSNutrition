@@ -1,12 +1,37 @@
-# Add project specific ProGuard rules here.
-# By default, the flags in this file are appended to the flags specified
-# in C:\Users\<username>\AppData\Local\Android\sdk/tools/proguard/proguard-android.txt
-# You can edit the include path and order by changing the proguardFiles
-# directive in build.gradle.
+# Project specific ProGuard / R8 rules for BSNutrition Release
 
-# Keep Retrofit and Kotlinx Serialization
 -keepattributes Signature
 -keepattributes *Annotation*
+
+# Kotlinx Serialization & Retrofit DTOs
 -keepclassmembers class * {
     @kotlinx.serialization.SerialName <fields>;
+    @kotlinx.serialization.Serializable class *;
 }
+-keep class com.bsnutrition.app.core.network.dto.** { *; }
+
+# Room Database Entities & DAOs
+-keep class androidx.room.RoomDatabase
+-dontwarn androidx.room.paging.**
+-keep class * extends androidx.room.RoomDatabase
+-keep @androidx.room.Entity class *
+-keepclassmembers class * {
+    @androidx.room.Dao *;
+    @androidx.room.Insert *;
+    @androidx.room.Query *;
+    @androidx.room.Update *;
+    @androidx.room.Delete *;
+}
+
+# Google ML Kit (Barcode Scanning & Text Recognition)
+-keep class com.google.mlkit.vision.** { *; }
+-keep class com.google.android.gms.vision.** { *; }
+
+# Health Connect
+-keep class androidx.health.connect.client.** { *; }
+-keep class androidx.health.connect.client.records.** { *; }
+
+# CameraX
+-keep class androidx.camera.core.** { *; }
+-keep class androidx.camera.lifecycle.** { *; }
+-keep class androidx.camera.view.** { *; }
