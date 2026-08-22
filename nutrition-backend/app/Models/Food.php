@@ -110,4 +110,24 @@ class Food extends Model
                 });
         });
     }
+
+    public function getNutrientAmount(string $code): float
+
+    {
+        if ($this->relationLoaded('foodNutrients')) {
+            $nutrient = $this->foodNutrients->first(function ($fn) use ($code) {
+                return ($fn->nutrient && $fn->nutrient->code === $code) || ($fn->nutrient_code ?? null) === $code;
+            });
+            if ($nutrient) {
+                return (float) $nutrient->amount;
+            }
+        }
+
+        $foodNutrient = $this->foodNutrients()
+            ->whereHas('nutrient', fn ($q) => $q->where('code', $code))
+            ->first();
+
+        return $foodNutrient ? (float) $foodNutrient->amount : 0.0;
+    }
 }
+

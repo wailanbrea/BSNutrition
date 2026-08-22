@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH09-T04
+**Added**
+- Tablas y migraciones `ai_photo_analyses` y `ai_photo_analysis_items` con modelos Eloquent correspondientes.
+- Pipeline orquestador `FoodAnalysisService` que integra almacenamiento privado, inferencia de visión IA, food matching y cálculo determinista de nutrición.
+- Endpoints API REST `POST /api/v1/ai/photo/analyze`, `GET /api/v1/ai/photo/analyses/{id}` y `POST /api/v1/ai/photo/analyses/{id}/confirm` para registrar ingredientes analizados y confirmados en el diario del usuario.
+- Helper `Food::getNutrientAmount(string $code)` para consultas de macronutrientes optimizadas.
+- Suite de pruebas en Pest (`AiPhotoApiTest.php`, 4 tests pasando, 93 tests backend pasando al 100%).
+
 ### 2026-08-21 — PH09-T03
 **Added**
 - Servicio `FoodMatchingService` para vinculación determinista de alimentos reconocidos por IA con la base de datos canónica.

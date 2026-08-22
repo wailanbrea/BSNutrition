@@ -66,21 +66,22 @@ Crear foto IA segura, structured output, matching, correction y diary.
 - Tests en Pest (`FoodMatchingServiceTest.php`, 5 tests pasando)
 
 
-### [ ] PH09-T04 — Analysis orchestration
+### [x] PH09-T04 — Analysis orchestration
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Analysis lifecycle
-- [ ] AI call
-- [ ] Items
-- [ ] Match
-- [ ] Nutrition
+- [x] Analysis lifecycle (Endpoints `POST /api/v1/ai/photo/analyze`, `GET /api/v1/ai/photo/analyses/{id}`, `POST /api/v1/ai/photo/analyses/{id}/confirm`)
+- [x] AI call (Invocación de `AiVisionManager` con auditoría de tokens de entrada/salida y coste estimado en USD)
+- [x] Items (Persistencia en tablas `ai_photo_analyses` y `ai_photo_analysis_items` con candidatos y confianza)
+- [x] Match (Emparejamiento determinista de ingredientes reconocidos con el catálogo canónico si score >= 0.70)
+- [x] Nutrition (Cálculo de nutrición por peso usando tablas canónicas oficiales o fallback a estimación por visión)
 
 **Acceptance criteria:**
-- Auditable deterministic nutrition
+- Nutrición auditable y determinista con soporte para confirmación y registro en bloque en el diario
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Pest (`AiPhotoApiTest.php`, 4 tests pasando; suite completa 93 tests pasando)
+
 
 ### [ ] PH09-T05 — Android capture/upload
 **Depends on:** None

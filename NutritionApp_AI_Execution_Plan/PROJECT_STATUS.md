@@ -3,13 +3,13 @@
 ## Current state
 - Project status: IN PROGRESS
 - Current phase: Phase 09 — AI Food Photo
-- Current task: PH09-T04
+- Current task: PH09-T05
 - Current task status: `[ ]`
-- Last completed task: PH09-T03
+- Last completed task: PH09-T04
 - Last update: 2026-08-21
 
 ## Exact next action
-Abrir `phases/PHASE_09_AI_FOOD_PHOTO.md` y ejecutar `PH09-T04` (Analysis orchestration: Pipeline orquestador `FoodAnalysisService.php` y endpoints `POST /api/v1/ai/photo/analyze`, persistencia en base de datos `ai_photo_analyses`, vinculación de items reconocidos, cálculo determinista de nutrición y auditoría de tokens).
+Abrir `phases/PHASE_09_AI_FOOD_PHOTO.md` y ejecutar `PH09-T05` y `PH09-T06` (Android capture/upload & Review/correction UI: Pantalla `AiFoodPhotoCameraScreen.kt` con captura CameraX, selección de galería, compresión/redimensionado inteligente, `AiPhotoRepository`, `AiFoodPhotoViewModel` y `AiFoodPhotoReviewScreen.kt` para ajuste fino de porciones y confirmación en el diario).
 
 ## Active blockers
 None.
@@ -23,6 +23,7 @@ None.
 - detalles finales de deployment.
 
 ## Recently completed
+- PH09-T04 — Analysis orchestration: Migración y modelos `AiPhotoAnalysis` y `AiPhotoAnalysisItem`, servicio orquestador `FoodAnalysisService`, controlador `AiPhotoController` con endpoints `POST /api/v1/ai/photo/analyze`, `GET /api/v1/ai/photo/analyses/{id}` y `POST /api/v1/ai/photo/analyses/{id}/confirm` para registro directo en diario con tests en `AiPhotoApiTest.php` (93 tests pasando al 100%).
 - PH09-T03 — Food matcher v1: Servicio `FoodMatchingService.php` y DTO `FoodMatchCandidate` para normalización de texto, matching de alias dominicanos y cocina criolla, scoring léxico y de tokens con tests en `FoodMatchingServiceTest.php` (5 tests pasando).
 - PH09-T02 — AI provider abstraction: Interfaz `AiVisionProviderInterface`, implementaciones `OpenAiVisionProvider` (con esquema JSON estructurado y soporte gastronómico dominicano) y `MockVisionProvider`, y `AiVisionManager` para resolución dinámica de drivers con tests en `AiVisionProviderTest.php` (4 tests pasando).
 - PH09-T01 — Private image storage: Migración `ai_image_uploads`, modelo Eloquent `AiImageUpload` y servicio `ImageStorageService` para almacenamiento aislado en disco privado, extracción base64 para inferencia, whitelist de formatos (JPEG, PNG, WEBP, HEIC), límite de 10 MB y purga de expiración con tests en `ImageStorageServiceTest.php` (5 tests pasando).
@@ -46,11 +47,12 @@ None.
 - **Fase 05 (Food Search, Favorites and Recents) completada al 100%**.
 
 ## Files/modules changed in last task
-- `nutrition-backend/`: app/DTOs/FoodMatchCandidate.php, app/Services/FoodMatchingService.php, tests/Feature/FoodMatchingServiceTest.php
+- `nutrition-backend/`: database/migrations/2026_08_21_240000_create_ai_photo_analyses_table.php, app/Models/AiPhotoAnalysis.php, app/Models/AiPhotoAnalysisItem.php, app/Services/FoodAnalysisService.php, app/Http/Controllers/Api/V1/AiPhotoController.php, routes/api.php, tests/Feature/AiPhotoApiTest.php, app/Models/Food.php
 - `NutritionApp_AI_Execution_Plan/`: PROJECT_STATUS.md, CHANGELOG.md, phases/PHASE_09_AI_FOOD_PHOTO.md
 
 ## Tests from last task
-- `php ./vendor/bin/pest tests/Feature/FoodMatchingServiceTest.php` -> 5 passed (16 assertions)
+- `php ./vendor/bin/pest` -> 93 passed (928 assertions)
+
 
 
 
