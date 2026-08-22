@@ -115,7 +115,14 @@ object NetworkModule {
     fun provideProgressApiService(retrofit: Retrofit): com.bsnutrition.app.core.network.api.ProgressApiService {
         return retrofit.create(com.bsnutrition.app.core.network.api.ProgressApiService::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideRecipeApiService(retrofit: Retrofit): com.bsnutrition.app.core.network.api.RecipeApiService {
+        return retrofit.create(com.bsnutrition.app.core.network.api.RecipeApiService::class.java)
+    }
 }
+
 
 
 

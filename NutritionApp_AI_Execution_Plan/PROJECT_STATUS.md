@@ -2,14 +2,14 @@
 
 ## Current state
 - Project status: IN PROGRESS
-- Current phase: Phase 14 — Recipes
-- Current task: PH14-T01
+- Current phase: Phase 15 — Administration
+- Current task: PH15-T01
 - Current task status: `[ ]`
-- Last completed task: PH13-T04
+- Last completed task: PH14-T03
 - Last update: 2026-08-21
 
 ## Exact next action
-Abrir `phases/PHASE_14_RECIPES.md` y ejecutar `PH14-T01` (Recipe schema/calculation: Migraciones y modelos de recetas e ingredientes, servicio de cálculo nutricional por porción total y unitaria en Laravel con tests).
+Abrir `phases/PHASE_15_ADMINISTRATION.md` y ejecutar `PH15-T01` (Admin auth/roles: Middleware de autorización `role:admin`, auditoría de cambios en catálogo y endpoints de administración protegidos con tests).
 
 ## Active blockers
 None.
@@ -23,11 +23,16 @@ None.
 - detalles finales de deployment.
 
 ## Recently completed
+- PH14-T03 — Recipe to diary: Registro directo de porciones de recetas en el diario del usuario con snapshot nutricional inmutable mediante `POST /api/v1/recipes/{id}/log-to-diary` y diálogo Compose `LogRecipeDialog` con tests en `RecipeApiTest.php` y `RecipeViewModelTest.kt`.
+- PH14-T02 — Recipe CRUD: Endpoints REST `GET /api/v1/recipes`, `POST /api/v1/recipes`, `GET /api/v1/recipes/{id}`, `PUT /api/v1/recipes/{id}`, `DELETE /api/v1/recipes/{id}`, y pantallas Jetpack Compose `RecipeListScreen`, `RecipeDetailScreen`, `RecipeCreateScreen` con tests en `RecipeApiTest.php` y `RecipeRepositoryTest.kt`.
+- PH14-T01 — Recipe schema/calculation: Migraciones `recipes`, `recipe_ingredients`, `recipe_steps`, modelos Eloquent con relaciones, y servicio `RecipeCalculationService.php` para cálculo exacto de rendimiento total y desglose por porción con tests en `RecipeCalculationServiceTest.php` (5/5 tests pasando).
+- **Fase 14 (Recipes) completada al 100%**.
 - PH13-T04 — Progress UI: Pantalla Jetpack Compose `ProgressScreen` con widgets interactivos de consumo de agua con botones rápidos (+250ml a +1L), tarjeta de control y registro de peso, y visualización de macros y consistencia con tests en `ProgressViewModelTest.kt`.
 - PH13-T03 — Statistics services: Servicio `StatisticsService.php` y controlador `StatisticsController.php` con agregación dinámica de 7d, 30d, 90d, tasa de adherencia calórica, distribución porcentual de macros y tests en `StatisticsApiTest.php`.
 - PH13-T02 — Weight tracking: Migración `weight_logs`, modelo `WeightLog`, controlador `WeightTrackingController` con conversión a libras y repositorio local-first `WeightRepositoryImpl` con tests en `WeightTrackingApiTest.php` y `WeightRepositoryTest.kt`.
 - PH13-T01 — Water tracking: Controlador `WaterTrackingController` con idempotencia por `client_id`, repositorio local-first `WaterRepositoryImpl` y tests en `WaterTrackingApiTest.php` y `WaterRepositoryTest.kt`.
 - **Fase 13 (Progress and Statistics) completada al 100%**.
+
 - PH12-T03 — Nutrition/hydration write policy ADR: Formalización de ADR-011 en `DECISIONS.md`, prevención de bucles de retroalimentación mediante `clientRecordId` y filtrado estricto de fuentes con tests en `HealthConnectViewModelTest.kt`.
 - PH12-T02 — Import metrics: Lectura agregada y filtrada de pasos (`StepsRecord`), último peso corporal (`WeightRecord`) y calorías activas quemadas (`TotalCaloriesBurnedRecord`) en `HealthConnectManager.kt`.
 - PH12-T01 — Permissions/availability: Detección de disponibilidad del SDK de Health Connect, persistencia de preferencias de sincronización en DataStore (`HealthConnectPreferences`), gestor `HealthConnectManager`, ViewModel `HealthConnectViewModel` y pantalla de configuración `HealthConnectSettingsScreen.kt`.

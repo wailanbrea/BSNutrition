@@ -2,6 +2,25 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH14-T03
+**Added**
+- Endpoint `POST /api/v1/recipes/{id}/log-to-diary` para registro instantáneo de porciones de recetas en el diario nutricional con snapshot inmutable.
+- Diálogo Compose `LogRecipeDialog` con selección de comida y multiplicador de porciones.
+- Tests en Pest (`RecipeApiTest.php`) y Kotlin (`RecipeViewModelTest.kt`).
+- **Fase 14 (Recipes) completada al 100%**.
+
+### 2026-08-21 — PH14-T02
+**Added**
+- Endpoints REST `GET /api/v1/recipes`, `POST /api/v1/recipes`, `GET /api/v1/recipes/{id}`, `PUT /api/v1/recipes/{id}`, `DELETE /api/v1/recipes/{id}`.
+- Pantallas Jetpack Compose `RecipeListScreen.kt`, `RecipeDetailScreen.kt`, `RecipeCreateScreen.kt` y ViewModel `RecipeViewModel.kt`.
+- Tests en Pest (`RecipeApiTest.php`) y Kotlin (`RecipeRepositoryTest.kt`).
+
+### 2026-08-21 — PH14-T01
+**Added**
+- Migración `recipes`, `recipe_ingredients`, `recipe_steps` y modelos Eloquent `Recipe`, `RecipeIngredient`, `RecipeStep`.
+- Servicio `RecipeCalculationService.php` para cálculo de peso final, rendimiento total y macros por porción.
+- Tests en Pest (`RecipeCalculationServiceTest.php`).
+
 ### 2026-08-21 — PH13-T04
 **Added**
 - Pantalla interactiva Jetpack Compose `ProgressScreen.kt` con widgets dedicados de hidratación, peso y consistencia.

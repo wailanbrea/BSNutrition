@@ -77,6 +77,15 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Nutrition & Progress Statistics API
     Route::get('/statistics/summary', [\App\Http\Controllers\Api\V1\StatisticsController::class, 'summary'])->name('api.v1.statistics.summary');
+
+    // Recipes API
+    Route::get('/recipes', [\App\Http\Controllers\Api\V1\RecipeController::class, 'index'])->name('api.v1.recipes.index');
+    Route::post('/recipes', [\App\Http\Controllers\Api\V1\RecipeController::class, 'store'])->name('api.v1.recipes.store');
+    Route::get('/recipes/{id}', [\App\Http\Controllers\Api\V1\RecipeController::class, 'show'])->whereNumber('id')->name('api.v1.recipes.show');
+    Route::put('/recipes/{id}', [\App\Http\Controllers\Api\V1\RecipeController::class, 'update'])->whereNumber('id')->name('api.v1.recipes.update');
+    Route::delete('/recipes/{id}', [\App\Http\Controllers\Api\V1\RecipeController::class, 'destroy'])->whereNumber('id')->name('api.v1.recipes.destroy');
+    Route::post('/recipes/{id}/log-to-diary', [\App\Http\Controllers\Api\V1\RecipeController::class, 'logToDiary'])->whereNumber('id')->name('api.v1.recipes.log_to_diary');
 });
+
 
 

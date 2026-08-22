@@ -65,7 +65,14 @@ abstract class DataModule {
     abstract fun bindStatisticsRepository(
         impl: com.bsnutrition.app.core.data.repository.StatisticsRepositoryImpl
     ): com.bsnutrition.app.core.data.repository.StatisticsRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindRecipeRepository(
+        impl: com.bsnutrition.app.core.data.repository.RecipeRepositoryImpl
+    ): com.bsnutrition.app.core.data.repository.RecipeRepository
 }
+
 
 
 

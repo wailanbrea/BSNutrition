@@ -8,60 +8,61 @@ Crear recetas multiingrediente y añadir servings al diario.
 - `08_NUTRITION_ENGINE.md`
 
 ## Entry criteria
-- [ ] Nutrition/diary stable
+- [x] Nutrition/diary stable
 
 ## Tasks
 
-### [ ] PH14-T01 — Recipe schema/calculation
+### [x] PH14-T01 — Recipe schema/calculation
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Recipes
-- [ ] Ingredients
-- [ ] Steps
-- [ ] Yield
-- [ ] Per-serving nutrition
+- [x] Recipes (Migración `recipes`, modelo Eloquent `Recipe`)
+- [x] Ingredients (Migración `recipe_ingredients`, modelo `RecipeIngredient` y vinculación con catálogo)
+- [x] Steps (Migración `recipe_steps`, modelo `RecipeStep` con ordenación secuencial)
+- [x] Yield (Cálculo automático de peso total terminado en gramos)
+- [x] Per-serving nutrition (Cálculo exacto de calorías, proteínas, carbohidratos y grasas por porción en `RecipeCalculationService.php`)
 
 **Acceptance criteria:**
-- Correct aggregation
+- Agregación y distribución matemática exacta por porción
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Pest (`RecipeCalculationServiceTest.php`)
 
-### [ ] PH14-T02 — Recipe CRUD
+### [x] PH14-T02 — Recipe CRUD
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] API
-- [ ] Android list/detail
-- [ ] User recipe
+- [x] API (Endpoints REST `GET /api/v1/recipes`, `POST /api/v1/recipes`, `GET /api/v1/recipes/{id}`, `PUT /api/v1/recipes/{id}`, `DELETE /api/v1/recipes/{id}`)
+- [x] Android list/detail (Pantallas `RecipeListScreen.kt` y `RecipeDetailScreen.kt`)
+- [x] User recipe (Pantalla de creación `RecipeCreateScreen.kt` con gestión dinámica de ingredientes y pasos)
 
 **Acceptance criteria:**
-- Create/view works
+- Creación, listado, visualización y eliminación completas
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Pest (`RecipeApiTest.php`) y Kotlin (`RecipeRepositoryTest.kt`, `RecipeViewModelTest.kt`)
 
-### [ ] PH14-T03 — Recipe to diary
+### [x] PH14-T03 — Recipe to diary
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Serving
-- [ ] Snapshot
-- [ ] Source
+- [x] Serving (Selector de porciones unitarias y fraccionales en `LogRecipeDialog`)
+- [x] Snapshot (Captura inmutable de `calories_snapshot`, `protein_snapshot`, etc.)
+- [x] Source (Etiquetado `source = 'recipe'` y generación de `client_id` para idempotencia)
 
 **Acceptance criteria:**
-- Historical diary behavior correct
+- Comportamiento del diario histórico inmutable garantizado al registrar recetas
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Pest (`RecipeApiTest.php`) y Kotlin (`RecipeViewModelTest.kt`)
 
 ## Phase exit criteria
-- [ ] Recipes usable
-- [ ] Status -> Phase 15
+- [x] Recipes usable (Motor de cálculo backend + CRUD API + Interfaz Compose de recetas e inserción en diario)
+- [x] Status -> Phase 15
 
 ## Mandatory closeout
-- [ ] Actualizar `PROJECT_STATUS.md`
-- [ ] Actualizar `CHANGELOG.md`
-- [ ] Actualizar `DECISIONS.md` si hubo decisión permanente
-- [ ] No dejar tareas `[-]` sin checkpoint
+- [x] Actualizar `PROJECT_STATUS.md`
+- [x] Actualizar `CHANGELOG.md`
+- [x] Actualizar `DECISIONS.md` si hubo decisión permanente
+- [x] No dejar tareas `[-]` sin checkpoint
+
