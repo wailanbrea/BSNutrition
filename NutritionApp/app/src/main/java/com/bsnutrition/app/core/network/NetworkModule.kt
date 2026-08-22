@@ -109,7 +109,14 @@ object NetworkModule {
     fun provideAiPhotoApiService(retrofit: Retrofit): com.bsnutrition.app.core.network.api.AiPhotoApiService {
         return retrofit.create(com.bsnutrition.app.core.network.api.AiPhotoApiService::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideProgressApiService(retrofit: Retrofit): com.bsnutrition.app.core.network.api.ProgressApiService {
+        return retrofit.create(com.bsnutrition.app.core.network.api.ProgressApiService::class.java)
+    }
 }
+
 
 
 

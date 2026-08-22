@@ -2,6 +2,34 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH13-T04
+**Added**
+- Pantalla interactiva Jetpack Compose `ProgressScreen.kt` con widgets dedicados de hidratación, peso y consistencia.
+- Visualización de distribución de macronutrientes (proteína, carbohidratos, grasas) y selector de rango de 7, 30 y 90 días.
+- Diálogo de registro de peso corporal con validación de peso y notas.
+- Tests unitarios en Kotlin (`ProgressViewModelTest.kt`).
+- **Fase 13 (Progress and Statistics) completada al 100%**.
+
+### 2026-08-21 — PH13-T03
+**Added**
+- Servicio `StatisticsService.php` en Laravel para cálculo y agregación dinámica de períodos de 7d, 30d y 90d.
+- Promedios diarios de calorías, macros y agua, tasa de adherencia calórica (rango +/-15%) y tendencia de peso.
+- Endpoint `GET /api/v1/statistics/summary`.
+- Tests en Pest (`StatisticsApiTest.php`).
+
+### 2026-08-21 — PH13-T02
+**Added**
+- Migración `weight_logs` y modelo Eloquent `WeightLog` con soft deletes y versionado.
+- Endpoints `GET /api/v1/weight/logs`, `POST /api/v1/weight/logs` (con idempotencia) y `DELETE /api/v1/weight/logs/{id}` con conversión automática a libras.
+- Repositorio `WeightRepositoryImpl` en Android con sincronización offline-first en Room (`WeightLogDao`).
+- Tests en Pest (`WeightTrackingApiTest.php`) y Kotlin (`WeightRepositoryTest.kt`).
+
+### 2026-08-21 — PH13-T01
+**Added**
+- Endpoints `GET /api/v1/water/logs`, `POST /api/v1/water/logs` y `DELETE /api/v1/water/logs/{id}` con idempotencia por `client_id`.
+- Repositorio `WaterRepositoryImpl` con persistencia local-first reactiva mediante `Flow` en Room (`WaterLogDao`).
+- Tests en Pest (`WaterTrackingApiTest.php`) y Kotlin (`WaterRepositoryTest.kt`).
+
 ### 2026-08-21 — PH12-T03
 **Added**
 - Formalización de ADR-011 en `DECISIONS.md` para política de escritura y prevención de bucles en Health Connect.

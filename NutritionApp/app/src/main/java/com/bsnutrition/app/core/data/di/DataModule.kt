@@ -47,7 +47,26 @@ abstract class DataModule {
     abstract fun bindAiPhotoRepository(
         impl: com.bsnutrition.app.core.data.repository.AiPhotoRepositoryImpl
     ): com.bsnutrition.app.core.data.repository.AiPhotoRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindWaterRepository(
+        impl: com.bsnutrition.app.core.data.repository.WaterRepositoryImpl
+    ): com.bsnutrition.app.core.data.repository.WaterRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindWeightRepository(
+        impl: com.bsnutrition.app.core.data.repository.WeightRepositoryImpl
+    ): com.bsnutrition.app.core.data.repository.WeightRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindStatisticsRepository(
+        impl: com.bsnutrition.app.core.data.repository.StatisticsRepositoryImpl
+    ): com.bsnutrition.app.core.data.repository.StatisticsRepository
 }
+
 
 
 

@@ -2,15 +2,14 @@
 
 ## Current state
 - Project status: IN PROGRESS
-- Current phase: Phase 13 — Progress and Statistics
-
-- Current task: PH13-T01
+- Current phase: Phase 14 — Recipes
+- Current task: PH14-T01
 - Current task status: `[ ]`
-- Last completed task: PH12-T03
+- Last completed task: PH13-T04
 - Last update: 2026-08-21
 
 ## Exact next action
-Abrir `phases/PHASE_13_PROGRESS_AND_STATISTICS.md` y ejecutar `PH13-T01` (Water tracking: Gestión de consumo de agua diario con metas personalizadas, accesos rápidos +250ml/+500ml, persistencia en Room y reconciliación offline-first con backend).
+Abrir `phases/PHASE_14_RECIPES.md` y ejecutar `PH14-T01` (Recipe schema/calculation: Migraciones y modelos de recetas e ingredientes, servicio de cálculo nutricional por porción total y unitaria en Laravel con tests).
 
 ## Active blockers
 None.
@@ -24,6 +23,11 @@ None.
 - detalles finales de deployment.
 
 ## Recently completed
+- PH13-T04 — Progress UI: Pantalla Jetpack Compose `ProgressScreen` con widgets interactivos de consumo de agua con botones rápidos (+250ml a +1L), tarjeta de control y registro de peso, y visualización de macros y consistencia con tests en `ProgressViewModelTest.kt`.
+- PH13-T03 — Statistics services: Servicio `StatisticsService.php` y controlador `StatisticsController.php` con agregación dinámica de 7d, 30d, 90d, tasa de adherencia calórica, distribución porcentual de macros y tests en `StatisticsApiTest.php`.
+- PH13-T02 — Weight tracking: Migración `weight_logs`, modelo `WeightLog`, controlador `WeightTrackingController` con conversión a libras y repositorio local-first `WeightRepositoryImpl` con tests en `WeightTrackingApiTest.php` y `WeightRepositoryTest.kt`.
+- PH13-T01 — Water tracking: Controlador `WaterTrackingController` con idempotencia por `client_id`, repositorio local-first `WaterRepositoryImpl` y tests en `WaterTrackingApiTest.php` y `WaterRepositoryTest.kt`.
+- **Fase 13 (Progress and Statistics) completada al 100%**.
 - PH12-T03 — Nutrition/hydration write policy ADR: Formalización de ADR-011 en `DECISIONS.md`, prevención de bucles de retroalimentación mediante `clientRecordId` y filtrado estricto de fuentes con tests en `HealthConnectViewModelTest.kt`.
 - PH12-T02 — Import metrics: Lectura agregada y filtrada de pasos (`StepsRecord`), último peso corporal (`WeightRecord`) y calorías activas quemadas (`TotalCaloriesBurnedRecord`) en `HealthConnectManager.kt`.
 - PH12-T01 — Permissions/availability: Detección de disponibilidad del SDK de Health Connect, persistencia de preferencias de sincronización en DataStore (`HealthConnectPreferences`), gestor `HealthConnectManager`, ViewModel `HealthConnectViewModel` y pantalla de configuración `HealthConnectSettingsScreen.kt`.
@@ -44,6 +48,7 @@ None.
 - PH09-T03 — Food matcher v1: Servicio `FoodMatchingService.php` y DTO `FoodMatchCandidate` para normalización de texto, matching de alias dominicanos y cocina criolla, scoring léxico y de tokens con tests en `FoodMatchingServiceTest.php` (5 tests pasando).
 - PH09-T02 — AI provider abstraction: Interfaz `AiVisionProviderInterface`, implementaciones `OpenAiVisionProvider` (con esquema JSON estructurado y soporte gastronómico dominicano) y `MockVisionProvider`, y `AiVisionManager` para resolución dinámica de drivers con tests en `AiVisionProviderTest.php` (4 tests pasando).
 - PH09-T01 — Private image storage: Migración `ai_image_uploads`, modelo Eloquent `AiImageUpload` y servicio `ImageStorageService` para almacenamiento aislado en disco privado, extracción base64 para inferencia, whitelist de formatos (JPEG, PNG, WEBP, HEIC), límite de 10 MB y purga de expiración con tests en `ImageStorageServiceTest.php` (5 tests pasando).
+
 - PH08-T03 — Log scanned product: Bottom sheet `FoodDetailSheet` al detectar código de barras, selector de porciones dinámico con recálculo en tiempo real, registro en diario y en historial reciente con tests en `BarcodeScannerViewModelTest.kt`.
 - PH08-T02 — Android scanner: Integración completa de CameraX y Google ML Kit (`BarcodeScanning`) en `BarcodeScannerScreen` y `BarcodeAnalyzer`, control de permisos en tiempo de ejecución, retícula de visor con animación y debouncing de lectura de 1.5s.
 - **Fase 08 (Barcode) completada al 100%**.

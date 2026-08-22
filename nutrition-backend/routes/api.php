@@ -64,5 +64,19 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/diary/{date}/water', [DiaryController::class, 'logWater'])->where('date', '\d{4}-\d{2}-\d{2}')->name('api.v1.diary.water.log');
     Route::delete('/diary/water/{id}', [DiaryController::class, 'deleteWater'])->whereNumber('id')->name('api.v1.diary.water.delete');
     Route::get('/diary/{date}/summary', [DiaryController::class, 'summary'])->where('date', '\d{4}-\d{2}-\d{2}')->name('api.v1.diary.summary');
+
+    // Water Tracking Dedicated API
+    Route::get('/water/logs', [\App\Http\Controllers\Api\V1\WaterTrackingController::class, 'index'])->name('api.v1.water.index');
+    Route::post('/water/logs', [\App\Http\Controllers\Api\V1\WaterTrackingController::class, 'store'])->name('api.v1.water.store');
+    Route::delete('/water/logs/{id}', [\App\Http\Controllers\Api\V1\WaterTrackingController::class, 'destroy'])->whereNumber('id')->name('api.v1.water.destroy');
+
+    // Weight Tracking Dedicated API
+    Route::get('/weight/logs', [\App\Http\Controllers\Api\V1\WeightTrackingController::class, 'index'])->name('api.v1.weight.index');
+    Route::post('/weight/logs', [\App\Http\Controllers\Api\V1\WeightTrackingController::class, 'store'])->name('api.v1.weight.store');
+    Route::delete('/weight/logs/{id}', [\App\Http\Controllers\Api\V1\WeightTrackingController::class, 'destroy'])->whereNumber('id')->name('api.v1.weight.destroy');
+
+    // Nutrition & Progress Statistics API
+    Route::get('/statistics/summary', [\App\Http\Controllers\Api\V1\StatisticsController::class, 'summary'])->name('api.v1.statistics.summary');
 });
+
 
