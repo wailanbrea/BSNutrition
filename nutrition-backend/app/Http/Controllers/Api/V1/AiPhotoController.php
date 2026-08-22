@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Services\AiQuotaService;
 use App\Services\FoodAnalysisService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -10,7 +11,8 @@ use Illuminate\Http\Request;
 class AiPhotoController extends Controller
 {
     public function __construct(
-        private FoodAnalysisService $analysisService
+        private FoodAnalysisService $analysisService,
+        private AiQuotaService $quotaService
     ) {}
 
     /**
@@ -18,7 +20,10 @@ class AiPhotoController extends Controller
      */
     public function analyze(Request $request): JsonResponse
     {
+        $this->quotaService->checkAndConsumePhotoQuota($request->user());
+
         $request->validate([
+
             'image' => ['required', 'file', 'image', 'max:10240'], // 10MB max
             'locale' => ['nullable', 'string', 'max:10'],
             'meal_type' => ['nullable', 'string', 'in:breakfast,lunch,dinner,snack'],

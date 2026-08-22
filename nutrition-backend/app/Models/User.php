@@ -88,10 +88,35 @@ class User extends Authenticatable
         return $this->hasMany(WaterLog::class);
     }
 
+    public function subscriptions(): HasMany
+    {
+        return $this->hasMany(UserSubscription::class);
+    }
+
+    public function activeSubscription(): HasOne
+    {
+        return $this->hasOne(UserSubscription::class)
+            ->where('status', 'active')
+            ->where(function ($q) {
+                $q->whereNull('expires_at')->orWhere('expires_at', '>', now());
+            })
+            ->latestOfMany('starts_at');
+    }
+
+    public function isPro(): bool
+    {
+        if ($this->isAdmin()) {
+            return true;
+        }
+
+        return $this->activeSubscription()->exists();
+    }
+
     public function isAdmin(): bool
     {
         return $this->role === 'admin';
     }
+
 
     public function isCurator(): bool
     {
@@ -103,4 +128,6 @@ class User extends Authenticatable
         return in_array($this->role, $roles);
     }
 }
+
+
 

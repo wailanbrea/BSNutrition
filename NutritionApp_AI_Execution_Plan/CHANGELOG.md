@@ -2,6 +2,31 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH16-T04
+**Added**
+- Control atómico de cuotas gratuitas (3 fotos / 5 textos al día) mediante bloqueo pesimista en `AiQuotaService.php`.
+- Excepción `QuotaExceededException` con respuesta HTTP 429 y código `AI_QUOTA_EXCEEDED`.
+- Acceso ilimitado garantizado a modelos de IA para suscriptores Pro activos.
+- Tests en Pest (`SubscriptionApiTest.php`).
+- **Fase 16 (Billing and Premium) completada al 100%**.
+
+### 2026-08-21 — PH16-T03
+**Added**
+- Migración `user_subscriptions` y modelo Eloquent `UserSubscription`.
+- Servicio `SubscriptionVerificationService.php` para validación de tokens de Google Play y cálculo de estados de expiración y gracia.
+- Endpoints `GET /api/v1/billing/status`, `POST /api/v1/billing/verify-play-purchase` y `GET /api/v1/billing/quotas`.
+- Tests en Pest (`SubscriptionApiTest.php`).
+
+### 2026-08-21 — PH16-T02
+**Added**
+- Pantalla Jetpack Compose `PaywallScreen.kt` con tarjetas de planes Pro mensual/anual y beneficios premium.
+- ViewModel `SubscriptionViewModel.kt` y repositorio `SubscriptionRepositoryImpl.kt`.
+- Tests en Kotlin (`SubscriptionRepositoryTest.kt`, `SubscriptionViewModelTest.kt`).
+
+### 2026-08-21 — PH16-T01
+**Added**
+- Formalización de ADR-012 en `DECISIONS.md` para modelos de monetización, SKUs de Google Play y autoridad centralizada de backend.
+
 ### 2026-08-21 — PH15-T05
 **Added**
 - Endpoint `GET /api/v1/admin/dashboard/stats` para monitoreo en vivo de usuarios, salud del catálogo, operaciones de IA, volumen del diario y auditorías recientes.

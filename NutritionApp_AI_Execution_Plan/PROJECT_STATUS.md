@@ -2,14 +2,14 @@
 
 ## Current state
 - Project status: IN PROGRESS
-- Current phase: Phase 16 — Billing and Premium
-- Current task: PH16-T01
+- Current phase: Phase 17 — Hardening and Release
+- Current task: PH17-T01
 - Current task status: `[ ]`
-- Last completed task: PH15-T05
+- Last completed task: PH16-T04
 - Last update: 2026-08-21
 
 ## Exact next action
-Abrir `phases/PHASE_16_BILLING_AND_PREMIUM.md` y ejecutar `PH16-T01` (Product/entitlement ADR: Formalizar ADR-012 en `DECISIONS.md`, esquema de suscripciones, cuotas atómicas de inferencia IA en backend y verificación de compras de Google Play Billing).
+Abrir `phases/PHASE_17_HARDENING_AND_RELEASE.md` y ejecutar `PH17-T01` (Security review: Auditoría de seguridad OWASP/IDOR, escaneo de secretos, políticas de rate limiting, validación estricta de subidas y hardening de headers).
 
 ## Active blockers
 None.
@@ -23,12 +23,18 @@ None.
 - detalles finales de deployment.
 
 ## Recently completed
+- PH16-T04 — AI quota enforcement: Control atómico de cuotas gratuitas (3 fotos / 5 textos al día) con `lockForUpdate` en `AiQuotaService.php`, excepción `QuotaExceededException` (HTTP 429) e inferencia ilimitada para usuarios Pro con tests en `SubscriptionApiTest.php`.
+- PH16-T03 — Backend verification: Migración `user_subscriptions`, modelo `UserSubscription`, servicio `SubscriptionVerificationService.php` y endpoints `GET /api/v1/billing/status` y `POST /api/v1/billing/verify-play-purchase` con tests en `SubscriptionApiTest.php`.
+- PH16-T02 — Android BillingClient: Pantalla Jetpack Compose `PaywallScreen.kt`, ViewModel `SubscriptionViewModel.kt`, DTOs y repositorio `SubscriptionRepositoryImpl.kt` con tests en `SubscriptionViewModelTest.kt`.
+- PH16-T01 — Product/entitlement ADR: Formalización de ADR-012 en `DECISIONS.md` para modelos de suscripción Pro mensual/anual y autoridad absoluta de backend.
+- **Fase 16 (Billing and Premium) completada al 100%**.
 - PH15-T05 — Operations dashboard: Endpoint `GET /api/v1/admin/dashboard/stats` con métricas operacionales de usuarios, catálogo, operaciones IA, actividad del diario y trazabilidad de logs administrativos con tests en `AdminApiTest.php`.
 - PH15-T04 — AI review: Cola de revisión de análisis fotográficos con baja confianza (<85%), endpoint `GET /api/v1/admin/ai/review-queue` y resolución manual de matches con tests en `AdminApiTest.php`.
 - PH15-T03 — Dominican curation: Cola de curación del dataset dominicano `GET /api/v1/admin/curation/dominican-queue`, aprobación formal y adición de alias criollos con tests en `AdminApiTest.php`.
 - PH15-T02 — Food management: Controlador `AdminFoodController` con CRUD completo, inyección de nutrientes, alias, códigos de barra y verificación de alimentos con tests en `AdminApiTest.php`.
 - PH15-T01 — Admin auth/roles: Middleware `EnsureUserHasRole` (`role:admin,curator`), campo `role` en `users`, modelo `AuditLog` con auditoría automática de mutaciones administrativas y tests en `AdminApiTest.php`.
 - **Fase 15 (Administration) completada al 100%**.
+
 - PH14-T03 — Recipe to diary: Registro directo de porciones de recetas en el diario del usuario con snapshot nutricional inmutable mediante `POST /api/v1/recipes/{id}/log-to-diary` y diálogo Compose `LogRecipeDialog` con tests en `RecipeApiTest.php` y `RecipeViewModelTest.kt`.
 - PH14-T02 — Recipe CRUD: Endpoints REST `GET /api/v1/recipes`, `POST /api/v1/recipes`, `GET /api/v1/recipes/{id}`, `PUT /api/v1/recipes/{id}`, `DELETE /api/v1/recipes/{id}`, y pantallas Jetpack Compose `RecipeListScreen`, `RecipeDetailScreen`, `RecipeCreateScreen` con tests en `RecipeApiTest.php` y `RecipeRepositoryTest.kt`.
 - PH14-T01 — Recipe schema/calculation: Migraciones `recipes`, `recipe_ingredients`, `recipe_steps`, modelos Eloquent con relaciones, y servicio `RecipeCalculationService.php` para cálculo exacto de rendimiento total y desglose por porción con tests en `RecipeCalculationServiceTest.php` (5/5 tests pasando).

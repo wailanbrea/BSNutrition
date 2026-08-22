@@ -105,9 +105,26 @@ Todo cálculo persistido en `nutrition_goals` debe almacenar `calculation_versio
 ### 3. Sincronización No Bloqueante
 - Toda interacción con Health Connect se ejecuta de forma asíncrona en segundo plano sin interrumpir las operaciones del diario local (offline-first).
 
+## ADR-012 — Subscription Tiers, Google Play Billing & Authoritative Quotas
+**Status:** Accepted (Phase 16)
+
+### 1. Modelos de Producto y SKUs
+- **Free Tier:** 3 análisis de fotos de comida por día, 5 registros por texto/voz por día, catálogo completo, diario nutricional ilimitado.
+- **Pro Monthly (`bsnutrition_pro_monthly`):** USD $6.99 / mes con 7 días de prueba gratuita. Análisis fotográfico y por voz ilimitados, analítica avanzada de 30 y 90 días, gestión ilimitada de recetas y soporte prioritario.
+- **Pro Yearly (`bsnutrition_pro_yearly`):** USD $49.99 / año (descuento del 40%). Mismos beneficios de nivel Pro.
+
+### 2. Autoridad Servidor (Backend-Authoritative Verification)
+- Google Play Billing Client gestiona la transacción en el cliente Android y transmite el `purchaseToken`, `orderId` y `productId` al backend (`POST /api/v1/billing/verify-play-purchase`).
+- El backend es la única fuente de verdad para el estado de la suscripción (`active`, `expired`, `in_grace_period`, `canceled`).
+- El cliente nunca asume estado Pro localmente sin validación y firma de backend.
+
+### 3. Control Atómico de Cuotas de IA (Atomic AI Quota Enforcement)
+- Las cuotas de inferencia gratuita se gestionan a nivel de base de datos en `user_daily_ai_quotas` con transacciones atómicas `SELECT ... FOR UPDATE` para prevenir ataques de condiciones de carrera (race conditions).
+- Al superar la cuota diaria gratuita, el backend responde con código HTTP `429 Too Many Requests` o `402 Payment Required` con código `AI_QUOTA_EXCEEDED`, activando la presentación del Paywall en Android.
+
 ## Pending ADR
 - image retention
-- subscription tiers/pricing
+
 
 
 

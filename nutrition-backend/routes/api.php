@@ -109,7 +109,15 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/ai/reviews/{id}', [\App\Http\Controllers\Api\V1\Admin\AdminAiReviewController::class, 'show'])->whereNumber('id')->name('api.v1.admin.ai.reviews.show');
         Route::post('/ai/reviews/{id}/resolve', [\App\Http\Controllers\Api\V1\Admin\AdminAiReviewController::class, 'resolve'])->whereNumber('id')->name('api.v1.admin.ai.reviews.resolve');
     });
+
+    // Billing, Subscriptions & AI Quotas API
+    Route::prefix('billing')->group(function () {
+        Route::get('/status', [\App\Http\Controllers\Api\V1\SubscriptionController::class, 'status'])->name('api.v1.billing.status');
+        Route::post('/verify-play-purchase', [\App\Http\Controllers\Api\V1\SubscriptionController::class, 'verifyPlayPurchase'])->name('api.v1.billing.verify_play_purchase');
+        Route::get('/quotas', [\App\Http\Controllers\Api\V1\SubscriptionController::class, 'quotas'])->name('api.v1.billing.quotas');
+    });
 });
+
 
 
 

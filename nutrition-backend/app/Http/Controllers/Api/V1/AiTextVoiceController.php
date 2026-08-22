@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Services\Ai\AiTextParserService;
+use App\Services\AiQuotaService;
 use App\Services\FoodAnalysisService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -12,7 +13,8 @@ class AiTextVoiceController extends Controller
 {
     public function __construct(
         private AiTextParserService $textParserService,
-        private FoodAnalysisService $analysisService
+        private FoodAnalysisService $analysisService,
+        private AiQuotaService $quotaService
     ) {}
 
     /**
@@ -20,7 +22,10 @@ class AiTextVoiceController extends Controller
      */
     public function parseText(Request $request): JsonResponse
     {
+        $this->quotaService->checkAndConsumeTextQuota($request->user());
+
         $request->validate([
+
             'text' => ['required', 'string', 'min:3', 'max:1000'],
             'locale' => ['nullable', 'string', 'max:10'],
             'meal_type' => ['nullable', 'string', 'in:breakfast,lunch,dinner,snack'],

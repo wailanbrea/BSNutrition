@@ -8,78 +8,79 @@ Agregar Google Play billing, entitlements y quotas autoritativas.
 - `11_SECURITY_PRIVACY.md`
 
 ## Entry criteria
-- [ ] Core product stable
-- [ ] Play products configured
+- [x] Core product stable
+- [x] Play products configured
 
 ## Tasks
 
-### [ ] PH16-T01 — Product/entitlement ADR
+### [x] PH16-T01 — Product/entitlement ADR
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Free/Pro/AI
-- [ ] Product IDs
-- [ ] Quotas
-- [ ] Grace/expiry
+- [x] Free/Pro/AI (Definición de Free: 3 fotos/5 textos diarios vs Pro: ilimitado)
+- [x] Product IDs (`bsnutrition_pro_monthly`, `bsnutrition_pro_yearly`)
+- [x] Quotas (Límites atómicos y reseteo diario a medianoche)
+- [x] Grace/expiry (Manejo de estados `active`, `in_grace_period`, `expired`, `canceled`)
 
 **Acceptance criteria:**
-- Rules documented server-side
+- Reglas formales de monetización documentadas en ADR-012 en `DECISIONS.md`
 
 **Tests / verification:**
 - Build/tests relevantes deben pasar
 
-### [ ] PH16-T02 — Android BillingClient
+### [x] PH16-T02 — Android BillingClient
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Products
-- [ ] Purchase
-- [ ] Restore/query
-- [ ] Send token
+- [x] Products (Listado de productos mensuales y anuales con descuentos)
+- [x] Purchase (Flujo de compra en `PaywallScreen.kt` y `SubscriptionViewModel.kt`)
+- [x] Restore/query (Función de restauración de compras)
+- [x] Send token (Envío seguro de token al backend para validación criptográfica)
 
 **Acceptance criteria:**
-- Token reaches backend
+- El token de compra de Google Play se transmite y valida en el backend
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Kotlin (`SubscriptionRepositoryTest.kt`, `SubscriptionViewModelTest.kt`)
 
-### [ ] PH16-T03 — Backend verification
+### [x] PH16-T03 — Backend verification
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Google verification
-- [ ] Subscription state
-- [ ] Entitlements
-- [ ] Revalidation
-- [ ] Refund
+- [x] Google verification (Servicio `SubscriptionVerificationService.php` y endpoint `POST /api/v1/billing/verify-play-purchase`)
+- [x] Subscription state (Persistencia en `user_subscriptions` con cálculo de expiración)
+- [x] Entitlements (Resolución de permisos de acceso en `SubscriptionController.php`)
+- [x] Revalidation (Mantenimiento autoritativo del estado de suscripción)
+- [x] Refund (Actualización y revocación inmediata de permisos al expirar o reembolsar)
 
 **Acceptance criteria:**
-- Backend authoritative
+- El backend es la única fuente de verdad autoritativa para el estado Pro
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Pest (`SubscriptionApiTest.php`)
 
-### [ ] PH16-T04 — AI quota enforcement
+### [x] PH16-T04 — AI quota enforcement
 **Depends on:** None
 
 **Implementation checklist:**
-- [ ] Usage
-- [ ] Atomic check
-- [ ] Limits
-- [ ] Exhausted response
+- [x] Usage (Tabla `user_daily_ai_quotas` con conteo diario segregado por fotos y textos)
+- [x] Atomic check (Bloqueo pesimista `lockForUpdate` en `AiQuotaService.php`)
+- [x] Limits (3 fotos / 5 textos al día para cuentas Free, ilimitado para Pro)
+- [x] Exhausted response (Excepción `QuotaExceededException` con HTTP 429 y código `AI_QUOTA_EXCEEDED`)
 
 **Acceptance criteria:**
-- Cannot bypass via local state
+- Imposible evadir el límite diario desde el cliente o mediante concurrencia
 
 **Tests / verification:**
-- Build/tests relevantes deben pasar
+- Tests en Pest (`SubscriptionApiTest.php`)
 
 ## Phase exit criteria
-- [ ] Billing test environment validated
-- [ ] Status -> Phase 17
+- [x] Billing test environment validated (Esquema de suscripciones, Play Billing Client UI, backend verification y control atómico de cuotas IA)
+- [x] Status -> Phase 17
 
 ## Mandatory closeout
-- [ ] Actualizar `PROJECT_STATUS.md`
-- [ ] Actualizar `CHANGELOG.md`
-- [ ] Actualizar `DECISIONS.md` si hubo decisión permanente
-- [ ] No dejar tareas `[-]` sin checkpoint
+- [x] Actualizar `PROJECT_STATUS.md`
+- [x] Actualizar `CHANGELOG.md`
+- [x] Actualizar `DECISIONS.md` si hubo decisión permanente
+- [x] No dejar tareas `[-]` sin checkpoint
+
