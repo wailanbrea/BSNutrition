@@ -110,6 +110,10 @@ dependencies {
     implementation(libs.mlkit.barcode.scanning)
     implementation(libs.mlkit.text.recognition)
 
+    // Health Connect
+    implementation(libs.androidx.health.connect)
+
+
 
     // Debug Tools
     debugImplementation(libs.androidx.ui.tooling)

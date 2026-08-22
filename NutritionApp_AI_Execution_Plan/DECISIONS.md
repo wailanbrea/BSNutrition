@@ -90,8 +90,24 @@ Todo cálculo persistido en `nutrition_goals` debe almacenar `calculation_versio
 - Los macronutrientes y micronutrientes calculados al registrar un alimento en el diario se congelan en snapshots inmutables (`calories_snapshot`, `protein_snapshot`, etc.).
 - Las ediciones posteriores del catálogo canónico de alimentos no modifican el historial registrado en días pasados del usuario.
 
+## ADR-011 — Health Connect Synchronization & Loop Prevention Policy
+**Status:** Accepted (Phase 12)
+
+### 1. Attributed Source Identification (`clientRecordId`)
+- Todo registro de nutrición o hidratación exportado hacia Google Health Connect incluye en sus metadatos un `clientRecordId` con prefijo explícito (ej: `bsnutrition:meal_entry:{id}` o `bsnutrition:water_log:{id}`).
+- Al leer registros de Health Connect para importar métricas (pasos, peso, calorías quemadas), el sistema filtra y descarta cualquier registro originado por el paquete `com.bsnutrition.app` o cuyo `clientRecordId` coincida con nuestro espacio de nombres.
+
+### 2. Prevensión de Bucles de Retroalimentación (Feedback Loop Elimination)
+- **Lecturas:** Únicamente se importan métricas de actividad física y biométricas (`StepsRecord`, `WeightRecord`, `TotalCaloriesBurnedRecord`).
+- **Escrituras:** Solo se exportan consumos consolidados generados por el usuario (`NutritionRecord`, `HydrationRecord`).
+- BSNutrition nunca sobreescribe ni reimporta como comida propia los datos de nutrición exportados previamente a Health Connect.
+
+### 3. Sincronización No Bloqueante
+- Toda interacción con Health Connect se ejecuta de forma asíncrona en segundo plano sin interrumpir las operaciones del diario local (offline-first).
+
 ## Pending ADR
 - image retention
 - subscription tiers/pricing
+
 
 

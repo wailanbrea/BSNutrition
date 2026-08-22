@@ -18,7 +18,9 @@ coil = "2.7.0"
 camera = "1.4.1"
 mlkitBarcode = "17.3.0"
 mlkitText = "16.0.1"
+androidxHealthConnect = "1.1.0-alpha11"
 ksp = "2.0.21-1.0.28"
+
 junit = "4.13.2"
 androidxJunit = "1.2.1"
 espresso = "3.6.1"
@@ -74,6 +76,10 @@ androidx-camera-view = { group = "androidx.camera", name = "camera-view", versio
 # ML Kit
 mlkit-barcode-scanning = { group = "com.google.mlkit", name = "barcode-scanning", version.ref = "mlkitBarcode" }
 mlkit-text-recognition = { group = "com.google.android.gms", name = "play-services-mlkit-text-recognition", version.ref = "mlkitText" }
+
+# Health Connect
+androidx-health-connect = { group = "androidx.health.connect", name = "connect-client", version.ref = "androidxHealthConnect" }
+
 
 
 # Testing

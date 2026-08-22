@@ -2,14 +2,15 @@
 
 ## Current state
 - Project status: IN PROGRESS
-- Current phase: Phase 12 — Health Connect
-- Current task: PH12-T01
+- Current phase: Phase 13 — Progress and Statistics
+
+- Current task: PH13-T01
 - Current task status: `[ ]`
-- Last completed task: PH11-T03
+- Last completed task: PH12-T03
 - Last update: 2026-08-21
 
 ## Exact next action
-Abrir `phases/PHASE_12_HEALTH_CONNECT.md` y ejecutar `PH12-T01` (Permissions/availability: Integración de Health Connect SDK en Android, chequeo de disponibilidad, gestor de permisos granulares y pantalla de configuración de sincronización).
+Abrir `phases/PHASE_13_PROGRESS_AND_STATISTICS.md` y ejecutar `PH13-T01` (Water tracking: Gestión de consumo de agua diario con metas personalizadas, accesos rápidos +250ml/+500ml, persistencia en Room y reconciliación offline-first con backend).
 
 ## Active blockers
 None.
@@ -23,6 +24,10 @@ None.
 - detalles finales de deployment.
 
 ## Recently completed
+- PH12-T03 — Nutrition/hydration write policy ADR: Formalización de ADR-011 en `DECISIONS.md`, prevención de bucles de retroalimentación mediante `clientRecordId` y filtrado estricto de fuentes con tests en `HealthConnectViewModelTest.kt`.
+- PH12-T02 — Import metrics: Lectura agregada y filtrada de pasos (`StepsRecord`), último peso corporal (`WeightRecord`) y calorías activas quemadas (`TotalCaloriesBurnedRecord`) en `HealthConnectManager.kt`.
+- PH12-T01 — Permissions/availability: Detección de disponibilidad del SDK de Health Connect, persistencia de preferencias de sincronización en DataStore (`HealthConnectPreferences`), gestor `HealthConnectManager`, ViewModel `HealthConnectViewModel` y pantalla de configuración `HealthConnectSettingsScreen.kt`.
+- **Fase 12 (Health Connect) completada al 100%**.
 - PH11-T03 — Voice path: Integración de dictado por voz mediante `RecognizerIntent.ACTION_RECOGNIZE_SPEECH`, transcripción local automática y reutilización directa del pipeline de revisión con tests en `TextVoiceLoggingViewModelTest.kt`.
 - PH11-T02 — Android text quick-add: Pantalla `TextVoiceLoggingScreen`, chips de sugerencias rápidas, envío a `/api/v1/ai/text/parse` y confirmación de comidas en bloque en el diario nutricional con tests en `TextVoiceLoggingViewModelTest.kt`.
 - PH11-T01 — Meal text parser: Servicio `AiTextParserService` en Laravel con extracción de porciones, cantidades y métodos de cocción en español, matching determinista contra catálogo canónico dominicano e internacional, y controlador `AiTextVoiceController` con tests en `AiTextParserServiceTest.php` y `AiTextVoiceApiTest.php` (4 tests pasando).
@@ -43,6 +48,7 @@ None.
 - PH08-T02 — Android scanner: Integración completa de CameraX y Google ML Kit (`BarcodeScanning`) en `BarcodeScannerScreen` y `BarcodeAnalyzer`, control de permisos en tiempo de ejecución, retícula de visor con animación y debouncing de lectura de 1.5s.
 - **Fase 08 (Barcode) completada al 100%**.
 - PH08-T01 — Barcode lookup API: Endpoint `GET /api/v1/foods/barcode/{barcode}` con búsqueda local directa en base de datos canónica, fallback transparente a Open Food Facts (`OpenFoodFactsService`), importación y caching automático con marcas, porciones y nutrientes, respuesta 404 estructurada si no existe y tests en `FoodSearchApiTest.php` y `OpenFoodFactsServiceTest.php` (75 tests pasando al 100%).
+ tests en `FoodSearchApiTest.php` y `OpenFoodFactsServiceTest.php` (75 tests pasando al 100%).
 - PH07-T05 — Offline E2E: Suite integral de pruebas end-to-end (`OfflineSyncE2ETest.kt`) validando creación, edición, eliminación de comidas y agua sin conexión, retención en Room y en `SyncQueueDao`, drenado y reconciliación garantizada al reconectar y manejo tolerante a fallos de servidor.
 - **Fase 07 (Offline-First and Sync) completada al 100%**.
 - PH07-T04 — Idempotency/conflicts: Validación de idempotencia con `client_id` (UUID), versionado optimista, tombstones mediante soft deletes en Room y Eloquent, deduplicación de reintentos en `SyncQueueDao` y formalización de ADR-010 en `DECISIONS.md`.

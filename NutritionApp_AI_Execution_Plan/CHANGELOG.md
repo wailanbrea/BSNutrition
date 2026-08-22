@@ -2,6 +2,24 @@
 
 ## Unreleased
 
+### 2026-08-21 — PH12-T03
+**Added**
+- Formalización de ADR-011 en `DECISIONS.md` para política de escritura y prevención de bucles en Health Connect.
+- Identificación de origen con prefijo `clientRecordId` y exclusión de datos exportados por `com.bsnutrition.app` en lecturas entrantes.
+- Tests unitarios en `HealthConnectViewModelTest.kt`.
+- **Fase 12 (Health Connect) completada al 100%**.
+
+### 2026-08-21 — PH12-T02
+**Added**
+- Extracción agregada de pasos diarios (`StepsRecord`), último peso corporal (`WeightRecord`) y calorías activas quemadas (`TotalCaloriesBurnedRecord`) en `HealthConnectManager.kt`.
+- Actualización reactiva de estado en `HealthConnectViewModel`.
+
+### 2026-08-21 — PH12-T01
+**Added**
+- Gestor de disponibilidad de Health Connect SDK con fallback para dispositivos no compatibles o pendientes de actualización en Google Play Store.
+- Preferencias de sincronización granular en DataStore (`HealthConnectPreferences`).
+- Pantalla de configuración `HealthConnectSettingsScreen.kt` con interruptores individuales de lectura/escritura y previsualización en tiempo real.
+
 ### 2026-08-21 — PH11-T03
 **Added**
 - Integración de dictado por voz local en Android con `RecognizerIntent.ACTION_RECOGNIZE_SPEECH` y español dominicano/latinoamericano.
